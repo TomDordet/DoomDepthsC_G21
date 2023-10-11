@@ -76,6 +76,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Monster.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Monster.h">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Player.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Player.h">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
 		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/main.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>

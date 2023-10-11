@@ -128,6 +128,54 @@ DoomDepthsC_G21/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/build
 .PHONY : DoomDepthsC_G21/fast
 
+Monster.obj: Monster.c.obj
+.PHONY : Monster.obj
+
+# target to build an object file
+Monster.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj
+.PHONY : Monster.c.obj
+
+Monster.i: Monster.c.i
+.PHONY : Monster.i
+
+# target to preprocess a source file
+Monster.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Monster.c.i
+.PHONY : Monster.c.i
+
+Monster.s: Monster.c.s
+.PHONY : Monster.s
+
+# target to generate assembly for a file
+Monster.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Monster.c.s
+.PHONY : Monster.c.s
+
+Player.obj: Player.c.obj
+.PHONY : Player.obj
+
+# target to build an object file
+Player.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj
+.PHONY : Player.c.obj
+
+Player.i: Player.c.i
+.PHONY : Player.i
+
+# target to preprocess a source file
+Player.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Player.c.i
+.PHONY : Player.c.i
+
+Player.s: Player.c.s
+.PHONY : Player.s
+
+# target to generate assembly for a file
+Player.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Player.c.s
+.PHONY : Player.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -161,6 +209,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DoomDepthsC_G21
+	@echo ... Monster.obj
+	@echo ... Monster.i
+	@echo ... Monster.s
+	@echo ... Player.obj
+	@echo ... Player.i
+	@echo ... Player.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
