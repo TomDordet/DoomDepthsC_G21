@@ -6,18 +6,7 @@
 #define MAX_MONSTER 5 // valeur "interne" au proramme
 
 
-typedef struct st_monsters
-{
-    int number; // numero du monstre (comme le nombre de monstre est aléatoire, on lui donne un nombre, pour la suite.
-
-    int maxLife; //stats monstres
-    int currentLife;
-    int attack;
-    int defense;
-
-    int * p_next; // Pointeur d'int pour passer de monstre en monstre, voir suite.
-} st_monsters;
-
+//-----------------PARTIE PLAYER-----------------
 typedef struct st_player
 {
     int maxLife; //stats player
@@ -28,7 +17,8 @@ typedef struct st_player
     int weapons; // weapons à revoir, j'ai mis ca comme ça histoire de, mais surement une structure rien que pour les armes, comme il y'a plusieurs armes, avec des statistiques différentes etc...
 } st_player;
 
-st_player * create_player (void) // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
+
+st_player* create_player (void) // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
 {
     st_player* p_player = malloc(sizeof(st_player)); //p_player = le joueur en gros.
     printf("debug :: alloc p_player [%d] = %p \n",1,p_player); // printf pour débug, vérifier que le joueur est bien créer/allouer.
@@ -43,6 +33,31 @@ st_player * create_player (void) // fonction de type * st_player pour créer le 
 
     return p_player;
 }
+
+
+int delete_player (st_player * p_player) //Supprime le joueur.
+{
+    printf("debug :: free p_player %d = %p \n",1,p_player); // débug, pour vérifier qu'il est bien désallouer, faudras appeler cette fonction, quand notre MyPlayer, mourra par exemple, ce sera la fin de la game.
+
+    free (p_player);
+    return 0;
+}
+//-----------------FIN PARTIE PLAYER-----------------
+
+
+//-----------------PARTIE MONSTERS-----------------
+typedef struct st_monsters
+{
+    int number; // numero du monstre (comme le nombre de monstre est aléatoire, on lui donne un nombre, pour la suite.
+
+    int maxLife; //stats monstres
+    int currentLife;
+    int attack;
+    int defense;
+
+    int * p_next; // Pointeur d'int pour passer de monstre en monstre, voir suite.
+} st_monsters;
+
 
 st_monsters * create_monsters (int * p_nb_monster) // même chose pour les monstres, sauf qu'on prend le nb de monstres en entrée.
 {
@@ -86,13 +101,6 @@ st_monsters * create_monsters (int * p_nb_monster) // même chose pour les monst
     return p_first_monster;
 };
 
-int delete_player (st_player * p_player) //Supprime le joueur.
-{
-    printf("debug :: free p_player %d = %p \n",1,p_player); // débug, pour vérifier qu'il est bien désallouer, faudras appeler cette fonction, quand notre MyPlayer, mourra par exemple, ce sera la fin de la game.
-
-    free (p_player);
-    return 0;
-}
 
 int delete_monsters (st_monsters * p_monster) // Supprime TOUT les monstres..
 {
@@ -106,6 +114,7 @@ int delete_monsters (st_monsters * p_monster) // Supprime TOUT les monstres..
     while (p_monster != NULL);
     return 0;
 }
+
 
 st_monsters * delete_the_monster (st_monsters * p_first_monster, st_monsters* p_the_monster) // Supprime UN monstre.
 {
@@ -132,11 +141,10 @@ st_monsters * delete_the_monster (st_monsters * p_first_monster, st_monsters* p_
     printf("Not found \n"); // si pas trouvé, bah pas trouver.
     return NULL;
 }
-
-//--------- Func d'affichage des stats
-
+//-----------------FIN PARTIE MONSTRES-----------------
 
 
+//-----------------PARTIE AFFICHAGE DES STATS-----------------
 int display_player (st_player* p_player) // affichage des statistiques du joueur.
 {
     printf("Vie : %d / %d point de vie. \n",p_player->currentLife, p_player->maxLife);
@@ -164,9 +172,10 @@ int display_monsters (st_monsters* p_first_monster) //affichage des stats des mo
     printf("Number of Monsters: %d\n", nb_monster);
     return 0;
 }
+//-----------------FIN PARTIE AFFICHAGE DES STATS-----------------
 
-//---------------- FIGHT ------------------------------------------
 
+//-----------------PARTIE FIGHT-----------------
 st_monsters * searchMonster(st_monsters* p_first_monster) // func pour chercher un monstre (pour choisir celui qu'on va attaquer). Elle a été faite pour ca, mais il y'a possibilité que l'on soit amené à l'utilsier pour autre chose, donc son contenu pourra changer.
 {
     int nb; //number du monstre choisis.
@@ -194,6 +203,7 @@ st_monsters * searchMonster(st_monsters* p_first_monster) // func pour chercher 
     return NULL; // sinon on return null, la faudrait générer une erreur, ou un message mais azi.
 }
 
+
 st_monsters * fight_round(st_player* p_player, st_monsters* p_first_monster){ // le FIGHT.
 
     st_monsters * p_monster_found; // le monstre que l'on veut attaquer.
@@ -217,8 +227,8 @@ st_monsters * fight_round(st_player* p_player, st_monsters* p_first_monster){ //
         return p_first_monster; // et on retourne le premier monstre.
     }
 }
+//-----------------FIN PARTIE FIGHT-----------------
 
-//-----------------------------------------------------------------------
 
 //-----------------PARTIE INVENTAIRE-----------------
 
@@ -248,7 +258,6 @@ void display_inventory(st_player* p_player){
     }
 }
 //-----------------FIN PARTIE INVENTAIRE-----------------
-
 
 
 
