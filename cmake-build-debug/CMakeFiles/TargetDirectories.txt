@@ -1,3 +1,3 @@
-D:/CLion 2023.2.2/DoomDepthsC-G21/cmake-build-debug/CMakeFiles/DoomDepthsC_G21.dir
-D:/CLion 2023.2.2/DoomDepthsC-G21/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/CLion 2023.2.2/DoomDepthsC-G21/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/CLion 2023.2.2/DoomDepthsC_G21/cmake-build-debug/CMakeFiles/DoomDepthsC_G21.dir
+D:/CLion 2023.2.2/DoomDepthsC_G21/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/CLion 2023.2.2/DoomDepthsC_G21/cmake-build-debug/CMakeFiles/rebuild_cache.dir
