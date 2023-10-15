@@ -1,6 +1,9 @@
 #ifndef DOOMDEPTHSC_G21_PLAYER_H
 #define DOOMDEPTHSC_G21_PLAYER_H
 
+#include "Weapon.h"
+
+
 typedef struct st_player
 {
     int maxLife;
@@ -8,7 +11,7 @@ typedef struct st_player
     int nb_attack_per_round;
     int attack;
     int defense;
-    int weapons;
+    Weapon *weapons;
 } st_player;
 
 st_player* create_player ();

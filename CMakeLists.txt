@@ -8,4 +8,10 @@ add_executable(DoomDepthsC_G21 main.c
         Player.h
         Monster.c
         Monster.h
+        Weapon.c
+        Weapon.h
+        Armor.c
+        Armor.h
+        Potion.c
+        Potion.h
 )

@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "Monster.h"
+#include "Weapon.h"
 
 #define MAX_MONSTER 5 // valeur "interne" au proramme
 
@@ -52,11 +53,11 @@ st_monsters * fight_round(st_player* p_player, st_monsters* p_first_monster){ //
     if(p_monster_found->currentLife < 0) p_monster_found->currentLife = 0; // à partir du moment ou la vie du monstre < 0, on la remet à zéro. (au lieu d'avoir [random] -8, on met 0, plus clean.
 
     if(p_monster_found->currentLife == 0){ // si la vie du monstre == 0
-        printf("Monstre éliminé %d \n", p_monster_found->number);
+        printf("Monstre %d éliminé \n", p_monster_found->number);
         return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
     }
     else{
-        printf("Le monstre %d vient de prendre %d , sa vie est désomrais de %d \n",p_monster_found->number, p_player->attack, p_monster_found->currentLife); //sinon il prend simplement les dégats.
+        printf("Le monstre %d vient de prendre %d , sa vie est desormais de %d \n",p_monster_found->number, p_player->attack, p_monster_found->currentLife); //sinon il prend simplement les dégats.
         return p_first_monster; // et on retourne le premier monstre.
     }
 }
@@ -76,16 +77,37 @@ void display_inventory(st_player* p_player){
         scanf("%d", &option);
 
         switch (option) {
-            case 1:
-                printf("Vous accedez aux armes\n");
+            case 1: //Inventaire -> Armes
+                printf("----------\n");
+                printf("Armes :\n");
+                for (int i = 0; i < 5; ++i) {
+                    printf("%d - ", i+1);
+                    displayWeapon(&(p_player->weapons[i]));
+                }
+                printf("----------\n");
+                int weaponOption = 1;
+
+                while (weaponOption != 2) {
+                    printf("1. Changer d'arme\n");
+                    printf("2. Retour\n");
+                    scanf("%d", &weaponOption);
+
+                    switch(weaponOption){
+                        case 1: //Armes -> Changer d'arme
+                            printf("Quelle arme equiper?\n");
+                            break;
+                        case 2:
+                            break;
+                    }
+                }
                 break;
-            case 2:
+            case 2: //Inventaire -> Armures
                 printf("Vous accedez aux armures\n");
                 break;
-            case 3:
+            case 3: //Inventaire -> Potions
                 printf("Vous accedez aux potions\n");
                 break;
-            case 4:
+            case 4: //Inventaire -> Retour
                 break;
         }
     }

@@ -99,7 +99,7 @@ int display_monsters (st_monsters* p_first_monster) //affichage des stats des mo
             printf("Monstre %d\n", p_monster->number);
             printf("Vie : %d / %d\n", p_monster->currentLife, p_monster->maxLife);
             printf("Attaque : %d\n", p_monster->attack);
-            printf("Défense : %d\n", p_monster->defense);
+            printf("Defense : %d\n", p_monster->defense);
             printf("-----\n");
         }
         p_monster = (st_monsters*)p_monster->p_next;
