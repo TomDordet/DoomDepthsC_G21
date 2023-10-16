@@ -20,7 +20,7 @@ st_monsters * create_monsters (int * p_nb_monster) // même chose pour les monst
     printf("debug :: alloc p_monster [%d] = %p \n",p_first_monster->number,p_first_monster); //pareil, pour vérifier que tout marche bien.
     p_first_monster->maxLife = rand() % (20 + 1);
     p_first_monster->currentLife = p_first_monster->maxLife;
-    p_first_monster->attack = rand() % (10 + 1); //toutes les valeurs, évidemment faudras qu'on se mette d'accord la dessus, la j'ai fais comme ca, pour avoir une base.
+    p_first_monster->attack = 25; //toutes les valeurs, évidemment faudras qu'on se mette d'accord la dessus, la j'ai fais comme ca, pour avoir une base.
     p_first_monster->defense = rand() % 10;
 
     p_first_monster->p_next = NULL; // le p_next (donc monstre suivant) est à NULL pour l'instant, on l'init juste, pas le choix.
@@ -35,7 +35,7 @@ st_monsters * create_monsters (int * p_nb_monster) // même chose pour les monst
             printf("debug :: alloc p_monster [%d] = %p \n",p_next->number, p_next); // même chose, débug.
             p_next->maxLife = rand() % (20 + 1);
             p_next->currentLife = p_next->maxLife;
-            p_next->attack = rand() % (10 + 1); // pareil que tout à l'heure ici, on leurs donne des stats aléatroire.
+            p_next->attack = 20; // pareil que tout à l'heure ici, on leurs donne des stats aléatroire.
             p_next->defense = rand() % 10;
             p_next->p_next = NULL; // on init à NULL.
             p_prev->p_next = (int *)p_next; //le (int *) c'est pour donner à p_next le type int, de base il était de type st_monsters. Et on donne p_prev->p_next la valeur int* p_next, qui correspond à l'adresse du monstre suivante. (rappelez vous les listes, chaque monstre est une valeur de la liste, et pour la parcourir, il faut accéder à la l'adresse de l'emplacement suivant).
@@ -61,7 +61,6 @@ int delete_monsters (st_monsters * p_monster) // Supprime TOUT les monstres..
     return 0;
 }
 
-
 st_monsters * delete_the_monster (st_monsters * p_first_monster, st_monsters* p_the_monster) // Supprime UN monstre.
 {
     if(p_the_monster == p_first_monster){ //si le monstre est = au premier (dans la liste chainé)
@@ -86,6 +85,36 @@ st_monsters * delete_the_monster (st_monsters * p_first_monster, st_monsters* p_
     }
     printf("Not found \n"); // si pas trouvé, bah pas trouver.
     return NULL;
+}
+
+// func pour chercher un monstre (pour choisir celui qu'on va attaquer).
+// Elle a été faite pour ca, mais il y'a possibilité que l'on soit amené à l'utilsier pour autre chose,
+// donc son contenu pourra changer.
+st_monsters * searchMonster(st_monsters* p_first_monster)
+{
+    int nb; //number du monstre choisis.
+    int maxNb = 0; //
+    st_monsters* p_monster = p_first_monster; // p_monster contient notre first monster.
+    while(p_monster != NULL) { // parcours de la liste chainé.
+        printf("Monstre %d (%d/%d) \n", p_monster->number, p_monster->currentLife, p_monster->maxLife); // affiche chaque monstre.
+        if(p_monster->number > maxNb){ // si le ->number du monstre est sup à MaxNB ;
+            maxNb = p_monster->number; // maxNb = le ->number du monstre. (Ici maxNb est un compteur, qui nous permet de savoir le nombre de monstre, comme à chaque fois le nombre peut varié.
+        }
+        p_monster = (st_monsters  *)p_monster->p_next; // i++.
+    }
+
+    printf("Lequel ? :"); // on demande lequel on veut attaquer.
+    scanf("%d", &nb);
+
+    p_monster = p_first_monster; // on remet p_monster au premier monstre.
+
+    while(p_monster != NULL){ // parcours de la liste etc..
+        if(p_monster->number == nb) { //
+            return p_monster; // si le monstre->number correspond au num choisis, on le retourne (comme une crêpe).
+        }
+        p_monster = (st_monsters *)p_monster->p_next; // i++
+    }
+    return NULL; // sinon on return null, la faudrait générer une erreur, ou un message mais azi.
 }
 
 int display_monsters (st_monsters* p_first_monster) //affichage des stats des monstres.

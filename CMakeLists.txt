@@ -8,4 +8,6 @@ add_executable(DoomDepthsC_G21 main.c
         Player.h
         Monster.c
         Monster.h
+        fight.c
+        heal.c
 )

@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\CLion 2023.2.2\DoomDepthsC_G21"
+CMAKE_SOURCE_DIR = C:\Users\ethan\CLionProjects\DoomDepthsC_G21
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug"
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,54 @@ Player.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Player.c.s
 .PHONY : Player.c.s
 
+fight.obj: fight.c.obj
+.PHONY : fight.obj
+
+# target to build an object file
+fight.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj
+.PHONY : fight.c.obj
+
+fight.i: fight.c.i
+.PHONY : fight.i
+
+# target to preprocess a source file
+fight.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/fight.c.i
+.PHONY : fight.c.i
+
+fight.s: fight.c.s
+.PHONY : fight.s
+
+# target to generate assembly for a file
+fight.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/fight.c.s
+.PHONY : fight.c.s
+
+heal.obj: heal.c.obj
+.PHONY : heal.obj
+
+# target to build an object file
+heal.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj
+.PHONY : heal.c.obj
+
+heal.i: heal.c.i
+.PHONY : heal.i
+
+# target to preprocess a source file
+heal.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.i
+.PHONY : heal.c.i
+
+heal.s: heal.c.s
+.PHONY : heal.s
+
+# target to generate assembly for a file
+heal.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.s
+.PHONY : heal.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -215,6 +263,12 @@ help:
 	@echo ... Player.obj
 	@echo ... Player.i
 	@echo ... Player.s
+	@echo ... fight.obj
+	@echo ... fight.i
+	@echo ... fight.s
+	@echo ... heal.obj
+	@echo ... heal.i
+	@echo ... heal.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

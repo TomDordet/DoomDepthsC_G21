@@ -6,64 +6,15 @@
 #include "Player.h"
 #include "Monster.h"
 
+st_monsters * fight_player_round(st_player* p_player, st_monsters* p_first_monster);
+st_player * fight_monsters_round(st_player* p_player, st_monsters* p_first_monster);
+int heal(st_player * p_player);
+
+
 #define MAX_MONSTER 5 // valeur "interne" au proramme
 
 //-----------------PARTIE FIGHT-----------------
-st_monsters * searchMonster(st_monsters* p_first_monster) // func pour chercher un monstre (pour choisir celui qu'on va attaquer). Elle a été faite pour ca, mais il y'a possibilité que l'on soit amené à l'utilsier pour autre chose, donc son contenu pourra changer.
-{
-    int nb; //number du monstre choisis.
-    int maxNb = 0; //
-    st_monsters* p_monster = p_first_monster; // p_monster contient notre first monster.
-    while(p_monster != NULL) { // parcours de la liste chainé.
-        printf("Monstre %d (%d/%d) \n", p_monster->number, p_monster->currentLife, p_monster->maxLife); // affiche chaque monstre.
-        if(p_monster->number > maxNb){ // si le ->number du monstre est sup à MaxNB ;
-            maxNb = p_monster->number; // maxNb = le ->number du monstre. (Ici maxNb est un compteur, qui nous permet de savoir le nombre de monstre, comme à chaque fois le nombre peut varié.
-        }
-        p_monster = (st_monsters  *)p_monster->p_next; // i++.
-    }
 
-    printf("Lequel ? :"); // on demande lequel on veut attaquer.
-    scanf("%d", &nb);
-
-    p_monster = p_first_monster; // on remet p_monster au premier monstre.
-
-    while(p_monster != NULL){ // parcours de la liste etc..
-        if(p_monster->number == nb) { //
-            return p_monster; // si le monstre->number correspond au num choisis, on le retourne (comme une crêpe).
-        }
-        p_monster = (st_monsters *)p_monster->p_next; // i++
-    }
-    return NULL; // sinon on return null, la faudrait générer une erreur, ou un message mais azi.
-}
-
-
-st_monsters * fight_round(st_player* p_player, st_monsters* p_first_monster){ // le FIGHT.
-
-    st_monsters * p_monster_found; // le monstre que l'on veut attaquer.
-    p_monster_found = searchMonster(p_first_monster); // on utilise la func pour choisir le monstre, et on stock ce monstre.
-    if(p_monster_found == NULL) // si marche pas
-    {
-        printf("No one found. \n");
-        return p_first_monster; // on renvoit le le first.
-    }
-
-    p_monster_found->currentLife -= p_player->attack; // opération, on diminue la vie du monstre, en fonction de l'attaque du joueur.
-
-    if(p_monster_found->currentLife < 0) p_monster_found->currentLife = 0; // à partir du moment ou la vie du monstre < 0, on la remet à zéro. (au lieu d'avoir [random] -8, on met 0, plus clean.
-
-    if(p_monster_found->currentLife == 0){ // si la vie du monstre == 0
-        printf("Monstre éliminé %d \n", p_monster_found->number);
-        return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
-    }
-    else{
-        printf("Le monstre %d vient de prendre %d , sa vie est désomrais de %d \n",p_monster_found->number, p_player->attack, p_monster_found->currentLife); //sinon il prend simplement les dégats.
-        return p_first_monster; // et on retourne le premier monstre.
-    }
-}
-//-----------------FIN PARTIE FIGHT-----------------
-
-
-//-----------------PARTIE INVENTAIRE-----------------
 
 void display_inventory(st_player* p_player){
     int option = 1;
@@ -92,9 +43,7 @@ void display_inventory(st_player* p_player){
 }
 //-----------------FIN PARTIE INVENTAIRE-----------------
 
-
-
-int main(void)
+int game(void)
 {
     int nb_monster = 0;
     int choixMenu = 1;
@@ -102,14 +51,14 @@ int main(void)
     st_player* p_player = create_player(); // on créer le joueur.
     st_monsters * p_first_monster = create_monsters(&nb_monster); //on créer nos monstres.
 
-    while (choixMenu != 4)
+    while (1)
     {
         printf("---Menu-- - \n");
         printf("1.stat joueur \n");
         printf("2.stat monsters \n");
         printf("3.game \n");
-        printf("4.sortir \n");
-        printf("5.Inventaire\n");
+        printf("4.heal \n");
+        printf("5.sortir \n");
         scanf("%d", &choixMenu);
 
         switch(choixMenu) {
@@ -123,22 +72,62 @@ int main(void)
             }
             case 3:
                 /*Game*/
-                p_first_monster = fight_round(p_player, p_first_monster);
+                p_first_monster = fight_player_round(p_player, p_first_monster);
+                p_player = fight_monsters_round(p_player, p_first_monster);
                 break;
             case 4:
+                heal(p_player);
                 break;
-            case 5:
-                display_inventory(p_player);
+            case 5: {
+                int var;
+                printf("Tout sera supprimer, continuer ? (1/0)\n");
+                scanf("%d", &var);
+                if (var == 1)
+                {
+                    //Libere les montres*/
+                    delete_monsters(p_first_monster);
+                    //Libère le joueur.
+                    delete_player(p_player);
+                    return 4;
+                }
                 break;
+            }
         }
     }
 
-    //Libere les montres*/
-    delete_monsters(p_first_monster);
-    //Libère le joueur.
-    delete_player(p_player);
 
     //system("PAUSE");
-
     return 0;
+}
+
+int welcome(void)
+{
+    int choixMenu = 0;
+    while (choixMenu != 3)
+    {
+        printf("--DOOMDEPTH-- \n");
+        printf("1 - Start New Game \n");
+        printf("2 - Load save \n");
+        printf("3 - Leave\n");
+        scanf("%d", &choixMenu);
+
+        switch(choixMenu) {
+            case 1: {
+                game();
+                break;
+            }
+            case 2: {
+                printf("Bientôt.");
+                break;
+            }
+            case 3: {
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+int main(void){
+    welcome();
 }
