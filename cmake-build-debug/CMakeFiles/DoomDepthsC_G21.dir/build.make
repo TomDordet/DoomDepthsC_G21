@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\tomdo\CLionProjects\DoomDepthsC_G21
+CMAKE_SOURCE_DIR = "D:\CLion 2023.2.2\DoomDepthsC_G21"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug
+CMAKE_BINARY_DIR = "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/DoomDepthsC_G21.dir/depend.make
@@ -69,88 +69,88 @@ include CMakeFiles/DoomDepthsC_G21.dir/progress.make
 include CMakeFiles/DoomDepthsC_G21.dir/flags.make
 
 CMakeFiles/DoomDepthsC_G21.dir/main.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
-CMakeFiles/DoomDepthsC_G21.dir/main.c.obj: C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/main.c
+CMakeFiles/DoomDepthsC_G21.dir/main.c.obj: D:/CLion\ 2023.2.2/DoomDepthsC_G21/main.c
 CMakeFiles/DoomDepthsC_G21.dir/main.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/DoomDepthsC_G21.dir/main.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/main.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\main.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\main.c.obj -c C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/DoomDepthsC_G21.dir/main.c.obj"
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/main.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\main.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\main.c.obj -c "D:\CLion 2023.2.2\DoomDepthsC_G21\main.c"
 
 CMakeFiles/DoomDepthsC_G21.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/main.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\main.c > CMakeFiles\DoomDepthsC_G21.dir\main.c.i
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\CLion 2023.2.2\DoomDepthsC_G21\main.c" > CMakeFiles\DoomDepthsC_G21.dir\main.c.i
 
 CMakeFiles/DoomDepthsC_G21.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/main.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\main.c -o CMakeFiles\DoomDepthsC_G21.dir\main.c.s
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\CLion 2023.2.2\DoomDepthsC_G21\main.c" -o CMakeFiles\DoomDepthsC_G21.dir\main.c.s
 
 CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
-CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj: C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/Player.c
+CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj: D:/CLion\ 2023.2.2/DoomDepthsC_G21/Player.c
 CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Player.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Player.c.obj -c C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Player.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj"
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Player.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Player.c.obj -c "D:\CLion 2023.2.2\DoomDepthsC_G21\Player.c"
 
 CMakeFiles/DoomDepthsC_G21.dir/Player.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/Player.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Player.c > CMakeFiles\DoomDepthsC_G21.dir\Player.c.i
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\CLion 2023.2.2\DoomDepthsC_G21\Player.c" > CMakeFiles\DoomDepthsC_G21.dir\Player.c.i
 
 CMakeFiles/DoomDepthsC_G21.dir/Player.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/Player.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Player.c -o CMakeFiles\DoomDepthsC_G21.dir\Player.c.s
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\CLion 2023.2.2\DoomDepthsC_G21\Player.c" -o CMakeFiles\DoomDepthsC_G21.dir\Player.c.s
 
 CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
-CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj: C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/Monster.c
+CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj: D:/CLion\ 2023.2.2/DoomDepthsC_G21/Monster.c
 CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Monster.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Monster.c.obj -c C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Monster.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj"
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Monster.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Monster.c.obj -c "D:\CLion 2023.2.2\DoomDepthsC_G21\Monster.c"
 
 CMakeFiles/DoomDepthsC_G21.dir/Monster.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/Monster.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Monster.c > CMakeFiles\DoomDepthsC_G21.dir\Monster.c.i
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\CLion 2023.2.2\DoomDepthsC_G21\Monster.c" > CMakeFiles\DoomDepthsC_G21.dir\Monster.c.i
 
 CMakeFiles/DoomDepthsC_G21.dir/Monster.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/Monster.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Monster.c -o CMakeFiles\DoomDepthsC_G21.dir\Monster.c.s
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\CLion 2023.2.2\DoomDepthsC_G21\Monster.c" -o CMakeFiles\DoomDepthsC_G21.dir\Monster.c.s
 
 CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
-CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj: C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/Weapon.c
+CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj: D:/CLion\ 2023.2.2/DoomDepthsC_G21/Weapon.c
 CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.obj -c C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Weapon.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj"
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.obj -c "D:\CLion 2023.2.2\DoomDepthsC_G21\Weapon.c"
 
 CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Weapon.c > CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.i
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\CLion 2023.2.2\DoomDepthsC_G21\Weapon.c" > CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.i
 
 CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Weapon.c -o CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.s
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\CLion 2023.2.2\DoomDepthsC_G21\Weapon.c" -o CMakeFiles\DoomDepthsC_G21.dir\Weapon.c.s
 
 CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
-CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj: C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/Armor.c
+CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj: D:/CLion\ 2023.2.2/DoomDepthsC_G21/Armor.c
 CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Armor.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Armor.c.obj -c C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Armor.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj"
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Armor.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Armor.c.obj -c "D:\CLion 2023.2.2\DoomDepthsC_G21\Armor.c"
 
 CMakeFiles/DoomDepthsC_G21.dir/Armor.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/Armor.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Armor.c > CMakeFiles\DoomDepthsC_G21.dir\Armor.c.i
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\CLion 2023.2.2\DoomDepthsC_G21\Armor.c" > CMakeFiles\DoomDepthsC_G21.dir\Armor.c.i
 
 CMakeFiles/DoomDepthsC_G21.dir/Armor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/Armor.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Armor.c -o CMakeFiles\DoomDepthsC_G21.dir\Armor.c.s
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\CLion 2023.2.2\DoomDepthsC_G21\Armor.c" -o CMakeFiles\DoomDepthsC_G21.dir\Armor.c.s
 
 CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
-CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj: C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/Potion.c
+CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj: D:/CLion\ 2023.2.2/DoomDepthsC_G21/Potion.c
 CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Potion.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Potion.c.obj -c C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Potion.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj"
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/Potion.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\Potion.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\Potion.c.obj -c "D:\CLion 2023.2.2\DoomDepthsC_G21\Potion.c"
 
 CMakeFiles/DoomDepthsC_G21.dir/Potion.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/Potion.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Potion.c > CMakeFiles\DoomDepthsC_G21.dir\Potion.c.i
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\CLion 2023.2.2\DoomDepthsC_G21\Potion.c" > CMakeFiles\DoomDepthsC_G21.dir\Potion.c.i
 
 CMakeFiles/DoomDepthsC_G21.dir/Potion.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/Potion.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\Potion.c -o CMakeFiles\DoomDepthsC_G21.dir\Potion.c.s
+	"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\CLion 2023.2.2\DoomDepthsC_G21\Potion.c" -o CMakeFiles\DoomDepthsC_G21.dir\Potion.c.s
 
 # Object files for target DoomDepthsC_G21
 DoomDepthsC_G21_OBJECTS = \
@@ -174,7 +174,7 @@ DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/build.make
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/linkLibs.rsp
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/objects1.rsp
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable DoomDepthsC_G21.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable DoomDepthsC_G21.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DoomDepthsC_G21.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -186,6 +186,6 @@ CMakeFiles/DoomDepthsC_G21.dir/clean:
 .PHONY : CMakeFiles/DoomDepthsC_G21.dir/clean
 
 CMakeFiles/DoomDepthsC_G21.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\tomdo\CLionProjects\DoomDepthsC_G21 C:\Users\tomdo\CLionProjects\DoomDepthsC_G21 C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug C:\Users\tomdo\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles\DoomDepthsC_G21.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "D:\CLion 2023.2.2\DoomDepthsC_G21" "D:\CLion 2023.2.2\DoomDepthsC_G21" "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug" "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug" "D:\CLion 2023.2.2\DoomDepthsC_G21\cmake-build-debug\CMakeFiles\DoomDepthsC_G21.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/DoomDepthsC_G21.dir/depend
 

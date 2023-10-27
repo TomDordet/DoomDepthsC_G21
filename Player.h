@@ -11,7 +11,7 @@ typedef struct st_player
     int nb_attack_per_round;
     int attack;
     int defense;
-    Weapon *weapons;
+    WeaponsPlayer *weapons;
 } st_player;
 
 st_player* create_player ();

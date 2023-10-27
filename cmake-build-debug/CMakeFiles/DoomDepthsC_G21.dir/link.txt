@@ -1,3 +1,3 @@
-"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\DoomDepthsC_G21.dir/objects.a
-C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc CMakeFiles\DoomDepthsC_G21.dir/objects.a @CMakeFiles\DoomDepthsC_G21.dir\objects1.rsp
-C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\DoomDepthsC_G21.dir/objects.a -Wl,--no-whole-archive -o DoomDepthsC_G21.exe -Wl,--out-implib,libDoomDepthsC_G21.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DoomDepthsC_G21.dir\linkLibs.rsp
+"D:\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\DoomDepthsC_G21.dir/objects.a
+"D:\CLion 2023.2.2\bin\mingw\bin\ar.exe" qc CMakeFiles\DoomDepthsC_G21.dir/objects.a @CMakeFiles\DoomDepthsC_G21.dir\objects1.rsp
+"D:\CLion 2023.2.2\bin\mingw\bin\gcc.exe" -g -Wl,--whole-archive CMakeFiles\DoomDepthsC_G21.dir/objects.a -Wl,--no-whole-archive -o DoomDepthsC_G21.exe -Wl,--out-implib,libDoomDepthsC_G21.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DoomDepthsC_G21.dir\linkLibs.rsp

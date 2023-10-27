@@ -92,11 +92,24 @@ void display_inventory(st_player* p_player){
                     printf("2. Retour\n");
                     scanf("%d", &weaponOption);
 
+                    int equipWeapon = -1;
                     switch(weaponOption){
                         case 1: //Armes -> Changer d'arme
                             printf("Quelle arme equiper?\n");
-                            break;
-                        case 2:
+                            scanf("%d", &equipWeapon);
+                            if(equipWeapon == -1){
+                                break;
+                            }
+                            else if(equipWeapon < 5){
+                                printf("Erreur de saisie : aucune arme ne correspond au numéro %d", equipWeapon);
+                                break;
+                            }
+                            else{ //Changement true
+                                for (int i = 0; i < 5; ++i) {
+                                    if(p_player->weapons[i]. == )
+                                }
+                            }
+                        case 2: //Armes -> Retour
                             break;
                     }
                 }

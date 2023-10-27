@@ -7,9 +7,19 @@ typedef struct Weapon {
     int minDamage;
     int maxDamage;
     int isEquipped;
-    int canBeDisplayed;
 }Weapon;
 
+typedef struct WeaponsPlayer {
+    int id;
+    Weapon weapon;
+    struct WeaponsPlayer *next;
+}WeaponsPlayer;
+
+Weapon* createWeapon(char* name, int nb_attack_per_round, int minDamage, int maxDamage);
+void deleteWeapon(Weapon *weapon);
 void displayWeapon(Weapon* weapon);
+
+WeaponsPlayer* addWeapon(WeaponsPlayer *weapons, Weapon weapon);
+void deleteWeaponsPlayer(WeaponsPlayer *weapons)
 
 #endif //DOOMDEPTHSC_G21_WEAPON_H

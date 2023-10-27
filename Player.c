@@ -17,41 +17,8 @@ st_player* create_player () // fonction de type * st_player pour créer le joueu
     p_player->attack = rand() % (10 + 1);
     p_player->defense = rand() % (10 + 1);
     p_player->weapons = malloc(sizeof(Weapon) * 5);
-    //partie test
-    p_player->weapons[0].name = "Epee robuste";
-    p_player->weapons[0].nb_attack_per_round = 1;
-    p_player->weapons[0].minDamage = 15;
-    p_player->weapons[0].maxDamage = 22;
-    p_player->weapons[0].isEquipped = 0;
-    p_player->weapons[0].canBeDisplayed = 1;
 
-    p_player->weapons[1].name = "Epee d'entrainement";
-    p_player->weapons[1].nb_attack_per_round = 4;
-    p_player->weapons[1].minDamage = 12;
-    p_player->weapons[1].maxDamage = 18;
-    p_player->weapons[1].isEquipped = 0;
-    p_player->weapons[1].canBeDisplayed = 0;
 
-    p_player->weapons[2].name = "Sabre de Namec";
-    p_player->weapons[2].nb_attack_per_round = 2;
-    p_player->weapons[2].minDamage = 27;
-    p_player->weapons[2].maxDamage = 34;
-    p_player->weapons[2].isEquipped = 1;
-    p_player->weapons[2].canBeDisplayed = 1;
-
-    p_player->weapons[3].name = "Baton de bois";
-    p_player->weapons[3].nb_attack_per_round = 1;
-    p_player->weapons[3].minDamage = 1;
-    p_player->weapons[3].maxDamage = 8;
-    p_player->weapons[3].isEquipped = 0;
-    p_player->weapons[3].canBeDisplayed = 0;
-
-    p_player->weapons[4].name = "Epee maudite";
-    p_player->weapons[4].nb_attack_per_round = 1;
-    p_player->weapons[4].minDamage = 99;
-    p_player->weapons[4].maxDamage = 109;
-    p_player->weapons[4].isEquipped = 0;
-    p_player->weapons[4].canBeDisplayed = 1;
 
     return p_player;
 }
