@@ -10,4 +10,7 @@ add_executable(DoomDepthsC_G21 main.c
         Monster.h
         fight.c
         heal.c
+        level.c
+        level.h
+        level.h
 )

@@ -4,7 +4,8 @@
 
 #include "Player.h"
 
-st_player * create_player (void) // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
+// fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
+st_player * create_player (void)
 {
     st_player* p_player = malloc(sizeof(st_player)); //p_player = le joueur en gros.
     printf("debug :: alloc p_player [%d] = %p \n",1,p_player); // printf pour débug, vérifier que le joueur est bien créer/allouer.
@@ -23,7 +24,6 @@ st_player * create_player (void) // fonction de type * st_player pour créer le 
 st_player * delete_player (st_player * p_player) //Supprime le joueur.
 {
     printf("debug :: free p_player %d = %p \n",1,p_player); // débug, pour vérifier qu'il est bien désallouer, faudras appeler cette fonction, quand notre MyPlayer, mourra par exemple, ce sera la fin de la game.
-
     free (p_player);
     return NULL;
 }

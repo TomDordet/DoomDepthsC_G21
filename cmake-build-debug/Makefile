@@ -224,6 +224,30 @@ heal.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.s
 .PHONY : heal.c.s
 
+level.obj: level.c.obj
+.PHONY : level.obj
+
+# target to build an object file
+level.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/level.c.obj
+.PHONY : level.c.obj
+
+level.i: level.c.i
+.PHONY : level.i
+
+# target to preprocess a source file
+level.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/level.c.i
+.PHONY : level.c.i
+
+level.s: level.c.s
+.PHONY : level.s
+
+# target to generate assembly for a file
+level.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/level.c.s
+.PHONY : level.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -269,6 +293,9 @@ help:
 	@echo ... heal.obj
 	@echo ... heal.i
 	@echo ... heal.s
+	@echo ... level.obj
+	@echo ... level.i
+	@echo ... level.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

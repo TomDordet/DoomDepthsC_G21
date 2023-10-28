@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.c" "CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj.d"
   "C:/Users/ethan/CLionProjects/DoomDepthsC_G21/fight.c" "CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj.d"
   "C:/Users/ethan/CLionProjects/DoomDepthsC_G21/heal.c" "CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj.d"
+  "C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.c" "CMakeFiles/DoomDepthsC_G21.dir/level.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/level.c.obj.d"
   "C:/Users/ethan/CLionProjects/DoomDepthsC_G21/main.c" "CMakeFiles/DoomDepthsC_G21.dir/main.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/main.c.obj.d"
   )
 

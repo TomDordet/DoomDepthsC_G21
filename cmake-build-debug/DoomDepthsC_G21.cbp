@@ -94,6 +94,12 @@
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/heal.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/main.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>

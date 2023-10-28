@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj"
   "CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj.d"
+  "CMakeFiles/DoomDepthsC_G21.dir/level.c.obj"
+  "CMakeFiles/DoomDepthsC_G21.dir/level.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/main.c.obj"
   "CMakeFiles/DoomDepthsC_G21.dir/main.c.obj.d"
   "DoomDepthsC_G21.exe"
