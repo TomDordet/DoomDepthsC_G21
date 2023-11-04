@@ -6,7 +6,7 @@
 #include "Weapon.h"
 //PARTIE WEAPON
 
-Weapon* createWeapon(char* name, int nb_attack_per_round, int minDamage, int maxDamage) {
+Weapon *createWeapon(char* name, int nb_attack_per_round, int minDamage, int maxDamage) {
     Weapon *newWeapon = malloc(sizeof(Weapon));
     if (newWeapon == NULL) {
         fprintf(stderr, "Erreur d'allocation mémoire\n");
@@ -37,7 +37,7 @@ void displayWeapon(Weapon *weapon)
 
 //PARTIE LISTE CHAINEES DE WEAPONS
 
-WeaponsPlayer* addWeapon(WeaponsPlayer *weapons, Weapon weapon){
+WeaponsPlayer* addWeaponToWeaponsPlayer(WeaponsPlayer *weapons, Weapon weapon){
     WeaponsPlayer *newWeapon = malloc(sizeof(WeaponsPlayer));
     if (newWeapon == NULL) {
         fprintf(stderr, "Erreur d'allocation mémoire\n");
@@ -66,4 +66,15 @@ void deleteWeaponsPlayer(WeaponsPlayer *weapons){
         deleteWeapon((&tmp->weapon));
         free(tmp);
     }
+}
+
+int countWeaponsPlayer(WeaponsPlayer *weapons){
+    int count = 0;
+    WeaponsPlayer *tmp = weapons;
+
+    while (tmp != NULL){
+        count++;
+        tmp = tmp->next;
+    }
+    return count;
 }

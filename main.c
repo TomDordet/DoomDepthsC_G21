@@ -80,9 +80,14 @@ void display_inventory(st_player* p_player){
             case 1: //Inventaire -> Armes
                 printf("----------\n");
                 printf("Armes :\n");
-                for (int i = 0; i < 5; ++i) {
+                /*for (int i = 0; i < countWeaponsPlayer(p_player->weapons); ++i) {
                     printf("%d - ", i+1);
-                    displayWeapon(&(p_player->weapons[i]));
+                    displayWeapon(&(p_player->weapons));
+                }*/
+                WeaponsPlayer *tmp = p_player->weapons;
+                while (tmp != NULL){
+                    displayWeapon(&tmp->weapon);
+                    tmp = tmp->next;
                 }
                 printf("----------\n");
                 int weaponOption = 1;
@@ -105,9 +110,9 @@ void display_inventory(st_player* p_player){
                                 break;
                             }
                             else{ //Changement true
-                                for (int i = 0; i < 5; ++i) {
+                                /*for (int i = 0; i < 5; ++i) {
                                     if(p_player->weapons[i]. == )
-                                }
+                                }*/
                             }
                         case 2: //Armes -> Retour
                             break;

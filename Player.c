@@ -16,7 +16,11 @@ st_player* create_player () // fonction de type * st_player pour créer le joueu
     p_player->nb_attack_per_round = rand() % (10 + 1); // Attaque par round, c'était évoqué dans le sujet, donc je l'ai mis, mais faudras approfondir sur ce point, et se mettre d'accord sur comment ca marche cette historie de d'attaque par round. (pour moi un round = une attaque chacun (MyPlayer, monstre(s) ??).
     p_player->attack = rand() % (10 + 1);
     p_player->defense = rand() % (10 + 1);
-    p_player->weapons = malloc(sizeof(Weapon) * 5);
+    p_player->weapons = malloc(sizeof(WeaponsPlayer) * 5);
+
+    Weapon *weapon = createWeapon("Epee de la justice", 2, 12, 16);
+    addWeaponToWeaponsPlayer(p_player->weapons, *weapon);
+
 
 
 
@@ -40,11 +44,15 @@ int display_player (st_player* p_player) // affichage des statistiques du joueur
 {
     printf("Vie : %d / %d point de vie. \n",p_player->currentLife, p_player->maxLife);
     printf("Attaque : %d \n", p_player->attack );
-    for (int i = 0; i < 5; ++i) {
-        if(p_player->weapons[i].isEquipped == 1){
-            printf("Arme equipee : %s\n", p_player->weapons[i].name);
+
+    WeaponsPlayer *tmp = p_player->weapons;
+    while (tmp != NULL) {
+        if (tmp->weapon.isEquipped == 1) {
+            printf("Arme equipee : %s\n", tmp->weapon.name);
             break;
         }
+        tmp = tmp->next;
     }
+
     return 0;
 }

@@ -19,7 +19,8 @@ Weapon* createWeapon(char* name, int nb_attack_per_round, int minDamage, int max
 void deleteWeapon(Weapon *weapon);
 void displayWeapon(Weapon* weapon);
 
-WeaponsPlayer* addWeapon(WeaponsPlayer *weapons, Weapon weapon);
-void deleteWeaponsPlayer(WeaponsPlayer *weapons)
+WeaponsPlayer* addWeaponToWeaponsPlayer(WeaponsPlayer *weapons, Weapon weapon);
+void deleteWeaponsPlayer(WeaponsPlayer *weapons);
+int countWeaponsPlayer(WeaponsPlayer *weapons);
 
 #endif //DOOMDEPTHSC_G21_WEAPON_H
