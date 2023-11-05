@@ -152,6 +152,48 @@ CMakeFiles/DoomDepthsC_G21.dir/level.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/level.c.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\ethan\CLionProjects\DoomDepthsC_G21\level.c -o CMakeFiles\DoomDepthsC_G21.dir\level.c.s
 
+CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
+CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.c
+CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\sqlite3.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\sqlite3.c.obj -c C:\Users\ethan\CLionProjects\DoomDepthsC_G21\sqlite3.c
+
+CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\ethan\CLionProjects\DoomDepthsC_G21\sqlite3.c > CMakeFiles\DoomDepthsC_G21.dir\sqlite3.c.i
+
+CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\ethan\CLionProjects\DoomDepthsC_G21\sqlite3.c -o CMakeFiles\DoomDepthsC_G21.dir\sqlite3.c.s
+
+CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
+CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/gameState.c
+CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\gameState.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\gameState.c.obj -c C:\Users\ethan\CLionProjects\DoomDepthsC_G21\gameState.c
+
+CMakeFiles/DoomDepthsC_G21.dir/gameState.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/gameState.c.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\ethan\CLionProjects\DoomDepthsC_G21\gameState.c > CMakeFiles\DoomDepthsC_G21.dir\gameState.c.i
+
+CMakeFiles/DoomDepthsC_G21.dir/gameState.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/gameState.c.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\ethan\CLionProjects\DoomDepthsC_G21\gameState.c -o CMakeFiles\DoomDepthsC_G21.dir\gameState.c.s
+
+CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj: CMakeFiles/DoomDepthsC_G21.dir/flags.make
+CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/loadSave.c
+CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj: CMakeFiles/DoomDepthsC_G21.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj -MF CMakeFiles\DoomDepthsC_G21.dir\loadSave.c.obj.d -o CMakeFiles\DoomDepthsC_G21.dir\loadSave.c.obj -c C:\Users\ethan\CLionProjects\DoomDepthsC_G21\loadSave.c
+
+CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\ethan\CLionProjects\DoomDepthsC_G21\loadSave.c > CMakeFiles\DoomDepthsC_G21.dir\loadSave.c.i
+
+CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\ethan\CLionProjects\DoomDepthsC_G21\loadSave.c -o CMakeFiles\DoomDepthsC_G21.dir\loadSave.c.s
+
 # Object files for target DoomDepthsC_G21
 DoomDepthsC_G21_OBJECTS = \
 "CMakeFiles/DoomDepthsC_G21.dir/main.c.obj" \
@@ -159,7 +201,10 @@ DoomDepthsC_G21_OBJECTS = \
 "CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj" \
 "CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj" \
 "CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj" \
-"CMakeFiles/DoomDepthsC_G21.dir/level.c.obj"
+"CMakeFiles/DoomDepthsC_G21.dir/level.c.obj" \
+"CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj" \
+"CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj" \
+"CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj"
 
 # External object files for target DoomDepthsC_G21
 DoomDepthsC_G21_EXTERNAL_OBJECTS =
@@ -170,11 +215,14 @@ DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/level.c.obj
+DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj
+DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj
+DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/build.make
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/linkLibs.rsp
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/objects1.rsp
 DoomDepthsC_G21.exe: CMakeFiles/DoomDepthsC_G21.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable DoomDepthsC_G21.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\ethan\CLionProjects\DoomDepthsC_G21\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable DoomDepthsC_G21.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DoomDepthsC_G21.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

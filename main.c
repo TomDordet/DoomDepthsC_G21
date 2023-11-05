@@ -4,44 +4,151 @@
 #include <string.h>
 
 #include "Player.h"
-//#include "Monster.h"
+#include "Monster.h"
 #include "level.h"
+#include "sqlite3.h"
 
+
+
+// PROTOTYPE FONCTIONS (pas issue de .h donc on les protos ici)
+// FIGHT
 st_monsters *fight_player_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func joueur attaque monstre
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func monstre(s) attaque joueur
+
+
+//HEAL
 int heal(st_player *p_player); //proto heal
-int next_game(void); // proto
-int save_lvl(void); // proto save LVL (à venir)
+
+// INSERT DATA (SAVE)
+int insertTheSAVE(sqlite3 *db, st_player* p_player, st_level* p_level);
+
+// LOAD SAVE
+int displayLatestSaves(void);
+
+// --------------- BDD -----------------------------------
+
+// create_table prend en param la db
+int create_tables(sqlite3 *db)
+{
+
+    const char *create_joueur_table_sql =
+            "CREATE TABLE JOUEUR ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "maxLife INTEGER, "
+            "currentLife INTEGER, "
+            "attack INTEGER, "
+            "id_niveau INTEGER, "
+            "id_sauvegarde INTEGER, "
+            "FOREIGN KEY (id_niveau) REFERENCES LEVEL(lvl_number), "
+            "FOREIGN KEY (id_sauvegarde) REFERENCES SAUVEGARDE(id) "
+            ");";
+
+    const char *create_monstre_table_sql =
+            "CREATE TABLE MONSTRE ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "number INTEGER, "
+            "maxLife INTEGER, "
+            "currentLife INTEGER, "
+            "attack INTEGER, "
+            "p_next INTEGER, "
+            "id_sauvegarde INTEGER, "
+            "FOREIGN KEY (p_next) REFERENCES MONSTRE(id), "
+            "FOREIGN KEY (id_sauvegarde) REFERENCES SAUVEGARDE(id) "
+            ");";
+
+    const char *create_level_table_sql =
+            "CREATE TABLE LEVEL ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "lvl_number INTEGER, "
+            "nb_monster INTEGER, "
+            "p_monster INTEGER, "
+            "id_sauvegarde INTEGER, "
+            "FOREIGN KEY (p_monster) REFERENCES MONSTRE(id), "
+            "FOREIGN KEY (id_sauvegarde) REFERENCES SAUVEGARDE(id) "
+            ");";
+
+    const char *create_sauvegarde_table_sql =
+            "CREATE TABLE SAUVEGARDE ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "currentLevel INTEGER, "
+            "date TEXT "
+            ");";
+    /*
+    const char *create_level_monstre_table_sql =
+            "CREATE TABLE LEVEL_MONSTER ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "id_niveau INTEGER, "
+            "id_monstre INTEGER, "
+            "FOREIGN KEY (id_niveau) REFERENCES LEVEL(lvl_number), "
+            "FOREIGN KEY (id_monstre) REFERENCES MONSTRE(id)"
+            ");";
+
+    */
+    /*
+    int rc = 0;
+
+    const char * drop_joueur_sql = "DROP TABLE JOUEUR;";
+    const char * drop_monster_sql = "DROP TABLE MONSTRE;";
+    const char * drop_level_sql = "DROP TABLE LEVEL;";
+    const char * drop_sauvegarde_sql = "DROP TABLE SAUVEGARDE;";
+
+    rc = sqlite3_exec(db, drop_joueur_sql, 0, 0, 0);
+    rc = sqlite3_exec(db, drop_monster_sql, 0, 0, 0);
+    rc = sqlite3_exec(db, drop_level_sql, 0, 0, 0);
+    rc = sqlite3_exec(db, drop_sauvegarde_sql, 0, 0, 0);
+    */
+
+
+    int rc = 0;
+
+    rc = sqlite3_exec(db, create_joueur_table_sql, 0, 0, 0);
+    rc = sqlite3_exec(db, create_monstre_table_sql, 0, 0, 0);
+    rc = sqlite3_exec(db, create_level_table_sql, 0, 0, 0);
+    rc = sqlite3_exec(db, create_sauvegarde_table_sql, 0, 0, 0);
+
+    return 0;
+}
+
+// Création / ouverture de la base de données
+int init_bdd(void)
+{
+    int rc = 0;
+    sqlite3 *db;
+    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    if (rc) {
+        fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
+        return rc;
+    }
+
+    // Créez les tables
+    rc = create_tables(db);
+    if (rc != 0) {
+        fprintf(stderr, "Erreur lors de la création des tables.\n");
+    }
+    sqlite3_close(db);
+    return 0;
+}
+
+int insertData(st_player* p_player, st_level* p_level)
+{
+    fprintf(stderr, "Début de la fonction insertData\n");
+    int rc = 0;
+    sqlite3 *db;
+    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    if (rc) {
+        fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
+        return rc;
+    }
+
+    insertTheSAVE(db, p_player, p_level);
+
+    sqlite3_close(db);
+    fprintf(stderr, "Fin de la fonction insertData\n");
+    return 0;
+}
 
 
 // --------------- DISPLAY ENTRE LVL ---------------------
-
-// les SALLES
-/*
-int next_game(void){
-    int game_choice = 1;
-
-    while(1)
-    {
-        printf("Trois portes se trouvent devant vous, laquel voulez-vous empruntez ? \n");
-        printf("1 - A gauche\n");
-        printf("2 - Tout droit\n");
-        printf("3 - A droite\n");
-        scanf("%d", &game_choice);
-
-        switch(game_choice){
-            case 1: {
-                return next_level();
-            }
-            case 2: {
-                return next_level();
-            }
-            case 3: {
-                return next_level();
-            }
-        }
-    }
-}*/
 
 int first_menu(void)
 {
@@ -61,10 +168,8 @@ int first_menu(void)
                 printf("inventaire à venir..\n");
                 break;
             }
-            case 2: {
-                printf("Sauvegarde à venir..\n");
-                break;
-            }
+            case 2:
+                return 2;
             case 3:
                 return 3;
             case 4:
@@ -85,16 +190,16 @@ int exit_game (st_player *p_player)
     return 0;
 }
 
-int game(void)
+int game(int id_db)
 {
     int choixMenu = 1;
-
-    st_player *p_player = create_player(); // on créer le joueur.
-    init_level(); // init le lvl (qui init la créa des mstr)
+    printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_db);
+    st_player *p_player = create_player(id_db); // on créer le joueur.
+    init_level(id_db); // init le lvl (qui init la créa des mstr)
 
     while (1)
     {
-        printf("--- LEVEL %d ----\n\n", get_lvl());
+        printf("--- LEVEL %d ----\n", get_lvl());
         printf("1.stat joueur \n");
         printf("2.stat monsters \n");
         printf("3.game \n");
@@ -117,9 +222,9 @@ int game(void)
             case 3:
             {
                 /*Game*/
-                st_monsters * pNew = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
+                st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
                 // Si le retour de fight_player_round == NULL, alors monstres morts / désallouer (voir ce que la fonction retourne à sa définition, pour comprendre).
-                if (pNew == NULL)
+                if (p_fight == NULL)
                 {
                     int f_menu;
 
@@ -127,7 +232,12 @@ int game(void)
                     set_lvl_monsters(NULL, get_lvl());
                     printf("Tout les monstres sont morts !");
                     f_menu = first_menu();
-                    if (f_menu == 3){//next game, next level
+                    if (f_menu == 2)
+                    {
+                        insertData(p_player, g_st_level);
+                    }
+                    else if (f_menu == 3)
+                    {//next game, next level
                         //next_game();
                         next_level();
                     }
@@ -137,9 +247,9 @@ int game(void)
                     }
                     break;
                 }
-                else if (pNew != get_lvl_monsters(get_lvl()))
+                else if (p_fight != get_lvl_monsters(get_lvl()))
                 {
-                    set_lvl_monsters(pNew, get_lvl());
+                    set_lvl_monsters(p_fight, get_lvl());
                 }
                 else
                 {
@@ -150,7 +260,7 @@ int game(void)
                 p_player = fight_monsters_round(p_player, get_lvl_monsters(get_lvl())); // déclenche l'attaque du monstre.
                 if (NULL == p_player) // si joueur = NULL (donc mort...)
                 {
-                    printf("Player is dead (has been deleted) .. Gave Over !!!!! \n ");
+                    printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
                     /*Libere tous les montres*/
                     delete_all_level ();
                     return 0; // ?
@@ -178,28 +288,29 @@ int game(void)
     //system("PAUSE");
     return 0;
 }
-
-
-
 // ---------------- WELCOME ----------------
 
 int welcome(void)
 {
     int choixMenu = 0;
-    while (choixMenu != 3) {
+    int id_db = 0;
+    while (choixMenu != 3)
+    {
         printf("--DOOMDEPTH-- \n\n");
-        printf("1 - Start New Game \n");
+        printf("1 - Start Game \n");
         printf("2 - Load save \n");
         printf("3 - Exit\n");
         scanf("%d", &choixMenu);
 
         switch (choixMenu) {
             case 1: {
-                game();
+                game(id_db);
                 break;
             }
-            case 2: {
-                printf("Bientôt.\n");
+            case 2:
+            {
+                id_db = displayLatestSaves();
+                printf("ID DB is %d\n", id_db);
                 break;
             }
             case 3: {
@@ -210,6 +321,8 @@ int welcome(void)
     return 0;
 }
 
-int main(void) {
+int main(void)
+{
+    init_bdd();
     welcome();
 }

@@ -91,6 +91,9 @@
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/fight.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/gameState.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/heal.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
@@ -100,7 +103,19 @@
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/loadSave.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/main.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3ext.h">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/CMakeLists.txt">

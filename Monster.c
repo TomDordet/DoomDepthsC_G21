@@ -5,60 +5,78 @@
 
 #include "Monster.h"
 
-static int number_monster = 1; //
+static int g_number_monster = 1; //
 
 void reset_monster_number (void) // func pour reset le nb de monstres. (pour que quand on les supp, puis en recréer d'autres, le "compteur" de mstr" reparte de 1.
 {
-    number_monster = 1;
+    g_number_monster = 1;
 }
 
 //initialise les stats des monstres.
-static void init_stats_monster (st_monsters * p_montser, int level_number)
+//Value from Data base
+// max_lvl --> le total de level sauve garder --> 2
+//   |-> lvl_number --> les levels sauvegarder --> 7 and 8
+//   |-> nb_monster --> nb de monstre pour chaque level
+//      |-> attack
+//      |-> maxLife
+//      |-> currentLife
+//      |-> defense
+static void init_stats_monster (st_monsters * p_montser, int level_number, int id_db)
 {
-    int un = 1;
-    p_montser->attack = 5 * level_number;
-    p_montser->maxLife = ((rand() % (10)) * level_number);
-    if (p_montser->maxLife == 0)
-        p_montser->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
-    p_montser->currentLife = p_montser->maxLife;
+    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
 
-    p_montser->defense = rand() % 10; // a faire plus tard.
+    if (id_db == 0)
+    {
+        //default value, Hardcoded value.
+        p_montser->number     = g_number_monster++;
+        p_montser->attack      = 5 * level_number;
+        p_montser->maxLife     = ((rand() % (10)) * level_number);
+        if (p_montser->maxLife == 0)
+            p_montser->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
+        p_montser->currentLife = p_montser->maxLife;
+        p_montser->defense     = rand() % 10; // a faire plus tard.
+    }
+    else
+    {
+        //value from DB
+        p_montser->number     = g_number_monster++;
+        p_montser->attack      = 5 * level_number;
+        p_montser->maxLife     = ((rand() % (10)) * level_number);
+        p_montser->currentLife = p_montser->maxLife;
+        p_montser->defense     = rand() % 10; // a faire plus tard.
+    }
 }
 
 //Creation des monstres.
-st_monsters * create_monsters(int *p_nb_monster , int level_number)
+st_monsters * create_monsters(int nb_monster , int level_number, int id_db)
 {
     st_monsters *p_prev = NULL; //les monstres qui suivront le premier, z'allez comprendre tkt.
+    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
 
     srand(time(NULL)); //intit du srand / random value.
 
-    int nb_monster = 2; // init du nb de monstres. Il faudras le repasser en rand. Bloqué à 2 pour le dév.
-    //if (nb_monster == 0) nb_monster = 1; //Au moins un monstre. (Sert à rien la, mais plus tard avec le rand, ya moyen)
-
     st_monsters *p_first_monster = malloc(sizeof(st_monsters)); // p_first_monster = un monstre. On l'alloue.
-    p_first_monster->number = number_monster++; //on init son 'number'. Et on incrémente sa valeur.
+    init_stats_monster (p_first_monster,level_number , id_db); // on initialise les stats des monstres. (Lvl nécessaire, puisque c'est lui qui définit leurs stats.)
+    printf("DEBUG :: alloc p_monster [%d] = %p \n", p_first_monster->number, p_first_monster); //debug.
 
-    printf("debug :: alloc p_monster [%d] = %p \n", p_first_monster->number, p_first_monster); //debug.
-
-    init_stats_monster (p_first_monster,level_number); // on initialise les stats des monstres. (Lvl nécessaire, puisque c'est lui qui définit leurs stats.)
+    //List chain manage
     p_first_monster->p_next = NULL; // monstre suivant init à NULL.
-
     p_prev = p_first_monster; //p_prev sauvegarde le premier.
 
     //création des monstres suivants.
     for (int i = 1; i < nb_monster; i++)
     {
         st_monsters * p_next = malloc(sizeof(st_monsters)); // p_next = nv monstre. On l'alloue.
-        p_next->number = number_monster++; // init du nb.
-        printf("debug :: alloc p_monster [%d] = %p \n", p_next->number, p_next); //débug.
-        init_stats_monster (p_next,level_number); // on init leurs stats.
-        p_next->p_next = NULL; // next = null.
+        init_stats_monster (p_next,level_number, id_db); // on init leurs stats.
+        printf("DEBUG :: alloc p_monster [%d] = %p \n", p_next->number, p_next); //débug.
 
+        //List chain manage
+        p_next->p_next = NULL; // next = null.
         p_prev->p_next = (int *) p_next; //p_prev (qui contient le p_first), son next = p_next (celui que l'on créer actuellement).
         p_prev = p_next; //p_prev devient p_next. Donc le monstre actuellement créer. Pour que prochain tour de boucle, ca s'incrémente.
         }
 
-    *p_nb_monster = nb_monster; //nb de monstres.
+    //*p_nb_monster = nb_monster; //nb de monstres.
     return p_first_monster; //return du p_first, puisque tout pars de lui.
 };
 
@@ -68,7 +86,7 @@ int delete_all_monster(st_monsters *p_monster)
     do
     {
         int *p_next = (int *) p_monster->p_next; // pointeur d'int p_next = le next monsters.
-        printf("debug :: free p_monster %d = %p \n", p_monster->number, p_monster); //debug
+        printf("DEBUG :: free p_monster %d = %p \n", p_monster->number, p_monster); //debug
         free(p_monster); //on le free
         p_monster = (st_monsters *) p_next; //p_monster++
     }

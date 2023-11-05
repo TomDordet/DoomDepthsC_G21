@@ -12,5 +12,9 @@ add_executable(DoomDepthsC_G21 main.c
         heal.c
         level.c
         level.h
-        level.h
+        sqlite3.c
+        sqlite3.h
+        sqlite3ext.h
+        gameState.c
+        loadSave.c
 )

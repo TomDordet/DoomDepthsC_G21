@@ -5,32 +5,66 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "level.h"
 
-static st_level g_st_level[MAX_LVL]; // tableau de st_lvl, de taille 10 (donc 10 LVL créer). Faudras varier le nb de lvl.
-static int g_current_lvl = 0; // lvl actuel.
+st_level g_st_level[MAX_LVL]; // tableau de st_lvl, de taille 10 (donc 10 LVL créer). Faudras varier le nb de lvl.
+static int g_current_lvl = 1; // lvl actuel.
 
 //------------ CREATION LVL ----------------
 
 // prend en param un lvl (struct), et le nombre max de lvl que l'on veut.
-static int create_level(st_level * p_st_lvl, int max_lvl)
+static int create_level( int id_db)
 {
-    for (int i = 0; i < max_lvl; i++)
-    {
-        p_st_lvl[i].lvl_number = i + 1; // lvl_number ++
-        printf("debug :: level %d \n", p_st_lvl[i].lvl_number); // debug
-        p_st_lvl[i].p_monster = create_monsters(&p_st_lvl[i].nb_monster,  p_st_lvl[i].lvl_number ); // création du monstre.
 
+    memset (g_st_level, 0, sizeof (st_level) * MAX_LVL);
+
+    srand(time(NULL) + rand());
+    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
+    if (id_db == 0)
+    {
+        // Default value, Hardcoded Value.
+        int max_monsters = 4;
+        int min_monsters = 1;
+        for (int i = 0; i < MAX_LVL; i++)
+        {
+            g_st_level[i].lvl_number = i + 1; // lvl_number ++
+            g_st_level[i].nb_monster = rand() % (max_monsters - min_monsters + 1) + min_monsters;
+            printf("DEBUG :: level %d\n", g_st_level[i].lvl_number); // debug
+            printf("DEBUG :: nombre de monstres : %d\n", g_st_level[i].nb_monster);
+            g_st_level[i].p_monster = create_monsters(g_st_level[i].nb_monster, g_st_level[i].lvl_number,  id_db); // création du monstre.
+        }
+        g_current_lvl = 1; // lvl actuel = 1
     }
-    g_current_lvl = 1; // lvl actuel = 1
-    return 0;
+    else
+    {
+        //Value from Data base
+        // max_lvl --> le total de level sauve garder --> 2
+        //   |-> lvl_number --> les levels sauvegarder --> 7 and 8
+        //   |-> nb_monster --> nb de monstre pour chaque level
+        //      |-> attack
+        //      |-> maxLife
+        //      |-> currentLife
+        //      |-> defense
+        int max_lvl = 2; //DB
+        for (int i = 0; i < max_lvl; i++)
+        {
+            g_st_level[i].lvl_number = i + 1; //DB
+            g_st_level[i].nb_monster = 2; //DB
+            g_st_level[i].p_monster = create_monsters(g_st_level[i].nb_monster, g_st_level[i].lvl_number,  id_db); // création du monstre.
+        }
+        g_current_lvl = 1; // le plus petit lvl_number
+    }
+
+    return g_current_lvl;
 }
 
 //create lvl, mais sans avoir les paramètre à renseigner, pck le joueur est pas censé définri le nb de lvl tout ca.
-int init_level(void)
+int init_level(int id_db)
 {
-    return create_level(g_st_level, MAX_LVL); //création du lvl.
+    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
+    return create_level( id_db); //création du lvl.
 }
 
 //-------------- SET MONSTERS by LVL -----------
@@ -58,6 +92,11 @@ int get_lvl(void)
     return g_current_lvl;
 }
 
+st_level * getLvl()
+{
+    return g_st_level;
+}
+
 // permet d'aller au niv suivant.
 int next_level(void)
 {
@@ -81,14 +120,11 @@ int delete_all_level (void)
 {
     for (int i = 0; i < MAX_LVL; i ++)
     {
-        printf("Delete level %d \n",g_st_level[i].lvl_number);
         if (g_st_level[i].p_monster != NULL) {
+            printf("DEBUG :: Delete level %d \n",g_st_level[i].lvl_number);
             delete_all_monster(g_st_level[i].p_monster);
         }
-        else
-        {
-            printf("no monster..... \n");
-        }
+
         g_st_level[i].nb_monster = 0;
     }
     reset_monster_number(); //on remet le nombre de monstre à 1.
