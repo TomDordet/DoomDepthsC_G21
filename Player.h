@@ -1,13 +1,17 @@
 #ifndef DOOMDEPTHSC_G21_PLAYER_H
 #define DOOMDEPTHSC_G21_PLAYER_H
 
-typedef struct
+#include "Weapon.h"
+#include "Armor.h"
+
+typedef struct st_player
 {
     int maxLife; //stats player
     int currentLife;
     int attack;
     int defense;
-    int weapons; // weapons à revoir, j'ai mis ca comme ça histoire de, mais surement une structure rien que pour les armes, comme il y'a plusieurs armes, avec des statistiques différentes etc...
+    WeaponsPlayer *weapons;
+    ArmorsPlayer *armors;
 } st_player;
 
 st_player *create_player(int id_db);

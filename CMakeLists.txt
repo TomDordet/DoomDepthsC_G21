@@ -17,4 +17,8 @@ add_executable(DoomDepthsC_G21 main.c
         sqlite3ext.h
         gameState.c
         loadSave.c
+        Weapon.h
+        Weapon.c
+        Armor.c
+        Armor.h
 )

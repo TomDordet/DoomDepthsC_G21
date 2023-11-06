@@ -150,7 +150,87 @@ int insertData(st_player* p_player, st_level* p_level)
 
 // --------------- DISPLAY ENTRE LVL ---------------------
 
-int first_menu(void)
+//-----------------PARTIE INVENTAIRE-----------------
+
+void display_inventory(st_player* p_player){
+    int option = 1;
+
+    while (option != 4){
+        printf("1. Armes\n");
+        printf("2. Armures\n");
+        printf("3. Potions\n");
+        printf("4. Retour\n");
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1: //Inventaire -> Armes
+                displayWeaponsPlayer(p_player->weapons);
+                int weaponOption = 1;
+
+                while (weaponOption != 2) {
+                    printf("1. Changer d'arme\n");
+                    printf("2. Retour\n");
+                    scanf("%d", &weaponOption);
+
+                    int equipWeapon = -1;
+                    switch(weaponOption){
+                        case 1: //Armes -> Changer d'arme
+                            displayWeaponsPlayer(p_player->weapons);
+                            printf("Quelle arme equiper?\n");
+                            scanf("%d", &equipWeapon);
+                            if (equipWeapon == -1){
+                                break;
+                            }
+                            else if (equipWeapon > countWeaponsPlayer(p_player->weapons)){
+                                printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipWeapon);
+                                break;
+                            }
+                            else {
+                                changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
+                            }
+                        case 2: //Armes -> Retour
+                            break;
+                    }
+                }
+                break;
+            case 2: //Inventaire -> Armures
+                displayArmorsPlayer(p_player->armors);
+                int armorOption = 1;
+
+                while (armorOption != 2) {
+                    printf("1. Changer d'armure\n");
+                    printf("2. Retour\n");
+                    scanf("%d", &armorOption);
+
+                    int equipArmor = -1;
+                    switch (armorOption) {
+                        case 1: //Armures -> Changer d'armure
+                            displayArmorsPlayer(p_player->armors);
+                            printf("Quelle armure equiper?\n");
+                            scanf("%d", &equipArmor);
+                            if (equipArmor == -1) {
+                                break;
+                            } else if (equipArmor > countArmorsPlayer(p_player->armors)) {
+                                printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipArmor);
+                                break;
+                            } else {
+                                changeIsEquippedToArmorsPlayer(p_player->armors, equipArmor);
+                            }
+                        case 2: //Armures -> Retour
+                            break;
+                    }
+                }
+            case 3: //Inventaire -> Potions
+                printf("Vous accedez aux potions\n");
+                break;
+            case 4: //Inventaire -> Retour
+                break;
+        }
+    }
+}
+//-----------------FIN PARTIE INVENTAIRE-----------------
+
+int first_menu(st_player *p_player)
 {
     while(1)
     {
@@ -165,7 +245,7 @@ int first_menu(void)
 
         switch(save_choice){
             case 1: {
-                printf("inventaire à venir..\n");
+                display_inventory(p_player);
                 break;
             }
             case 2:
@@ -184,7 +264,7 @@ int first_menu(void)
 int exit_game (st_player *p_player)
 {
     //Libere tous les montres
-    delete_all_level ();
+    delete_all_level();
     //libere le joueur
     delete_player(p_player);
     return 0;
@@ -204,7 +284,8 @@ int game(int id_db)
         printf("2.stat monsters \n");
         printf("3.game \n");
         printf("4.heal \n");
-        printf("5.sortir \n");
+        printf("5.Inventaire\n");
+        printf("9.sortir \n");
         scanf("%d", &choixMenu);
 
         switch (choixMenu)
@@ -231,7 +312,7 @@ int game(int id_db)
                     // on remet à NULL les monstres dans le lvl, pck ils sont morts.
                     set_lvl_monsters(NULL, get_lvl());
                     printf("Tout les monstres sont morts !");
-                    f_menu = first_menu();
+                    f_menu = first_menu(p_player);
                     if (f_menu == 2)
                     {
                         insertData(p_player, g_st_level);
@@ -267,10 +348,15 @@ int game(int id_db)
                 }
                 break;
             }
-            case 4:
+            case 4: {
                 heal(p_player);
                 break;
-            case 5:
+            }
+            case 5: {
+                display_inventory(p_player);
+                break;
+            }
+            case 9:
             {
                 int var;
                 printf("Tout sera supprimer, continuer ? (1/0)\n");
