@@ -78,18 +78,7 @@ void display_inventory(st_player* p_player){
 
         switch (option) {
             case 1: //Inventaire -> Armes
-                printf("----------\n");
-                printf("Armes :\n");
-                /*for (int i = 0; i < countWeaponsPlayer(p_player->weapons); ++i) {
-                    printf("%d - ", i+1);
-                    displayWeapon(&(p_player->weapons));
-                }*/
-                WeaponsPlayer *tmp = p_player->weapons;
-                while (tmp != NULL){
-                    displayWeapon(&tmp->weapon);
-                    tmp = tmp->next;
-                }
-                printf("----------\n");
+                displayWeaponsPlayer(p_player->weapons);
                 int weaponOption = 1;
 
                 while (weaponOption != 2) {
@@ -100,19 +89,18 @@ void display_inventory(st_player* p_player){
                     int equipWeapon = -1;
                     switch(weaponOption){
                         case 1: //Armes -> Changer d'arme
+                            displayWeaponsPlayer(p_player->weapons);
                             printf("Quelle arme equiper?\n");
                             scanf("%d", &equipWeapon);
-                            if(equipWeapon == -1){
+                            if (equipWeapon == -1){
                                 break;
                             }
-                            else if(equipWeapon < 5){
-                                printf("Erreur de saisie : aucune arme ne correspond au numéro %d", equipWeapon);
+                            else if (equipWeapon > countWeaponsPlayer(p_player->weapons)){
+                                printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipWeapon);
                                 break;
                             }
-                            else{ //Changement true
-                                /*for (int i = 0; i < 5; ++i) {
-                                    if(p_player->weapons[i]. == )
-                                }*/
+                            else {
+                                changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
                             }
                         case 2: //Armes -> Retour
                             break;
@@ -136,6 +124,7 @@ void display_inventory(st_player* p_player){
 
 int main(void)
 {
+
     int nb_monster = 0;
     int choixMenu = 1;
 
