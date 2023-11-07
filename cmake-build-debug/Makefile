@@ -128,6 +128,30 @@ DoomDepthsC_G21/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/build
 .PHONY : DoomDepthsC_G21/fast
 
+Armor.obj: Armor.c.obj
+.PHONY : Armor.obj
+
+# target to build an object file
+Armor.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj
+.PHONY : Armor.c.obj
+
+Armor.i: Armor.c.i
+.PHONY : Armor.i
+
+# target to preprocess a source file
+Armor.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Armor.c.i
+.PHONY : Armor.c.i
+
+Armor.s: Armor.c.s
+.PHONY : Armor.s
+
+# target to generate assembly for a file
+Armor.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Armor.c.s
+.PHONY : Armor.c.s
+
 Monster.obj: Monster.c.obj
 .PHONY : Monster.obj
 
@@ -176,6 +200,150 @@ Player.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Player.c.s
 .PHONY : Player.c.s
 
+Weapon.obj: Weapon.c.obj
+.PHONY : Weapon.obj
+
+# target to build an object file
+Weapon.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj
+.PHONY : Weapon.c.obj
+
+Weapon.i: Weapon.c.i
+.PHONY : Weapon.i
+
+# target to preprocess a source file
+Weapon.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.i
+.PHONY : Weapon.c.i
+
+Weapon.s: Weapon.c.s
+.PHONY : Weapon.s
+
+# target to generate assembly for a file
+Weapon.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.s
+.PHONY : Weapon.c.s
+
+fight.obj: fight.c.obj
+.PHONY : fight.obj
+
+# target to build an object file
+fight.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj
+.PHONY : fight.c.obj
+
+fight.i: fight.c.i
+.PHONY : fight.i
+
+# target to preprocess a source file
+fight.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/fight.c.i
+.PHONY : fight.c.i
+
+fight.s: fight.c.s
+.PHONY : fight.s
+
+# target to generate assembly for a file
+fight.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/fight.c.s
+.PHONY : fight.c.s
+
+gameState.obj: gameState.c.obj
+.PHONY : gameState.obj
+
+# target to build an object file
+gameState.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj
+.PHONY : gameState.c.obj
+
+gameState.i: gameState.c.i
+.PHONY : gameState.i
+
+# target to preprocess a source file
+gameState.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/gameState.c.i
+.PHONY : gameState.c.i
+
+gameState.s: gameState.c.s
+.PHONY : gameState.s
+
+# target to generate assembly for a file
+gameState.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/gameState.c.s
+.PHONY : gameState.c.s
+
+heal.obj: heal.c.obj
+.PHONY : heal.obj
+
+# target to build an object file
+heal.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj
+.PHONY : heal.c.obj
+
+heal.i: heal.c.i
+.PHONY : heal.i
+
+# target to preprocess a source file
+heal.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.i
+.PHONY : heal.c.i
+
+heal.s: heal.c.s
+.PHONY : heal.s
+
+# target to generate assembly for a file
+heal.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/heal.c.s
+.PHONY : heal.c.s
+
+level.obj: level.c.obj
+.PHONY : level.obj
+
+# target to build an object file
+level.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/level.c.obj
+.PHONY : level.c.obj
+
+level.i: level.c.i
+.PHONY : level.i
+
+# target to preprocess a source file
+level.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/level.c.i
+.PHONY : level.c.i
+
+level.s: level.c.s
+.PHONY : level.s
+
+# target to generate assembly for a file
+level.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/level.c.s
+.PHONY : level.c.s
+
+loadSave.obj: loadSave.c.obj
+.PHONY : loadSave.obj
+
+# target to build an object file
+loadSave.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj
+.PHONY : loadSave.c.obj
+
+loadSave.i: loadSave.c.i
+.PHONY : loadSave.i
+
+# target to preprocess a source file
+loadSave.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.i
+.PHONY : loadSave.c.i
+
+loadSave.s: loadSave.c.s
+.PHONY : loadSave.s
+
+# target to generate assembly for a file
+loadSave.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.s
+.PHONY : loadSave.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -200,6 +368,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/main.c.s
 .PHONY : main.c.s
 
+sqlite3.obj: sqlite3.c.obj
+.PHONY : sqlite3.obj
+
+# target to build an object file
+sqlite3.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj
+.PHONY : sqlite3.c.obj
+
+sqlite3.i: sqlite3.c.i
+.PHONY : sqlite3.i
+
+# target to preprocess a source file
+sqlite3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.i
+.PHONY : sqlite3.c.i
+
+sqlite3.s: sqlite3.c.s
+.PHONY : sqlite3.s
+
+# target to generate assembly for a file
+sqlite3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.s
+.PHONY : sqlite3.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -209,15 +401,39 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DoomDepthsC_G21
+	@echo ... Armor.obj
+	@echo ... Armor.i
+	@echo ... Armor.s
 	@echo ... Monster.obj
 	@echo ... Monster.i
 	@echo ... Monster.s
 	@echo ... Player.obj
 	@echo ... Player.i
 	@echo ... Player.s
+	@echo ... Weapon.obj
+	@echo ... Weapon.i
+	@echo ... Weapon.s
+	@echo ... fight.obj
+	@echo ... fight.i
+	@echo ... fight.s
+	@echo ... gameState.obj
+	@echo ... gameState.i
+	@echo ... gameState.s
+	@echo ... heal.obj
+	@echo ... heal.i
+	@echo ... heal.s
+	@echo ... level.obj
+	@echo ... level.i
+	@echo ... level.s
+	@echo ... loadSave.obj
+	@echo ... loadSave.i
+	@echo ... loadSave.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... sqlite3.obj
+	@echo ... sqlite3.i
+	@echo ... sqlite3.s
 .PHONY : help
 
 

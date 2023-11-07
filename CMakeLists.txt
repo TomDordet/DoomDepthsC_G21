@@ -8,4 +8,17 @@ add_executable(DoomDepthsC_G21 main.c
         Player.h
         Monster.c
         Monster.h
+        fight.c
+        heal.c
+        level.c
+        level.h
+        sqlite3.c
+        sqlite3.h
+        sqlite3ext.h
+        gameState.c
+        loadSave.c
+        Weapon.h
+        Weapon.c
+        Armor.c
+        Armor.h
 )
