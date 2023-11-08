@@ -128,6 +128,30 @@ DoomDepthsC_G21/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/build
 .PHONY : DoomDepthsC_G21/fast
 
+BDD.obj: BDD.c.obj
+.PHONY : BDD.obj
+
+# target to build an object file
+BDD.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/BDD.c.obj
+.PHONY : BDD.c.obj
+
+BDD.i: BDD.c.i
+.PHONY : BDD.i
+
+# target to preprocess a source file
+BDD.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/BDD.c.i
+.PHONY : BDD.c.i
+
+BDD.s: BDD.c.s
+.PHONY : BDD.s
+
+# target to generate assembly for a file
+BDD.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/BDD.c.s
+.PHONY : BDD.c.s
+
 Monster.obj: Monster.c.obj
 .PHONY : Monster.obj
 
@@ -353,6 +377,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DoomDepthsC_G21
+	@echo ... BDD.obj
+	@echo ... BDD.i
+	@echo ... BDD.s
 	@echo ... Monster.obj
 	@echo ... Monster.i
 	@echo ... Monster.s

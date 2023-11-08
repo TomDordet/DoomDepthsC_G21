@@ -24,7 +24,7 @@ int displayLatestSaves(void)
 
     // ON SELECTE LES 5 DERNIRERE SAUVEGARDE EN DATE
 
-    const char *select_latest_saves_sql = "SELECT * FROM SAUVEGARDE ORDER BY date ASC LIMIT 5;";
+    const char *select_latest_saves_sql = "SELECT * FROM SAUVEGARDE ORDER BY date DESC LIMIT 5;";
     sqlite3_stmt *stmt;
     rc = sqlite3_prepare_v2(db, select_latest_saves_sql, -1, &stmt, 0);
 
@@ -37,7 +37,6 @@ int displayLatestSaves(void)
     int i = 1;
     int choixSave = 0;
     printf("Quelle sauvegardes voulez-vous charger ?\n");
-    printf("0 - Nouvelle partie \n");
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
     {
         int sauvegarde_id = sqlite3_column_int(stmt, 0);
@@ -47,6 +46,7 @@ int displayLatestSaves(void)
         printf("%d - ID: %d, Niveau actuel: %d, Date: %s\n", sauvegarde_id, sauvegarde_id, currentLevel, date);
         i++;
     }
+    printf("0 - Nouvelle partie \n");
     scanf("%d", &choixSave);
 
     if (i == 1)

@@ -32,7 +32,6 @@ static int create_level(int save_id)
         // on parcours tout les niveaux.
         for (int i = 0; i < MAX_LVL; i++)
         {
-
             g_st_level[i].lvl_number = i + 1; // lvl_number ++
             g_st_level[i].nb_monster = rand() % (max_monsters - min_monsters + 1) + min_monsters; // as besoin d'un nombre de monstres
             printf("DEBUG :: level %d\n", g_st_level[i].lvl_number); // debug
@@ -143,10 +142,10 @@ int set_lvl_monsters(st_monsters * new_monster, int lvl)
 {
     for (int i = 0; i < MAX_LVL; i ++)
     {
-        // on parcours les lvl, si on tombe sur le lvl sur lequel on est (donc celui passer en para) ;
+        // on parcourt les lvl, si on tombe sur le lvl sur lequel on est ;
         if (g_st_level[i].lvl_number == lvl)
         {
-            g_st_level[i].p_monster = new_monster; // alors l'attribut p_monster (qui est une st de monstre dans la st du lvl) devient un monstre.
+            g_st_level[i].p_monster = new_monster; // alors l'attribut p_monster (qui est une struct de monstre dans la struct du lvl) devient un monstre. On init les monstres en gros. (si NULL passer en param, alors pu de monstres).
             return g_st_level[i].lvl_number;
         }
     }
@@ -160,6 +159,7 @@ int get_lvl(void)
 {
     return g_current_lvl;
 }
+
 
 st_level * getLvl()
 {
@@ -176,13 +176,16 @@ int next_level(void)
 //retourne les monstres du lvl
 st_monsters * get_lvl_monsters(int lvl)
 {
+    // parcous les lvls
     for (int i = 0; i < MAX_LVL; i ++)
     {
+        // retourne le monstre du level.
         if (g_st_level[i].lvl_number == lvl)
             return g_st_level[i].p_monster;
     }
     return NULL;
 }
+
 
 //delete les lvl (et tout les monstres qu'il y'a dedans).
 int delete_all_level (void)

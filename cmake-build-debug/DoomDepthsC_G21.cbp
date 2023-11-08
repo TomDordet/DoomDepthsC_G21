@@ -76,6 +76,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/BDD.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
 		<Unit filename="C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
