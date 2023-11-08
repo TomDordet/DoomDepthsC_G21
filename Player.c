@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
 #include "Player.h"
 
 // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
@@ -18,6 +14,8 @@ st_player * create_player (int id_db)
         //default value, Hardcoded value.
         p_player->maxLife = 50;//rand() % 50; // la vie du MyPlayer. Valeur de base, à changer plus tard.
         p_player->currentLife = p_player->maxLife;
+        p_player->maxMana = 80;
+        p_player->currentMana = p_player->maxMana;
         p_player->attack = 10;
         p_player->defense = 10;
         p_player->weapons = NULL;
@@ -28,6 +26,8 @@ st_player * create_player (int id_db)
         //get db (id_db)
         p_player->maxLife = 50;//rand() % 50; // la vie du MyPlayer. Valeur de base, à changer plus tard.
         p_player->currentLife = p_player->maxLife;
+        p_player->maxMana = 80;
+        p_player->currentMana = p_player->maxMana;
         p_player->attack = 10;
         p_player->defense = 10;
         p_player->weapons = NULL;
@@ -122,6 +122,7 @@ st_player * delete_player (st_player * p_player) //Supprime le joueur.
 int display_player (st_player* p_player) // affichage des statistiques du joueur.
 {
     printf("Vie : %d / %d point de vie. \n",p_player->currentLife, p_player->maxLife);
+    printf("Mana : %d / %d point de Mana. \n",p_player->currentMana, p_player->maxMana);
     printf("Attaque :  : %d \n", p_player->attack );
     //Affiche l'arme équipée
     WeaponsPlayer *tmp = p_player->weapons;
