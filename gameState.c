@@ -146,8 +146,8 @@ int insert_monsters(sqlite3 *db, st_level* p_level, int saveId)
             printf("Debut insert niveau \n");
             // Récupérez l'ID du monstre que vous venez d'insérer.
 
-            sqlite3_int64 monster_id = sqlite3_last_insert_rowid(db);
-            int mstrId = (int)monster_id;
+            //sqlite3_int64 monster_id = sqlite3_last_insert_rowid(db);
+            //int mstrId = (int)monster_id;
 
 
             // Préparez la requête SQL d'insertion
@@ -167,12 +167,12 @@ int insert_monsters(sqlite3 *db, st_level* p_level, int saveId)
 
             printf("LEVEL NUMBER %d \n", p_lvl->lvl_number);
             printf("nb monster  %d \n", p_lvl->nb_monster);
-            printf("ID DU MONSTRE WALLAH %lld \n", monster_id);
+            printf("NUM DU MONSTRE WALLAH %lld \n", p_monster->number);
             printf("SAVE ID : %d\n", saveId);
             // Liez les valeurs aux paramètres de la requête
             sqlite3_bind_int(stmt2, 1, p_lvl->lvl_number);
             sqlite3_bind_int(stmt2, 2, p_lvl->nb_monster);
-            sqlite3_bind_int(stmt2, 3, mstrId);
+            sqlite3_bind_int(stmt2, 3, p_monster->number);
             sqlite3_bind_int(stmt2, 4, saveId);
 
             printf("BIND VALUE OK  \n");

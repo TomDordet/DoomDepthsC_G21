@@ -150,7 +150,7 @@ int insertData(st_player* p_player, st_level* p_level)
 
 // --------------- DISPLAY ENTRE LVL ---------------------
 
-int first_menu(void)
+int postLvlMenu(void)
 {
     while(1)
     {
@@ -190,13 +190,17 @@ int exit_game (st_player *p_player)
     return 0;
 }
 
-int game(int id_db)
+int game(int id_save)
 {
-    int choixMenu = 1;
-    printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_db);
-    st_player *p_player = create_player(id_db); // on créer le joueur.
-    init_level(id_db); // init le lvl (qui init la créa des mstr)
 
+    // chargement de la partie
+    // création des levels / monstres / joueur
+    printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_save);
+    st_player *p_player = create_player(id_save); // on créer le joueur.
+    init_level(id_save); // init le lvl (qui init la créa des mstr)
+
+
+    int choixMenu = 1;
     while (1)
     {
         printf("--- LEVEL %d ----\n", get_lvl());
@@ -209,29 +213,34 @@ int game(int id_db)
 
         switch (choixMenu)
         {
-            case 1: {
+            // STATS JOUEUR
+            case 1:
+            {
                 display_player(p_player); // affiche les stats du joueur.
                 break;
             }
+            //STATS DES MONSTRES
             case 2:
             {
                 printf("-- Level %d -- \n",get_lvl()); // affiche le LVL actuel
                 display_monsters(get_lvl_monsters(get_lvl())); // affiche les monstres.
                 break;
             }
+            // GAME
             case 3:
             {
-                /*Game*/
+                // ATTAQUE DU JOUEUR
                 st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
                 // Si le retour de fight_player_round == NULL, alors monstres morts / désallouer (voir ce que la fonction retourne à sa définition, pour comprendre).
                 if (p_fight == NULL)
                 {
-                    int f_menu;
+                    //variable qui contient le retour du menu "postLvlMenu"
+                    int f_menu = 0;
 
                     // on remet à NULL les monstres dans le lvl, pck ils sont morts.
                     set_lvl_monsters(NULL, get_lvl());
                     printf("Tout les monstres sont morts !");
-                    f_menu = first_menu();
+                    f_menu = postLvlMenu();
                     if (f_menu == 2)
                     {
                         insertData(p_player, g_st_level);
@@ -283,8 +292,6 @@ int game(int id_db)
             }
         }
     }
-
-
     //system("PAUSE");
     return 0;
 }
@@ -293,24 +300,24 @@ int game(int id_db)
 int welcome(void)
 {
     int choixMenu = 0;
-    int id_db = 0;
+    int id_save = 0;
     while (choixMenu != 3)
     {
         printf("--DOOMDEPTH-- \n\n");
         printf("1 - Start Game \n");
-        printf("2 - Load save \n");
+        printf("2 - Choisir une partie \n");
         printf("3 - Exit\n");
         scanf("%d", &choixMenu);
 
         switch (choixMenu) {
             case 1: {
-                game(id_db);
+                game(id_save);
                 break;
             }
             case 2:
             {
-                id_db = displayLatestSaves();
-                printf("ID DB is %d\n", id_db);
+                id_save = displayLatestSaves();
+                //printf("ID DB is %d\n", id_db);
                 break;
             }
             case 3: {

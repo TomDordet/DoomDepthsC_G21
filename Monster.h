@@ -13,7 +13,8 @@ typedef struct {
 } st_monsters;
 
 
-st_monsters * create_monsters(int nb_monster , int level_number, int id_db);
+st_monsters * create_monsters(int nb_monster , int level_number);
+st_monsters * create_monsters_save(st_monsters * p_monster, int save_id, int num_monster);
 
 st_monsters *delete_the_monster(st_monsters *p_first_monster, st_monsters *p_the_monster);
 int delete_all_monster(st_monsters *p_monster);

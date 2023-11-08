@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "Monster.h"
+#include "sqlite3.h"
 
 static int g_number_monster = 1; //
 
@@ -12,51 +13,76 @@ void reset_monster_number (void) // func pour reset le nb de monstres. (pour que
     g_number_monster = 1;
 }
 
-//initialise les stats des monstres.
-//Value from Data base
-// max_lvl --> le total de level sauve garder --> 2
-//   |-> lvl_number --> les levels sauvegarder --> 7 and 8
-//   |-> nb_monster --> nb de monstre pour chaque level
-//      |-> attack
-//      |-> maxLife
-//      |-> currentLife
-//      |-> defense
-static void init_stats_monster (st_monsters * p_montser, int level_number, int id_db)
+static void init_stats_monster (st_monsters * p_montser, int level_number)
 {
-    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
+    //default value, Hardcoded value.
+    p_montser->number = g_number_monster++;
+    printf("DEBUG :: init_stats_monster func begin for monster %d\n", p_montser->number);
+    p_montser->attack = 5 * level_number;
+    p_montser->maxLife = ((rand() % (10)) * level_number);
+    if (p_montser->maxLife == 0)
+        p_montser->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
+    p_montser->currentLife = p_montser->maxLife;
+    p_montser->defense = rand() % 10; // a faire plus tard.
+    printf("DEBUG :: END FUNC for monster %d\n", p_montser->number);
 
-    if (id_db == 0)
+}
+
+static void init_stats_monster_save(st_monsters * p_montser, int save_id, int monster_number)
+{
+    // BDD
+    int rc = 0;
+    sqlite3 *db;
+    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    if (rc)
     {
-        //default value, Hardcoded value.
-        p_montser->number     = g_number_monster++;
-        p_montser->attack      = 5 * level_number;
-        p_montser->maxLife     = ((rand() % (10)) * level_number);
-        if (p_montser->maxLife == 0)
-            p_montser->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
-        p_montser->currentLife = p_montser->maxLife;
-        p_montser->defense     = rand() % 10; // a faire plus tard.
+        fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
     }
-    else
+    // SAME REQUETE MAIS QUI PREND EN PLUS LE NUMBER DU MONSTRE RECUP EN PARAMETRE
+    const char *select_monster_sql = "SELECT maxLife, currentLife, attack FROM MONSTRE WHERE id_sauvegarde = ? AND number = ?;";
+    sqlite3_stmt *stmt;
+    rc = sqlite3_prepare_v2(db, select_monster_sql, -1, &stmt, 0);
+
+    if (rc != SQLITE_OK)
     {
-        //value from DB
-        p_montser->number     = g_number_monster++;
-        p_montser->attack      = 5 * level_number;
-        p_montser->maxLife     = ((rand() % (10)) * level_number);
-        p_montser->currentLife = p_montser->maxLife;
-        p_montser->defense     = rand() % 10; // a faire plus tard.
+        fprintf(stderr, "Erreur lors de la préparation de la requête : %s\n", sqlite3_errmsg(db));
     }
+
+    sqlite3_bind_int(stmt, 1, save_id);
+    sqlite3_bind_int(stmt, 2, monster_number);
+
+    rc = sqlite3_step(stmt);
+
+    int monsterMaxLife = sqlite3_column_int(stmt, 0);
+    int monsterCurrentLife = sqlite3_column_int(stmt, 1);
+    int monsterAttack = sqlite3_column_int(stmt, 2);
+
+    printf("NUMBER MONSTER %d\n", monster_number);
+    printf("MAX LIFE MONSTER %d\n", monsterMaxLife);
+    printf("CURRENT LIFE MONSTER %d\n", monsterCurrentLife);
+    printf("ATTACK MONSTER %d\n\n", monsterAttack);
+
+    //value from DB
+    p_montser->number = monster_number;
+    p_montser->attack = monsterAttack;
+    p_montser->maxLife = monsterMaxLife;
+    p_montser->currentLife = monsterCurrentLife;
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
 }
 
 //Creation des monstres.
-st_monsters * create_monsters(int nb_monster , int level_number, int id_db)
+st_monsters * create_monsters(int nb_monster, int level_number)
 {
-    st_monsters *p_prev = NULL; //les monstres qui suivront le premier, z'allez comprendre tkt.
-    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
+    st_monsters *p_prev = NULL; //on créer un monstre à NULL (ce sera pour stocker / sauvegarder un autre monstre pdt le traitement)
+    //printf("DEBUG :: create_monsters func begin\n");
+    //on créer et alloue le premier monstre.
+    st_monsters *p_first_monster = malloc(sizeof(st_monsters));
 
-    srand(time(NULL)); //intit du srand / random value.
+    //on init ses stats (et on passe le save_id pour récup les stats de la save si on as choisis une save). Aussi le lvl_number, car dans cas ou pas save, le lvl permet d'augmenter leurs stats au fur et à mesure.
+    init_stats_monster(p_first_monster, level_number);
 
-    st_monsters *p_first_monster = malloc(sizeof(st_monsters)); // p_first_monster = un monstre. On l'alloue.
-    init_stats_monster (p_first_monster,level_number , id_db); // on initialise les stats des monstres. (Lvl nécessaire, puisque c'est lui qui définit leurs stats.)
     printf("DEBUG :: alloc p_monster [%d] = %p \n", p_first_monster->number, p_first_monster); //debug.
 
     //List chain manage
@@ -67,17 +93,59 @@ st_monsters * create_monsters(int nb_monster , int level_number, int id_db)
     for (int i = 1; i < nb_monster; i++)
     {
         st_monsters * p_next = malloc(sizeof(st_monsters)); // p_next = nv monstre. On l'alloue.
-        init_stats_monster (p_next,level_number, id_db); // on init leurs stats.
+        init_stats_monster (p_next,level_number); // on init leurs stats.
         printf("DEBUG :: alloc p_monster [%d] = %p \n", p_next->number, p_next); //débug.
 
         //List chain manage
         p_next->p_next = NULL; // next = null.
         p_prev->p_next = (int *) p_next; //p_prev (qui contient le p_first), son next = p_next (celui que l'on créer actuellement).
         p_prev = p_next; //p_prev devient p_next. Donc le monstre actuellement créer. Pour que prochain tour de boucle, ca s'incrémente.
-        }
+    }
 
     //*p_nb_monster = nb_monster; //nb de monstres.
+    printf("FIN FUNC\n");
     return p_first_monster; //return du p_first, puisque tout pars de lui.
+};
+
+st_monsters * create_monsters_save(st_monsters *p_monster, int save_id, int num_monster)
+{
+    st_monsters *p_prev = p_monster; // p_prev = le monstre passer en param
+
+    // si le premier est == NULL c'est aucun n'est créer. (pas de liste chainer etc..)
+    if (p_monster == NULL)
+    {
+        p_monster = malloc(sizeof(st_monsters)); // donc on l'alloue
+
+        //on init ses stats
+        printf("DEBUG :: alloc p_monster  IF NULL [%d] = %p \n", num_monster, p_monster); //debug.
+        init_stats_monster_save(p_monster, save_id, num_monster);
+
+        // le monstre suivant est NULL (on fait ca car si jamais on n'a qu'un seul monstre dans le niveau, on termine la liste ici).
+        p_monster->p_next = NULL; // monstre suivant init à NULL.
+        return p_monster; // et on retourne le monstre.
+    }
+    else // mais si le monstre passer en param n'est pas null. C'est qu'une liste existe déjà. Donc ce n'est pas le premier de la liste.
+    {
+        p_prev = p_monster; //p_prev sauvegarde le monstre.
+
+        while(p_prev->p_next != NULL) // tant que le monstre suivant n'est pas null (donc tant que l'on arrive pas au dernier de la liste).
+        {
+            p_prev = (st_monsters *) p_prev->p_next; // le monstre devient le suivant (donc le denier en gros)
+        }
+
+        st_monsters * p_next = malloc(sizeof(st_monsters)); // nouveau monstre allouer.
+
+        printf("DEBUG :: alloc p_monster [%d] = %p \n", num_monster, p_next); //débug.
+        init_stats_monster_save(p_next, save_id, num_monster); // on init ses stats.
+
+
+        //List chain manage
+        p_next->p_next = NULL; // next = null.
+        p_prev->p_next = (int *) p_next;
+
+        return p_next;
+    }
+    //return p_monster; //return du p_first, puisque tout pars de lui.
 };
 
 // delete TOUS les monstres

@@ -30,7 +30,11 @@ CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj: C:/Users/ethan/CLionProjects/DoomD
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h
 
 CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -59,7 +63,11 @@ CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj: C:/Users/ethan/CLionProjects/DoomDe
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h
 
 CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/fight.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -198,7 +206,11 @@ CMakeFiles/DoomDepthsC_G21.dir/level.c.obj: C:/Users/ethan/CLionProjects/DoomDep
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/getopt.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/pthread_unistd.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h
 
 CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/loadSave.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -703,9 +715,15 @@ C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h:
 
-C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h:
+C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/oaidl.h:
+
+C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h:
 
 C:/Users/ethan/CLionProjects/DoomDepthsC_G21/fight.c:
+
+C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/winapifamily.h:
 
@@ -716,12 +734,6 @@ C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h:
 C:/Users/ethan/CLionProjects/DoomDepthsC_G21/main.c:
 
 C:/Users/ethan/CLionProjects/DoomDepthsC_G21/gameState.c:
-
-C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/oaidl.h:
-
-C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h:
-
-C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h:
 
 C:/Users/ethan/CLionProjects/DoomDepthsC_G21/heal.c:
 
