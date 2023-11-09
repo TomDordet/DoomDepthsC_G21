@@ -11,7 +11,7 @@ int heal(st_player *p_player) {
     int theHeal = 10;
 
     if (p_player->currentLife == p_player->maxLife) {
-        printf("Vie déjà au max.\n");
+        printf("Vie deja au max.\n");
         return 0;
     }
 

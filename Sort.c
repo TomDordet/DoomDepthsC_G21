@@ -1,7 +1,7 @@
 #include "Sort.h"
 
 
-void sort(st_player* p_player, st_monsters* p_monster, Sort playerChoice){
+void sort(st_player* p_player, st_monsters* p_monster, Sort playerChoice){// je comprends plus trop a quoi sert cette fonction en faite
 
     if(p_player->currentMana <= playerChoice.resources){
         printf("Pas assez de mana pour ce sort");
@@ -15,7 +15,7 @@ void sort(st_player* p_player, st_monsters* p_monster, Sort playerChoice){
             p_player->currentMana -= playerChoice.resources;
             break;
         case DEFENSIVE:
-            p_monster->attack -= playerChoice.damage;
+            p_player->defense += playerChoice.damage;
             p_player->currentMana -= playerChoice.resources;
             break;
         case LIFEHEAL:

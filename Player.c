@@ -3,9 +3,7 @@
 // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
 st_player * create_player (int id_db)
 {
-    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
     st_player* p_player = malloc(sizeof(st_player)); //p_player = le joueur en gros.
-    printf("DEBUG :: alloc p_player [%d] = %p \n",1,p_player); // printf pour débug, vérifier que le joueur est bien créer/allouer.
 
     srand(time(NULL)); //pour que chaque génération diffère des précédentes / suivantes.
 
@@ -64,7 +62,6 @@ st_player * create_player (int id_db)
     printf("%s\n",weapon6->name);
     p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon6);
 
-    swapWeaponsPlayer(p_player->weapons, *weapon6);
 
 
     //FIN PARTIE TEST ARMORS
@@ -98,8 +95,6 @@ st_player * create_player (int id_db)
     Armor *armor6 = createArmor(6);
     printf("%s\n",armor6->name);
     p_player->armors = addArmorsPlayer(p_player->armors, *armor6);
-
-    swapArmorsPlayer(p_player->armors, *armor6);
 
     //FIN PARTIE TEST ARMORS
 

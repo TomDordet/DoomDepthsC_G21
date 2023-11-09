@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "level.h"
+#include "Sort.h"
 
 
 //-------------- FIGHT -----------------------------
@@ -40,6 +41,49 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
         return p_first_monster; // et on retourne le premier monstre.
     }
 }
+
+st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monster, Sort sort){
+
+    st_monsters *p_monster_found;
+
+    p_monster_found = searchMonster(p_first_monster);
+    if (p_monster_found == NULL)
+    {
+        printf("Monstre non trouvé. \n");
+        return p_first_monster;
+    }
+
+    if (sort.type == OFFENSIVE){
+        p_monster_found->currentLife -= sort.damage;
+        p_player->currentMana -= sort.resources;
+    } else if (sort.type == DEFENSIVE){
+        p_player->defense += sort.damage;
+        p_player->currentMana -= sort.resources;
+    } else if (sort.type == LIFEHEAL){
+        p_player->currentLife += sort.damage;
+        p_player->currentMana -= sort.resources;
+    } else if (sort.type == MANAHEAL){
+        p_player->currentMana += sort.damage;
+    }else{
+        printf("Type incorrecte");
+    }
+
+    if (p_monster_found->currentLife < 0)
+        p_monster_found->currentLife = 0;
+
+    if (p_monster_found->currentLife == 0) {
+        printf("Le monstre %d est mort !\n", p_monster_found->number);
+        return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
+    }
+    else
+    {
+        printf("Le monstre %d vient de prendre %d (%d/%d) \n", p_monster_found->number,
+               p_player->attack, p_monster_found->currentLife, p_monster_found->maxLife);
+        return p_first_monster;
+    }
+
+}
+
 
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster) {
 

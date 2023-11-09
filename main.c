@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 
 #include "Player.h"
 #include "Monster.h"
@@ -15,6 +14,7 @@
 // FIGHT
 st_monsters *fight_player_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func joueur attaque monstre
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func monstre(s) attaque joueur
+st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monster, Sort sort);
 
 
 //HEAL
@@ -191,6 +191,10 @@ void display_inventory(st_player* p_player){
                             }
                         case 2: //Armes -> Retour
                             break;
+
+                        default:
+                            printf("Aucune option ne correspond a votre saisi. Veuillez reesayer\n");
+                            break;
                     }
                 }
                 break;
@@ -219,12 +223,20 @@ void display_inventory(st_player* p_player){
                             }
                         case 2: //Armures -> Retour
                             break;
+
+                        default:
+                            printf("Aucune option ne correspond a votre saisi. Veuillez reesayer\n");
+                            break;
                     }
                 }
             case 3: //Inventaire -> Potions
                 printf("Vous accedez aux potions\n");
                 break;
             case 4: //Inventaire -> Retour
+                break;
+
+            default:
+                printf("Aucune option ne correspond a votre saisi. Veuillez reesayer\n");
                 break;
         }
     }
@@ -255,6 +267,9 @@ int first_menu(st_player *p_player)
                 return 3;
             case 4:
                 return 4;
+            default:
+                printf("Aucune option ne correspond a votre saisi. Veuillez reesayer\n");
+                break;
         }
     }
 }
@@ -274,6 +289,7 @@ int exit_game (st_player *p_player)
 int game(int id_db)
 {
     int choixMenu = 1;
+    char saisie[256];
     printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_db);
     st_player *p_player = create_player(id_db); // on créer le joueur.
     init_level(id_db); // init le lvl (qui init la créa des mstr)
@@ -288,7 +304,14 @@ int game(int id_db)
         printf("5.Inventaire\n");
         printf("9.sortir \n");
         printf("Selectionner une des options: ");
-        scanf(" %d", &choixMenu);
+        scanf(" %s", saisie);
+
+        if (sscanf(saisie, "%d", &choixMenu) != 1) {
+            printf("Veuillez entrer un chiffre valide.\n\n");
+            // Effacer le tampon d'entrée pour éviter les boucles infinies en cas de saisie invalide
+            while (getchar() != '\n');
+            continue;  // Reprendre la boucle
+        }
 
         switch (choixMenu)
         {
@@ -305,17 +328,22 @@ int game(int id_db)
             case 3:
             {
                 int choixAttaque = 1;
+                char saisie0[256];
 
                 do{
 
                     printf("1. Attaquer\n");
                     printf("2. Lancer un sort\n");
-                    printf("3. Pause\n");
                     printf("0. Retour\n");
-
-
                     printf("Votre selection: ");
-                    scanf("%d", &choixAttaque);
+
+                    scanf(" %s", saisie0);
+                    if (sscanf(saisie0, "%d", &choixAttaque) != 1) {
+                        printf("Veuillez entrer un chiffre valide.\n\n");
+                        while (getchar() != '\n');
+                        continue;
+                    }
+
                     switch (choixAttaque) {
                         case 1: {
                             /*Game*/
@@ -359,109 +387,144 @@ int game(int id_db)
 
                         case 2:
                         {
-                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
                             int choixSort = 1;
+                            char saisie1[256];
 
-                                printf("1. Boule de Feu\n");
-                                printf("2. Eclair Fulgurant\n");
-                                printf("3. Mur de glace\n");
-                                printf("4. Bouclier de lumiere\n");
-                                printf("5. Regeneration de vie\n");
-                                printf("6. Regeneration de mana\n");
-                                printf("0. Retour\n");
+                            printf("1. Boule de Feu\n");
+                            printf("2. Eclair Fulgurant\n");
+                            printf("3. Mur de glace\n");
+                            printf("4. Bouclier de lumiere\n");
+                            printf("5. Regeneration de vie\n");
+                            printf("6. Regeneration de mana\n");
+                            printf("0. Retour\n");
+                            printf("Selectionner une option: ");
+
+                            scanf(" %s", saisie1);
+                            if (sscanf(saisie1, "%d", &choixSort) != 1) {
+                                printf("Veuillez entrer un chiffre valide.\n\n");
+                                while (getchar() != '\n');
+                                continue;
+                            }
+
+                            Sort mon_sort;
+                            st_monsters* p_fight = NULL;
 
 
-                                printf("Selectionner une option: ");
-                                scanf("%d", &choixSort);
-                                srand(time(NULL));
-                                Sort mon_sort;
-
-                                switch (choixSort) {
-                                    case 1:
-                                    {
-                                        int damage = rand() % 50+1;
-                                        int ressources = rand() % 50+1;
-                                        mon_sort.sort = BOULEDEFEU;
-                                        mon_sort.damage = damage;
-                                        mon_sort.resources = ressources;
-                                        mon_sort.type = OFFENSIVE;
-                                        sort(p_player, p_fight, mon_sort);
-                                        printf("sort execute\n");
-                                        break;
-                                    }
-                                    case 2:
-                                    {
-                                        int damage = rand() % 50+1;
-                                        int ressources = rand() % 50+1;
-                                        mon_sort.sort = ECLAIRFULGURANT;
-                                        mon_sort.damage = damage;
-                                        mon_sort.resources = ressources;
-                                        mon_sort.type = OFFENSIVE;
-                                        sort(p_player, p_fight, mon_sort);
-                                        printf("sort executé\n");
-                                        break;
-                                    }
-                                    case 3:
-                                    {
-                                        int damage = rand() % 50+1;
-                                        int ressources = rand() % 50+1;
-                                        mon_sort.sort = MURDECLACE;
-                                        mon_sort.damage = damage;
-                                        mon_sort.resources = ressources;
-                                        mon_sort.type = DEFENSIVE;
-                                        sort(p_player, p_fight, mon_sort);
-                                        printf("sort executé\n");
-                                        break;
-                                    }
-                                    case 4:
-                                    {
-                                        int damage = rand() % 50+1;
-                                        int ressources = rand() % 50+1;
-                                        mon_sort.sort = BOUCLIERDELUMIERE;
-                                        mon_sort.damage = damage;
-                                        mon_sort.resources = ressources;
-                                        mon_sort.type = DEFENSIVE;
-                                        sort(p_player, p_fight, mon_sort);
-                                        printf("sort executé\n");
-                                        break;
-                                    }
-                                    case 5:
-                                    {
-                                        int damage = rand() % 50+1;
-                                        int ressources = rand() % 50+1;
-                                        mon_sort.sort = REGENERATIONVIE;
-                                        mon_sort.damage = damage;
-                                        mon_sort.resources = ressources;
-                                        mon_sort.type = LIFEHEAL;
-                                        sort(p_player, p_fight, mon_sort);
-                                        printf("sort executé\n");
-                                        break;
-                                    }
-                                    case 6:
-                                    {
-                                        int damage = rand() % 50+1;
-                                        int ressources = rand() % 50+1;
-                                        mon_sort.sort = REGENERATIONMANA;
-                                        mon_sort.damage = damage;
-                                        mon_sort.resources = ressources;
-                                        mon_sort.type = MANAHEAL;
-                                        sort(p_player, p_fight, mon_sort);
-                                        printf("sort executé\n");
-                                        break;
-                                    }
-                                    case 0:
-                                        break;
-
-                                    default:
-                                        printf("Choix invalide. Veuillez réessayer.\n");
-                                        break;
+                            switch (choixSort) {
+                                case 1:
+                                {
+                                    int damage = rand() % 50+1;
+                                    int ressources = rand() % 50+1;
+                                    mon_sort.sort = BOULEDEFEU;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = OFFENSIVE;
+                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    //sort(p_player, p_fight, mon_sort);
+                                    break;
                                 }
-                            break;
-                        }
+                                case 2:
+                                {
+                                    int damage = rand() % 50+1;
+                                    int ressources = rand() % 50+1;
+                                    mon_sort.sort = ECLAIRFULGURANT;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = OFFENSIVE;
+                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    //sort(p_player, p_fight, mon_sort);
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    int damage = rand() % 50+1;
+                                    int ressources = rand() % 50+1;
+                                    mon_sort.sort = MURDECLACE;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = DEFENSIVE;
+                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    //sort(p_player, p_fight, mon_sort);
+                                    break;
+                                }
+                                case 4:
+                                {
+                                    int damage = rand() % 50+1;
+                                    int ressources = rand() % 50+1;
+                                    mon_sort.sort = BOUCLIERDELUMIERE;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = DEFENSIVE;
+                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    //sort(p_player, p_fight, mon_sort);
+                                    break;
+                                }
+                                case 5:
+                                {
+                                    int damage = rand() % 50+1;
+                                    int ressources = rand() % 50+1;
+                                    mon_sort.sort = REGENERATIONVIE;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = LIFEHEAL;
+                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    //sort(p_player, p_fight, mon_sort);
+                                    break;
+                                }
+                                case 6:
+                                {
+                                    int damage = rand() % 50+1;
+                                    int ressources = rand() % 50+1;
+                                    mon_sort.sort = REGENERATIONMANA;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = MANAHEAL;
+                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    //sort(p_player, p_fight, mon_sort);
+                                    break;
+                                }
+                                case 0:
+                                    break;
 
-                        case 3:
-                            printf("PAUSE\n");
+                                default:
+                                    printf("Choix invalide. Veuillez reessayer.\n");
+                                    break;
+
+                            }
+                            if (p_fight == NULL) {
+                                int f_menu;
+
+                                set_lvl_monsters(NULL, get_lvl());
+                                printf("Tout les monstres sont morts !");
+                                f_menu = first_menu(p_player);
+                                if (f_menu == 2) {
+                                    insertData(p_player, g_st_level);
+                                } else if (f_menu == 3) {
+                                    next_level();
+                                } else if (f_menu == 4)//Exit
+                                {
+                                    return exit_game(p_player);
+                                }
+                                break;
+                            } else if (p_fight != get_lvl_monsters(get_lvl())) {
+                                set_lvl_monsters(p_fight, get_lvl());
+                            } else {
+                                //pNew == get_lvl_monsters(get_lvl()
+                                //donc on fait rien
+                            }
+
+                            p_player = fight_monsters_round(p_player, get_lvl_monsters(
+                                    get_lvl())); // déclenche l'attaque du monstre.
+                            if (NULL == p_player) // si joueur = NULL (donc mort...)
+                            {
+                                printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
+                                /*Libere tous les montres*/
+                                delete_all_level();
+                                return 0; // ?
+                            }
                             break;
+
+                        }
 
                         case 0:
                             break;
@@ -495,6 +558,9 @@ int game(int id_db)
                 }
                 break;
             }
+            default:
+                printf("Aucune option ne correspond a votre saisi, veuillez reesayer\n");
+                break;
         }
     }
 
@@ -508,6 +574,8 @@ int welcome(void)
 {
     int choixMenu = 0;
     int id_db = 0;
+    char saisie[256];
+
     while (choixMenu != 3)
     {
         printf("--DOOMDEPTH-- \n\n");
@@ -515,7 +583,15 @@ int welcome(void)
         printf("2 - Load save \n");
         printf("3 - Exit\n");
         printf("Selectionner une des options: ");
-        scanf(" %d", &choixMenu);
+        scanf(" %s", saisie);
+
+        if (sscanf(saisie, "%d", &choixMenu) != 1) {
+            printf("Veuillez entrer un chiffre valide.\n\n");
+            // Effacer le tampon d'entrée pour éviter les boucles infinies en cas de saisie invalide
+            while (getchar() != '\n');
+            continue;  // Reprendre la boucle
+        }
+
 
         switch (choixMenu) {
             case 1: {
@@ -531,6 +607,9 @@ int welcome(void)
             case 3: {
                 break;
             }
+            default:
+                printf("Aucune option ne correspond a votre saisi, veuillez reesayer\n");
+                break;
         }
     }
     return 0;
