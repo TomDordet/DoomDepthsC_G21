@@ -305,7 +305,6 @@ int game(int id_db)
             case 3:
             {
                 int choixAttaque = 1;
-                st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
 
                 do{
 
@@ -317,12 +316,11 @@ int game(int id_db)
 
                     printf("Votre selection: ");
                     scanf("%d", &choixAttaque);
-                    printf("carl");
-
                     switch (choixAttaque) {
                         case 1: {
                             /*Game*/
                             // Si le retour de fight_player_round == NULL, alors monstres morts / désallouer (voir ce que la fonction retourne à sa définition, pour comprendre).
+                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
                             if (p_fight == NULL) {
                                 int f_menu;
 
@@ -361,9 +359,9 @@ int game(int id_db)
 
                         case 2:
                         {
+                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
                             int choixSort = 1;
 
-                            do {
                                 printf("1. Boule de Feu\n");
                                 printf("2. Eclair Fulgurant\n");
                                 printf("3. Mur de glace\n");
@@ -376,29 +374,29 @@ int game(int id_db)
                                 printf("Selectionner une option: ");
                                 scanf("%d", &choixSort);
                                 srand(time(NULL));
-                                Sort* mon_sort = NULL;
+                                Sort mon_sort;
 
                                 switch (choixSort) {
                                     case 1:
                                     {
                                         int damage = rand() % 50+1;
                                         int ressources = rand() % 50+1;
-                                        mon_sort->sort = BOULEDEFEU;
-                                        mon_sort->damage = damage;
-                                        mon_sort->resources = ressources;
-                                        mon_sort->type = OFFENSIVE;
+                                        mon_sort.sort = BOULEDEFEU;
+                                        mon_sort.damage = damage;
+                                        mon_sort.resources = ressources;
+                                        mon_sort.type = OFFENSIVE;
                                         sort(p_player, p_fight, mon_sort);
-                                        printf("sort executer\n");
+                                        printf("sort execute\n");
                                         break;
                                     }
                                     case 2:
                                     {
                                         int damage = rand() % 50+1;
                                         int ressources = rand() % 50+1;
-                                        mon_sort->sort = ECLAIRFULGURANT;
-                                        mon_sort->damage = damage;
-                                        mon_sort->resources = ressources;
-                                        mon_sort->type = OFFENSIVE;
+                                        mon_sort.sort = ECLAIRFULGURANT;
+                                        mon_sort.damage = damage;
+                                        mon_sort.resources = ressources;
+                                        mon_sort.type = OFFENSIVE;
                                         sort(p_player, p_fight, mon_sort);
                                         printf("sort executé\n");
                                         break;
@@ -407,10 +405,10 @@ int game(int id_db)
                                     {
                                         int damage = rand() % 50+1;
                                         int ressources = rand() % 50+1;
-                                        mon_sort->sort = MURDECLACE;
-                                        mon_sort->damage = damage;
-                                        mon_sort->resources = ressources;
-                                        mon_sort->type = DEFENSIVE;
+                                        mon_sort.sort = MURDECLACE;
+                                        mon_sort.damage = damage;
+                                        mon_sort.resources = ressources;
+                                        mon_sort.type = DEFENSIVE;
                                         sort(p_player, p_fight, mon_sort);
                                         printf("sort executé\n");
                                         break;
@@ -419,10 +417,10 @@ int game(int id_db)
                                     {
                                         int damage = rand() % 50+1;
                                         int ressources = rand() % 50+1;
-                                        mon_sort->sort = BOUCLIERDELUMIERE;
-                                        mon_sort->damage = damage;
-                                        mon_sort->resources = ressources;
-                                        mon_sort->type = DEFENSIVE;
+                                        mon_sort.sort = BOUCLIERDELUMIERE;
+                                        mon_sort.damage = damage;
+                                        mon_sort.resources = ressources;
+                                        mon_sort.type = DEFENSIVE;
                                         sort(p_player, p_fight, mon_sort);
                                         printf("sort executé\n");
                                         break;
@@ -431,10 +429,10 @@ int game(int id_db)
                                     {
                                         int damage = rand() % 50+1;
                                         int ressources = rand() % 50+1;
-                                        mon_sort->sort = REGENERATIONVIE;
-                                        mon_sort->damage = damage;
-                                        mon_sort->resources = ressources;
-                                        mon_sort->type = LIFEHEAL;
+                                        mon_sort.sort = REGENERATIONVIE;
+                                        mon_sort.damage = damage;
+                                        mon_sort.resources = ressources;
+                                        mon_sort.type = LIFEHEAL;
                                         sort(p_player, p_fight, mon_sort);
                                         printf("sort executé\n");
                                         break;
@@ -443,10 +441,10 @@ int game(int id_db)
                                     {
                                         int damage = rand() % 50+1;
                                         int ressources = rand() % 50+1;
-                                        mon_sort->sort = REGENERATIONMANA;
-                                        mon_sort->damage = damage;
-                                        mon_sort->resources = ressources;
-                                        mon_sort->type = MANAHEAL;
+                                        mon_sort.sort = REGENERATIONMANA;
+                                        mon_sort.damage = damage;
+                                        mon_sort.resources = ressources;
+                                        mon_sort.type = MANAHEAL;
                                         sort(p_player, p_fight, mon_sort);
                                         printf("sort executé\n");
                                         break;
@@ -458,8 +456,6 @@ int game(int id_db)
                                         printf("Choix invalide. Veuillez réessayer.\n");
                                         break;
                                 }
-
-                            }while(choixAttaque != 0);
                             break;
                         }
 

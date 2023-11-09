@@ -35,6 +35,6 @@ typedef struct
 
 
 /*cette fonction lance le sort player choice lancé par p_player contre p_monster*/
-void sort(st_player* p_player, st_monsters* p_monster, Sort* playerChoice);
+void sort(st_player* p_player, st_monsters* p_monster, Sort playerChoice);
 
 #endif //DOOMDEPTHSC_G21_SORT_H
