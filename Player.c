@@ -107,7 +107,7 @@ st_player * create_player (int id_db)
 }
 
 
-st_player * delete_player (st_player * p_player) //Supprime le joueur.
+st_player * delete_player (st_player *p_player) //Supprime le joueur.
 {
     //débug de vérification du free de l'ensemble des armes du joueur
     //je le fais ici car les armes ont besoin d'être free seulement lorsque le joueur meurt.
@@ -119,10 +119,10 @@ st_player * delete_player (st_player * p_player) //Supprime le joueur.
     return NULL;
 }
 
-int display_player (st_player* p_player) // affichage des statistiques du joueur.
+int display_player (st_player *p_player) // affichage des statistiques du joueur.
 {
     printf("Vie : %d / %d point de vie. \n",p_player->currentLife, p_player->maxLife);
-    printf("Attaque :  : %d \n", p_player->attack );
+    printf("Attaque : %d \n", p_player->attack );
     //Affiche l'arme équipée
     WeaponsPlayer *tmp = p_player->weapons;
     while (tmp != NULL) {

@@ -147,7 +147,6 @@ int insertData(st_player* p_player, st_level* p_level)
     return 0;
 }
 
-
 // --------------- DISPLAY ENTRE LVL ---------------------
 
 //-----------------PARTIE INVENTAIRE-----------------
@@ -220,6 +219,7 @@ void display_inventory(st_player* p_player){
                             break;
                     }
                 }
+                break;
             case 3: //Inventaire -> Potions
                 printf("Vous accedez aux potions\n");
                 break;
