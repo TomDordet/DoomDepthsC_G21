@@ -16,6 +16,7 @@ typedef struct st_player
     int currentMana;
     int attack;
     int defense;
+    int gold;
     WeaponsPlayer *weapons;
     ArmorsPlayer *armors;
 } st_player;

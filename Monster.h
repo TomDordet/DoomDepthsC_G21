@@ -13,7 +13,8 @@ typedef struct {
     int currentLife;
     int attack;
     int defense;
-    int gainPercent;
+    int percentGainMana;
+    int percentGainGold;
 
     int *p_next; // Pointeur d'int pour passer de monstre en monstre, voir suite.
 } st_monsters;

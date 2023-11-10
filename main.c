@@ -155,23 +155,37 @@ int insertData(st_player* p_player, st_level* p_level)
 
 void display_inventory(st_player* p_player){
     int option = 1;
+    char saisie2[256];
 
     while (option != 4){
         printf("1. Armes\n");
         printf("2. Armures\n");
         printf("3. Potions\n");
         printf("4. Retour\n");
-        scanf("%d", &option);
+        scanf(" %s", saisie2);
+
+        if (sscanf(saisie2, "%d", &option) != 1) {
+            printf("Veuillez entrer un chiffre valide.\n\n");
+            while (getchar() != '\n');
+            continue;
+        }
 
         switch (option) {
             case 1: //Inventaire -> Armes
                 displayWeaponsPlayer(p_player->weapons);
                 int weaponOption = 1;
+                char saisie3[256];
 
                 while (weaponOption != 2) {
                     printf("1. Changer d'arme\n");
                     printf("2. Retour\n");
-                    scanf("%d", &weaponOption);
+                    scanf(" %s", saisie3);
+
+                    if (sscanf(saisie3, "%d", &weaponOption) != 1) {
+                        printf("Veuillez entrer un chiffre valide.\n\n");
+                        while (getchar() != '\n');
+                        continue;
+                    }
 
                     int equipWeapon = -1;
                     switch(weaponOption){
@@ -201,11 +215,18 @@ void display_inventory(st_player* p_player){
             case 2: //Inventaire -> Armures
                 displayArmorsPlayer(p_player->armors);
                 int armorOption = 1;
+                char saisie4[256];
 
                 while (armorOption != 2) {
                     printf("1. Changer d'armure\n");
                     printf("2. Retour\n");
-                    scanf("%d", &armorOption);
+                    scanf(" %s", saisie4);
+
+                    if (sscanf(saisie3, "%d", &armorOption) != 1) {
+                        printf("Veuillez entrer un chiffre valide.\n\n");
+                        while (getchar() != '\n');
+                        continue;
+                    }
 
                     int equipArmor = -1;
                     switch (armorOption) {
@@ -248,13 +269,20 @@ int first_menu(st_player *p_player)
     while(1)
     {
         int save_choice = 1;
+        char saisie[256];
         printf("Quelques minutes de pause avant de reprendre... Que voulez vous faire ? \n");
         printf("1 - Inventaire\n");
         printf("2 - Sauvegarde\n");
         printf("3 - Continuer\n");
         printf("4 - Exit\n");
 
-        scanf("%d", &save_choice);
+        scanf(" %s", saisie);
+
+        if (sscanf(saisie, "%d", &save_choice) != 1) {
+            printf("Veuillez entrer un chiffre valide.\n\n");
+            while (getchar() != '\n');
+            continue;
+        }
 
         switch(save_choice){
             case 1: {

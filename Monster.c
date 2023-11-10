@@ -26,6 +26,9 @@ static void init_stats_monster (st_monsters * p_montser, int level_number, int i
         p_montser->number     = g_number_monster++;
         p_montser->attack      = 5 * level_number;
         p_montser->maxLife     = ((rand() % (10)) * level_number);
+        p_montser->percentGainGold = rand() % 101;
+        p_montser->percentGainMana = rand() % 101;
+
         if (p_montser->maxLife == 0)
             p_montser->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
         p_montser->currentLife = p_montser->maxLife;
@@ -38,6 +41,8 @@ static void init_stats_monster (st_monsters * p_montser, int level_number, int i
         p_montser->attack      = 5 * level_number;
         p_montser->maxLife     = ((rand() % (10)) * level_number);
         p_montser->currentLife = p_montser->maxLife;
+        p_montser->percentGainGold = rand() % 101;
+        p_montser->percentGainMana = rand() % 101;
         p_montser->defense     = rand() % 10; // a faire plus tard.
     }
 }

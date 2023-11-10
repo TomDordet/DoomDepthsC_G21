@@ -5,6 +5,11 @@
 #ifndef DOOMDEPTHSC_G21_ARMOR_H
 #define DOOMDEPTHSC_G21_ARMOR_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
 typedef struct Armor {
     char *name;
     int defense;

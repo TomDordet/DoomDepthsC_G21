@@ -16,6 +16,7 @@ st_player * create_player (int id_db)
         p_player->currentMana = p_player->maxMana;
         p_player->attack = 10;
         p_player->defense = 10;
+        p_player->gold = 0;
         p_player->weapons = NULL;
         p_player->armors = NULL;
     }
@@ -28,6 +29,7 @@ st_player * create_player (int id_db)
         p_player->currentMana = p_player->maxMana;
         p_player->attack = 10;
         p_player->defense = 10;
+        p_player->gold = 0;
         p_player->weapons = NULL;
         p_player->armors = NULL;
 
@@ -118,6 +120,7 @@ int display_player (st_player* p_player) // affichage des statistiques du joueur
 {
     printf("Vie : %d / %d point de vie. \n",p_player->currentLife, p_player->maxLife);
     printf("Mana : %d / %d point de Mana. \n",p_player->currentMana, p_player->maxMana);
+    printf("Or: %d\n", p_player->gold);
     printf("Attaque :  : %d \n", p_player->attack );
     //Affiche l'arme équipée
     WeaponsPlayer *tmp = p_player->weapons;
