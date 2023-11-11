@@ -126,7 +126,7 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
             case 2:
             {
                 clearScreen();
-                affichageMenu(p_player);
+                affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                 printf("-- Level %d -- \n",get_lvl());
                 display_monsters(get_lvl_monsters(get_lvl()));
                 // affiche les monstres.
@@ -138,7 +138,7 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
             case 3:
             {
                 clearScreen();
-                affichageMenu(p_player);
+                affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                 // ATTAQUE DU JOUEUR - prend en param le joueur, les monstres du niveau, et le niveau
                 st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
 

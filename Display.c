@@ -41,76 +41,52 @@ void clearScreen() {
 int choixMonstre;
 
 char *hero[] = {
-        "  / \\                 ",
-        "  | |                  ",
-        "  |.|                  ",
-        "  |.|                  ",
-        "  |:|      __          ",
-        ",_|:|_,   /  )         ",
-        "  (Oo    / _I_         ",
-        "   +\\ \\  || __|      ",
-        "      \\ \\||___|      ",
-        "        \\ /.:.\\-\\   ",
-        "         |.:. /-----\\ ",
-        "         |___|::oOo::| ",
-        "         /   |:<_T_>:| ",
-        "        |_____\\ ::: / ",
-        "         | |  \\ \\:/  ",
-        "         | |   | |     ",
-        "         \\ /   | \\___",
-        "         / |   \\_____\\",
-        "         `-'",
+        "  / \\                    ",
+        "  | |                    ",
+        "  |.|                    ",
+        "  |.|                    ",
+        "  |:|      __            ",
+        ",_|:|_,   /  )           ",
+        "  (Oo    / _I_           ",
+        "   +\\ \\  || __|          ",
+        "      \\ \\||___|          ",
+        "        \\ /.:.\\-\\        ",
+        "         |.:. /-----\\    ",
+        "         |___|::oOo::|   ",
+        "         /   |:<_T_>:|   ",
+        "        |_____\\ ::: /    ",
+        "         | |  \\ \\:/      ",
+        "         | |   | |       ",
+        "         \\ /   | \\___    ",
+        "         / |   \\_____\\   ",
+        "         `-'"
 };
 
 
-char *monstre1[] = {
+char *monstre[] = {
         "      .-.       ",
         "     (o.o)      ",
         "      |=|       ",
         "     __|__      ",
-        "   //.=|=.\\\\  ",
-        "  // .=|=. \\\\ ",
-        "  \\\\ .=|=. // ",
-        "   \\\\(_=_)//  ",
+        "   //.=|=.\\\\    ",
+        "  // .=|=. \\\\   ",
+        "  \\\\ .=|=. //   ",
+        "   \\\\(_=_)//    ",
         "    (:| |:)     ",
         "     || ||      ",
-        "     () ()     ",
-        "     || ||     ",
-        "     || ||     ",
-        "    ==' '==    ",
+        "     () ()      ",
+        "     || ||      ",
+        "     || ||      ",
+        "    ==' '==     ",
         "",
         "",
         "",
         "",
-        "",
-        "",
+        ""
 
 
 };
 
-char *monstre2[] = {
-        "              (                 ",
-        "               )                ",
-        "              (                 ",
-        "        /\\  .-\"\"\"-.  /\\    ",
-        "       //\\\\/  ,,,  \\//\\\\   ",
-        "       |\\| ,;;;;;, |/|         ",
-        "       //\\\\\\;-\"\"\"-;///\\\\",
-        "      //  \\/   .   \\/  \\\\   ",
-        "     (| ,-_| \\ | / |_-, |)     ",
-        "       //`__\\.-.-./__`\\\\     ",
-        "      // /.-(() ())-.\\ \\\\    ",
-        "     (\\ |)   '---'   (| /)     ",
-        "      ` (|           |) `       ",
-        "        \\)           (/        ",
-        "",
-        "",
-        "",
-        "",
-        "",
-
-
-};
 
 
 void afficherHero() {
@@ -124,20 +100,27 @@ void afficherHero() {
 
 
 
-void afficherPersonnages() {
+void afficherPersonnages(st_monsters* p_monster) {
+    // Affichage personnage
+    int nb_monstre = 0;
+   st_monsters* monstres = p_monster;
+    while (monstres != NULL){
+        nb_monstre ++;
+        monstres = (st_monsters*) monstres->p_next;
+    }
 
-    // affichage heros
+
     for (int i = 0; i < sizeof(hero) / sizeof(hero[0]); i++) {
-        //if (/*nombre de monstre*/ == 1) {
-        //    printf("%s\t\t\t\t\t%s\n", hero[i], monstre1[i]);
-        //} else if (/*nombre de monstre*/  == 2) {
-          //  printf("%s\t\t\t\t\t%s\t%s\n", hero[i], monstre1[i], monstre2[i]);
-       // } else if (/*nombre de monstre*/ == 3) {
-         //   printf("%s\t\t\t\t\t%s\t%s\t%s\n", hero[i], monstre1[i], monstre2[i], monstre1[i]);
-        //} else {
-            printf("%s\t\t\t\t\t%s\t%s\t%s\t%s\n", hero[i], monstre2[i], monstre1[i], monstre2[i], monstre1[i]);
-        //}
+        if (nb_monstre == 1) {
+            printf("%s\t\t\t\t\t%s\n", hero[i], monstre[i]);
+        } else if (nb_monstre == 2) {
+            printf("%s\t\t\t\t\t%s\t%s\n", hero[i], monstre[i], monstre[i]);
+        } else if (nb_monstre == 3) {
+            printf("%s\t\t\t\t\t%s\t%s\t%s\n", hero[i], monstre[i], monstre[i], monstre[i]);
+        } else {
+            printf("%s\t\t\t\t\t%s\t%s\t%s\t%s\n", hero[i], monstre[i], monstre[i], monstre[i], monstre[i]);
 
+        }
     }
 }
 
@@ -160,10 +143,10 @@ void display_health_bar(st_player *p_player) {
 }
 
 
-void affichageMenu(st_player *p_player){
+void affichageMenu(st_player *p_player, st_monsters* p_monster){
     display_health_bar(p_player);
     printf("\n \n");
-    afficherPersonnages();
+    afficherPersonnages(p_monster);
     printf("\n \n");
 
 }
