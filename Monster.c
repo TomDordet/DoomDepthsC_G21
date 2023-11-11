@@ -5,6 +5,7 @@
 
 #include "Monster.h"
 #include "sqlite3.h"
+#include "Display.h"
 
 static int g_number_monster = 1; //
 
@@ -33,7 +34,7 @@ static void init_stats_monster_save(st_monsters * p_montser, int save_id, int mo
     // BDD
     int rc = 0;
     sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    rc = sqlite3_open("D:/Bilal/Code/DoomDepths/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
     if (rc)
     {
         fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
@@ -218,6 +219,7 @@ st_monsters *searchMonster(st_monsters *p_first_monster)
 
     printf("Quelle monstre attaquer ? :"); // on demande lequel on veut attaquer.
     scanf("%d", &nb);
+    clearScreen();
 
     p_monster = p_first_monster; // on remet p_monster au premier monstre.
 

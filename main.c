@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "Player.h"
 #include "Monster.h"
 #include "level.h"
 #include "sqlite3.h"
+#include "Display.h"
 
-
+st_monsters *p_first_monster;
 
 // PROTOTYPE FONCTIONS (pas issue de .h donc on les protos ici)
 // FIGHT
@@ -49,14 +51,18 @@ int postLvlMenu(void)
 
         switch(save_choice){
             case 1: {
+                clearScreen();
                 printf("inventaire à venir..\n");
                 break;
             }
             case 2:
+                clearScreen();
                 return 2;
             case 3:
+                clearScreen();
                 return 3;
             case 4:
+                clearScreen();
                 return 4;
         }
     }
@@ -87,9 +93,14 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
 
 
     int choixMenu = 1;
+    clearScreen();
     while (1)
     {
+
+        display_health_bar(p_player);
+        afficherHero();
         printf("--- LEVEL %d ----\n", get_lvl());
+        printf("\n\n");
         printf("1.stat joueur \n");
         printf("2.stat monsters \n");
         printf("3.game \n");
@@ -102,22 +113,32 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
             // STATS JOUEUR
             case 1:
             {
+                clearScreen();
+                display_health_bar(p_player);
+                afficherHero();
                 //affichage des statistiques du joueur.
                 display_player(p_player);
+                sleep(5);
+                clearScreen();
                 break;
             }
             //STATS DES MONSTRES
             case 2:
             {
-
+                clearScreen();
+                affichageMenu(p_player);
                 printf("-- Level %d -- \n",get_lvl());
-                display_monsters(get_lvl_monsters(get_lvl())); // affiche les monstres.
-
+                display_monsters(get_lvl_monsters(get_lvl()));
+                // affiche les monstres.
+                sleep(5);
+                clearScreen();
                 break;
             }
             // ROUND
             case 3:
             {
+                clearScreen();
+                affichageMenu(p_player);
                 // ATTAQUE DU JOUEUR - prend en param le joueur, les monstres du niveau, et le niveau
                 st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
 
@@ -129,6 +150,7 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
 
                     // on remet à NULL les monstres dans le lvl
                     set_lvl_monsters(NULL, get_lvl());
+                    youWin();
                     printf("Tout les monstres sont morts !");
 
                     f_menu = postLvlMenu();
@@ -167,17 +189,22 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
                     printf("Vous avez perdu, retour au menu... \n ");
                     /*Libere tous les montres*/
                     delete_all_level ();
+                    gameOver();
+                    sleep(5);
+                    clearScreen();
                     return 0; // ?
                 }
                 break;
             }
             case 4:
                 // heal du joueur.
+                clearScreen();
                 heal(p_player);
                 break;
             case 5:
             {
                 // leave.
+                clearScreen();
                 int var;
                 printf("Tout sera supprimer, continuer ? (1/0)\n");
                 scanf("%d", &var);
@@ -199,7 +226,9 @@ int welcome(void)
     int id_save = 0;
     while (choixMenu != 3)
     {
-        printf("--DOOMDEPTH-- \n\n");
+        clearScreen();
+        doomDepths();
+        printf("\n\n");
         printf("1 - Start Game \n");
         printf("2 - Choisir une partie \n");
         printf("3 - Exit\n");
@@ -208,18 +237,21 @@ int welcome(void)
         switch (choixMenu) {
             case 1:
             {
+                clearScreen();
                 // On lance la game, avec l'id de la sauvegarde en paramètre. Par défault l'id est à 0, donc si on lance sans choisir, on lance sans sauvegarde.
                 game(id_save);
                 break;
             }
             case 2:
             {
+                clearScreen();
                 // Affichage des sauvegardes disponibles (limité aux 5 dernières).
                 id_save = displayLatestSaves();
                 //printf("ID DB is %d\n", id_db);
                 break;
             }
             case 3: {
+                clearScreen();
                 break;
             }
         }
