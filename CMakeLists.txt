@@ -21,4 +21,5 @@ add_executable(DoomDepthsC_G21 main.c
         Weapon.c
         Armor.c
         Armor.h
+        bdd.c
 )

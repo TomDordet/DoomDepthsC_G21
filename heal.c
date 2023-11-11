@@ -7,7 +7,8 @@
 
 #include "Player.h"
 
-int heal(st_player *p_player) {
+int heal(st_player *p_player)
+{
     int theHeal = 10;
 
     if (p_player->currentLife == p_player->maxLife) {
@@ -17,7 +18,7 @@ int heal(st_player *p_player) {
 
     if ((p_player->maxLife - p_player->currentLife) < theHeal) {
         p_player->currentLife = p_player->maxLife;
-        printf("Vous vous soignez de %d HP, vie au max (%d/%d)\n", theHeal, p_player->currentLife, p_player->maxLife);
+        printf("Vie au max (%d/%d) !\n", theHeal, p_player->currentLife, p_player->maxLife);
         return 0;
     }
 

@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "DoomDepthsC_G21::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-DoomDepthsC_G21-Debug-3a7af99b6d8766537345.json",
+					"jsonFile" : "target-DoomDepthsC_G21-Debug-fa6c7b093f26bb60c865.json",
 					"name" : "DoomDepthsC_G21",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/CLion 2023.2.2/DoomDepthsC_G21/cmake-build-debug",
-		"source" : "D:/CLion 2023.2.2/DoomDepthsC_G21"
+		"build" : "C:/Users/ethan/CLionProjects/DoomDepthsC_G21/cmake-build-debug",
+		"source" : "C:/Users/ethan/CLionProjects/DoomDepthsC_G21"
 	},
 	"version" : 
 	{

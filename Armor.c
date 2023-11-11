@@ -7,9 +7,12 @@
 
 //PARTIE ARMOR
 
-Armor* createArmor(int defense) {
+Armor* createArmor(int defense)
+{
+    // on alloue la nouvelle armure.
     Armor *newArmor = malloc(sizeof(Armor));
 
+    // nom random
     char *randomName = generateRandomArmorName();
     newArmor->name = randomName;
 
@@ -18,23 +21,30 @@ Armor* createArmor(int defense) {
     return newArmor;
 }
 
-void deleteArmor(Armor *armor) {
+
+// supp
+void deleteArmor(Armor *armor)
+{
     free(armor);
 }
 
-void displayArmor(Armor* armor) {
+void displayArmor(Armor* armor)
+{
     printf("Armor - %s (defense: %d)", armor->name, armor->defense);
-    if(armor->isEquipped == 1){
+    if(armor->isEquipped == 1)
+    {
         printf(" (Equipped)");
     }
     printf("\n");
 }
 
 //PARTIE LISTE CHAINEES DE ARMORS
-
-ArmorsPlayer* addArmorsPlayer(ArmorsPlayer *armors, Armor armor) {
+// meme comment que pour l'arme.
+ArmorsPlayer* addArmorsPlayer(ArmorsPlayer *armors, Armor armor)
+{
     int count = countArmorsPlayer(armors);
-    if (count == 5) {
+    if (count == 5)
+    {
         printf("Impossible.\n");
         return armors;
     }

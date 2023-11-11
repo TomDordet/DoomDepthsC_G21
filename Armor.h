@@ -5,13 +5,15 @@
 #ifndef DOOMDEPTHSC_G21_ARMOR_H
 #define DOOMDEPTHSC_G21_ARMOR_H
 
-typedef struct Armor {
+typedef struct Armor
+{
     char *name;
     int defense;
     int isEquipped;
 }Armor;
 
-typedef struct ArmorsPlayer {
+typedef struct ArmorsPlayer
+{
     Armor armor;
     struct ArmorsPlayer *next;
 }ArmorsPlayer;

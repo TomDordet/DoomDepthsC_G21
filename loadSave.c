@@ -37,7 +37,6 @@ int displayLatestSaves(void)
     int i = 1;
     int choixSave = 0;
     printf("Quelle sauvegardes voulez-vous charger ?\n");
-    printf("0 - ID: 0, aucune sauvegarde \n");
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
     {
         int sauvegarde_id = sqlite3_column_int(stmt, 0);
@@ -47,6 +46,7 @@ int displayLatestSaves(void)
         printf("%d - ID: %d, Niveau actuel: %d, Date: %s\n", sauvegarde_id, sauvegarde_id, currentLevel, date);
         i++;
     }
+    printf("0 - Nouvelle partie \n");
     scanf("%d", &choixSave);
 
     if (i == 1)

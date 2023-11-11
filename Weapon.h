@@ -1,7 +1,11 @@
 #ifndef DOOMDEPTHSC_G21_WEAPON_H
 #define DOOMDEPTHSC_G21_WEAPON_H
 
-typedef struct Weapon {
+#include "sqlite3.h"
+#include "Player.h"
+
+typedef struct Weapon
+{
     char *name;
     int nb_attack_per_round;
     int minDamage;
@@ -9,7 +13,8 @@ typedef struct Weapon {
     int isEquipped;
 }Weapon;
 
-typedef struct WeaponsPlayer {
+typedef struct WeaponsPlayer
+{
     Weapon weapon;
     struct WeaponsPlayer *next;
 }WeaponsPlayer;

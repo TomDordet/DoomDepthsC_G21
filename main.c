@@ -19,155 +19,40 @@ st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monste
 //HEAL
 int heal(st_player *p_player); //proto heal
 
-// INSERT DATA (SAVE)
-int insertTheSAVE(sqlite3 *db, st_player* p_player, st_level* p_level);
+// --- BDD ----
+
+
+int create_tables(sqlite3 *db);
+int init_bdd(void);
+int insertData(st_player* p_player, st_level* p_level, WeaponsPlayer* weapons);
 
 // LOAD SAVE
 int displayLatestSaves(void);
-
-// --------------- BDD -----------------------------------
-
-// create_table prend en param la db
-int create_tables(sqlite3 *db)
-{
-
-    const char *create_joueur_table_sql =
-            "CREATE TABLE JOUEUR ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "maxLife INTEGER, "
-            "currentLife INTEGER, "
-            "attack INTEGER, "
-            "id_niveau INTEGER, "
-            "id_sauvegarde INTEGER, "
-            "FOREIGN KEY (id_niveau) REFERENCES LEVEL(lvl_number), "
-            "FOREIGN KEY (id_sauvegarde) REFERENCES SAUVEGARDE(id) "
-            ");";
-
-    const char *create_monstre_table_sql =
-            "CREATE TABLE MONSTRE ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "number INTEGER, "
-            "maxLife INTEGER, "
-            "currentLife INTEGER, "
-            "attack INTEGER, "
-            "p_next INTEGER, "
-            "id_sauvegarde INTEGER, "
-            "FOREIGN KEY (p_next) REFERENCES MONSTRE(id), "
-            "FOREIGN KEY (id_sauvegarde) REFERENCES SAUVEGARDE(id) "
-            ");";
-
-    const char *create_level_table_sql =
-            "CREATE TABLE LEVEL ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "lvl_number INTEGER, "
-            "nb_monster INTEGER, "
-            "p_monster INTEGER, "
-            "id_sauvegarde INTEGER, "
-            "FOREIGN KEY (p_monster) REFERENCES MONSTRE(id), "
-            "FOREIGN KEY (id_sauvegarde) REFERENCES SAUVEGARDE(id) "
-            ");";
-
-    const char *create_sauvegarde_table_sql =
-            "CREATE TABLE SAUVEGARDE ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "currentLevel INTEGER, "
-            "date TEXT "
-            ");";
-    /*
-    const char *create_level_monstre_table_sql =
-            "CREATE TABLE LEVEL_MONSTER ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "id_niveau INTEGER, "
-            "id_monstre INTEGER, "
-            "FOREIGN KEY (id_niveau) REFERENCES LEVEL(lvl_number), "
-            "FOREIGN KEY (id_monstre) REFERENCES MONSTRE(id)"
-            ");";
-
-    */
-    /*
-    int rc = 0;
-
-    const char * drop_joueur_sql = "DROP TABLE JOUEUR;";
-    const char * drop_monster_sql = "DROP TABLE MONSTRE;";
-    const char * drop_level_sql = "DROP TABLE LEVEL;";
-    const char * drop_sauvegarde_sql = "DROP TABLE SAUVEGARDE;";
-
-    rc = sqlite3_exec(db, drop_joueur_sql, 0, 0, 0);
-    rc = sqlite3_exec(db, drop_monster_sql, 0, 0, 0);
-    rc = sqlite3_exec(db, drop_level_sql, 0, 0, 0);
-    rc = sqlite3_exec(db, drop_sauvegarde_sql, 0, 0, 0);
-    */
-
-
-    int rc = 0;
-
-    rc = sqlite3_exec(db, create_joueur_table_sql, 0, 0, 0);
-    rc = sqlite3_exec(db, create_monstre_table_sql, 0, 0, 0);
-    rc = sqlite3_exec(db, create_level_table_sql, 0, 0, 0);
-    rc = sqlite3_exec(db, create_sauvegarde_table_sql, 0, 0, 0);
-
-    return 0;
-}
-
-// Création / ouverture de la base de données
-int init_bdd(void)
-{
-    int rc = 0;
-    sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
-    if (rc) {
-        fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
-        return rc;
-    }
-
-    // Créez les tables
-    rc = create_tables(db);
-    if (rc != 0) {
-        fprintf(stderr, "Erreur lors de la création des tables.\n");
-    }
-    sqlite3_close(db);
-    return 0;
-}
-
-int insertData(st_player* p_player, st_level* p_level)
-{
-    fprintf(stderr, "Début de la fonction insertData\n");
-    int rc = 0;
-    sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
-    if (rc) {
-        fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
-        return rc;
-    }
-
-    insertTheSAVE(db, p_player, p_level);
-
-    sqlite3_close(db);
-    fprintf(stderr, "Fin de la fonction insertData\n");
-    return 0;
-}
 
 
 // --------------- DISPLAY ENTRE LVL ---------------------
 
 //-----------------PARTIE INVENTAIRE-----------------
 
-void display_inventory(st_player* p_player){
+void display_inventory(st_player* p_player)
+{
     int option = 1;
 
-    while (option != 4){
+    while (option != 4)
+    {
         printf("1. Armes\n");
         printf("2. Armures\n");
         printf("3. Potions\n");
         printf("4. Retour\n");
         scanf("%d", &option);
 
-        switch (option) {
+        switch (option){
             case 1: //Inventaire -> Armes
                 displayWeaponsPlayer(p_player->weapons);
                 int weaponOption = 1;
 
-                while (weaponOption != 2) {
+                while (weaponOption != 2)
+                {
                     printf("1. Changer d'arme\n");
                     printf("2. Retour\n");
                     scanf("%d", &weaponOption);
@@ -178,14 +63,17 @@ void display_inventory(st_player* p_player){
                             displayWeaponsPlayer(p_player->weapons);
                             printf("Quelle arme equiper?\n");
                             scanf("%d", &equipWeapon);
-                            if (equipWeapon == -1){
+                            if (equipWeapon == -1)
+                            {
                                 break;
                             }
-                            else if (equipWeapon > countWeaponsPlayer(p_player->weapons)){
+                            else if (equipWeapon > countWeaponsPlayer(p_player->weapons))
+                            {
                                 printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipWeapon);
                                 break;
                             }
-                            else {
+                            else
+                            {
                                 changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
                             }
                         case 2: //Armes -> Retour
@@ -197,18 +85,21 @@ void display_inventory(st_player* p_player){
                 displayArmorsPlayer(p_player->armors);
                 int armorOption = 1;
 
-                while (armorOption != 2) {
+                while (armorOption != 2)
+                {
                     printf("1. Changer d'armure\n");
                     printf("2. Retour\n");
                     scanf("%d", &armorOption);
 
                     int equipArmor = -1;
-                    switch (armorOption) {
+                    switch (armorOption)
+                    {
                         case 1: //Armures -> Changer d'armure
                             displayArmorsPlayer(p_player->armors);
                             printf("Quelle armure equiper?\n");
                             scanf("%d", &equipArmor);
-                            if (equipArmor == -1) {
+                            if (equipArmor == -1)
+                            {
                                 break;
                             } else if (equipArmor > countArmorsPlayer(p_player->armors)) {
                                 printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipArmor);
@@ -260,23 +151,29 @@ int first_menu(st_player *p_player)
 
 // ---- LA GAME
 
-//fin de game
+//EXIT
 int exit_game (st_player *p_player)
 {
-    //Libere tous les montres
+    //FREE tous les levels (avec les monstres)
     delete_all_level();
-    //libere le joueur
+    //FREE le joueur
     delete_player(p_player);
     return 0;
 }
 
-int game(int id_db)
+// LA GAME
+int game(int id_save) // prend en param un id_save, qui sert à savori si on as load une sauvegarde ou non.
 {
-    int choixMenu = 1;
-    printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_db);
-    st_player *p_player = create_player(id_db); // on créer le joueur.
-    init_level(id_db); // init le lvl (qui init la créa des mstr)
 
+    //printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_save);
+
+    // création du joueur (avec id_save, pour récup les stats d'une save)
+    st_player *p_player = create_player(id_save);
+    // et init des levels (avec les monstres, et aussi basé sur une sauvegarde ou non)
+    init_level(id_save);
+
+
+    int choixMenu = 1;
     while (1)
     {
         printf("--- LEVEL %d ----\n", get_lvl());
@@ -290,41 +187,59 @@ int game(int id_db)
 
         switch (choixMenu)
         {
-            case 1: {
-                display_player(p_player); // affiche les stats du joueur.
+            // STATS JOUEUR
+            case 1:
+            {
+                //affichage des statistiques du joueur.
+                display_player(p_player);
                 break;
             }
+                //STATS DES MONSTRES
             case 2:
             {
-                printf("-- Level %d -- \n",get_lvl()); // affiche le LVL actuel
+
+                printf("-- Level %d -- \n",get_lvl());
                 display_monsters(get_lvl_monsters(get_lvl())); // affiche les monstres.
+
                 break;
             }
+                // ROUND
             case 3:
             {
-                /*Game*/
+                // ATTAQUE DU JOUEUR - prend en param le joueur, les monstres du niveau, et le niveau
                 st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
-                // Si le retour de fight_player_round == NULL, alors monstres morts / désallouer (voir ce que la fonction retourne à sa définition, pour comprendre).
+
+                // si le res de p_fight == NULL, alors c'est que les monstres sont tous morts.
                 if (p_fight == NULL)
                 {
-                    int f_menu;
+                    //variable qui contient le retour du menu "postLvlMenu"
+                    int f_menu = 0;
 
-                    // on remet à NULL les monstres dans le lvl, pck ils sont morts.
+                    // on remet à NULL les monstres dans le lvl
                     set_lvl_monsters(NULL, get_lvl());
                     printf("Tout les monstres sont morts !");
+
                     f_menu = first_menu(p_player);
                     if (f_menu == 2)
                     {
-                        insertData(p_player, g_st_level);
+                        // si on choisis de sauvegarder, on inserts les datas du joueur, des levels et des monstres.
+                        insertData(p_player, g_st_level, p_player->weapons);
+                        next_level(); // et on passe au lvl suivant
                     }
                     else if (f_menu == 3)
-                    {//next game, next level
-                        //next_game();
+                    {
+                        //on continue.
                         next_level();
                     }
-                    else if(f_menu == 4)//Exit
+                    else
                     {
-                        return exit_game (p_player);
+                        int var;
+                        printf("Tout sera supprimer, continuer ? (1/0)\n");
+                        scanf("%d", &var);
+                        if (var == 1)
+                        {
+                            return exit_game (p_player);
+                        }
                     }
                     break;
                 }
@@ -332,27 +247,25 @@ int game(int id_db)
                 {
                     set_lvl_monsters(p_fight, get_lvl());
                 }
-                else
-                {
-                    //pNew == get_lvl_monsters(get_lvl()
-                    //donc on fait rien
-                }
 
+                // attaque du joueur.
                 p_player = fight_monsters_round(p_player, get_lvl_monsters(get_lvl())); // déclenche l'attaque du monstre.
                 if (NULL == p_player) // si joueur = NULL (donc mort...)
                 {
-                    printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
+                    printf("Vous avez perdu, retour au menu... \n ");
                     /*Libere tous les montres*/
                     delete_all_level ();
                     return 0; // ?
                 }
                 break;
             }
-            case 4: {
+            case 4:
+            {
                 heal(p_player);
                 break;
             }
-            case 5: {
+            case 5:
+            {
                 display_inventory(p_player);
                 break;
             }
@@ -376,27 +289,31 @@ int game(int id_db)
 }
 // ---------------- WELCOME ----------------
 
+// premier menu jeu.
 int welcome(void)
 {
     int choixMenu = 0;
-    int id_db = 0;
+    int id_save = 0;
     while (choixMenu != 3)
     {
         printf("--DOOMDEPTH-- \n\n");
         printf("1 - Start Game \n");
-        printf("2 - Load save \n");
+        printf("2 - Choisir une partie \n");
         printf("3 - Exit\n");
         scanf("%d", &choixMenu);
 
         switch (choixMenu) {
-            case 1: {
-                game(id_db);
+            case 1:
+            {
+                // On lance la game, avec l'id de la sauvegarde en paramètre. Par défault l'id est à 0, donc si on lance sans choisir, on lance sans sauvegarde.
+                game(id_save);
                 break;
             }
             case 2:
             {
-                id_db = displayLatestSaves();
-                printf("ID DB is %d\n", id_db);
+                // Affichage des sauvegardes disponibles (limité aux 5 dernières).
+                id_save = displayLatestSaves();
+                //printf("ID DB is %d\n", id_db);
                 break;
             }
             case 3: {
@@ -409,6 +326,8 @@ int welcome(void)
 
 int main(void)
 {
+    // Créer la BD, si déjà créer, ne fais rien.
     init_bdd();
+    // on lance le premier menu.
     welcome();
 }

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj"
   "CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj.d"
+  "CMakeFiles/DoomDepthsC_G21.dir/bdd.c.obj"
+  "CMakeFiles/DoomDepthsC_G21.dir/bdd.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj"
   "CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj"

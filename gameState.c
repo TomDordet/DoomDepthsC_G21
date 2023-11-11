@@ -11,8 +11,8 @@
 #include "player.h"
 #include "level.h"
 
-
-int insertPlayer(sqlite3 *db, st_player* p_player, st_level* p_level, int saveId)
+/*
+int insertPlayer(sqlite3 *db, st_player* p_player, st_level* p_level, int saveId, WeaponsPlayer* weapons)
 {
     char *error_message = 0;
     int rc = 0;
@@ -42,6 +42,74 @@ int insertPlayer(sqlite3 *db, st_player* p_player, st_level* p_level, int saveId
         return rc;
     }
 
+    int playerId = sqlite3_last_insert_rowid(db);
+
+
+    WeaponsPlayer* currentWeapon = weapons;
+    WeaponsPlayer* nextWeapon = currentWeapon->next;
+
+    while (currentWeapon != NULL)
+    {
+        char weapon_insert_sql[256];
+        snprintf(weapon_insert_sql, sizeof(weapon_insert_sql),
+                 "INSERT INTO WEAPON (name, nb_attack_per_round, minDamage, maxDamage, id_sauvegarde) VALUES ('%s', %d, %d, %d, %d);",
+                 currentWeapon->weapon.name, currentWeapon->weapon.nb_attack_per_round,
+                 currentWeapon->weapon.minDamage, currentWeapon->weapon.maxDamage, saveId);
+
+        rc = sqlite3_exec(db, weapon_insert_sql, 0, 0, &error_message);
+        if (rc != SQLITE_OK)
+        {
+            fprintf(stderr, "Erreur lors de l'insertion des données de l'arme : %s\n", error_message);
+            sqlite3_free(error_message);
+            return rc;
+        }
+
+        // Récupérez l'ID de l'arme insérée
+        int weaponId = sqlite3_last_insert_rowid(db);
+
+        if (currentWeapon->next) {
+            // Insérer l'arme suivante
+            char next_weapon_insert_sql[256];
+            snprintf(next_weapon_insert_sql, sizeof(next_weapon_insert_sql),
+                     "INSERT INTO WEAPON (name, nb_attack_per_round, minDamage, maxDamage, id_sauvegarde) VALUES ('%s', %d, %d, %d, %d);",
+                     currentWeapon->next->weapon.name, currentWeapon->next->weapon.nb_attack_per_round,
+                     currentWeapon->next->weapon.minDamage, currentWeapon->next->weapon.maxDamage, saveId);
+
+            rc = sqlite3_exec(db, next_weapon_insert_sql, 0, 0, &error_message);
+            if (rc != SQLITE_OK) {
+                // Gérer l'erreur...
+            }
+
+            // Récupérer l'ID de l'arme suivante
+            int nextWeaponId = sqlite3_last_insert_rowid(db);
+
+            // Mettre à jour l'entrée de l'arme actuelle avec l'ID de l'arme suivante
+            char update_current_weapon_sql[256];
+            snprintf(update_current_weapon_sql, sizeof(update_current_weapon_sql),
+                     "UPDATE WEAPON SET next_weapon_id = %d WHERE id = %d;", nextWeaponId, weaponId);
+
+            rc = sqlite3_exec(db, update_current_weapon_sql, 0, 0, &error_message);
+            if (rc != SQLITE_OK)
+            {
+                fprintf(stderr, "Erreur lors de la mise à jour de l'arme actuelle : %s\n", error_message);
+                sqlite3_free(error_message);
+                return rc;
+            }
+        }
+
+        if (rc != SQLITE_OK)
+        {
+            fprintf(stderr, "Erreur lors de l'insertion de l'association joueur-arme : %s\n", error_message);
+            sqlite3_free(error_message);
+            return rc;
+        }
+
+        currentWeapon = currentWeapon->next;
+        if (nextWeapon != NULL)
+            nextWeapon = nextWeapon->next;
+    }
+
+
     // Validez la transaction
     rc = sqlite3_exec(db, "COMMIT;", 0, 0, &error_message);
     if (rc != SQLITE_OK)
@@ -50,9 +118,134 @@ int insertPlayer(sqlite3 *db, st_player* p_player, st_level* p_level, int saveId
         sqlite3_free(error_message);
         return rc;
     }
+    return SQLITE_OK; // Tout s'est bien passé
+}*/
+
+
+int insertPlayer(sqlite3 *db, st_player* p_player, st_level* p_level, int saveId, WeaponsPlayer* weapons)
+{
+    char *error_message = 0;
+    int rc = 0;
+
+    // Commencez une transaction pour assurer la cohérence des données
+    rc = sqlite3_exec(db, "BEGIN TRANSACTION;", 0, 0, &error_message);
+    if (rc != SQLITE_OK)
+    {
+        fprintf(stderr, "Erreur lors du début de la transaction : %s\n", error_message);
+        sqlite3_free(error_message);
+        return rc;
+    }
+    printf("DEBUG :: BEGIN TRANSAC\n");
+
+    // Utilisez cet ID pour insérer les données du joueur dans la table JOUEUR
+    char joueur_insert_sql[256];
+    snprintf(joueur_insert_sql, sizeof(joueur_insert_sql),
+             "INSERT INTO JOUEUR (maxLife, currentLife, attack, id_niveau, id_sauvegarde) VALUES (%d, %d, %d, %d, %d);",
+             p_player->maxLife, p_player->currentLife, p_player->attack, p_level->lvl_number, saveId);
+
+    rc = sqlite3_exec(db, joueur_insert_sql, 0, 0, &error_message);
+    if (rc != SQLITE_OK)
+    {
+        fprintf(stderr, "Erreur lors de l'insertion des données du joueur : %s\n", error_message);
+        sqlite3_free(error_message);
+        return rc;
+    }
+
+    printf("JOUEUR INSERER\n");
+
+    int playerId = sqlite3_last_insert_rowid(db);
+    printf("ID JOUEUR : %d\n\n", playerId);
+    //int prevWeaponId = -1; // Variable pour stocker l'ID de l'arme précédente
+
+
+    int idArme = 0;
+
+    WeaponsPlayer* currentWeapon = weapons;
+
+    while (currentWeapon != NULL)
+    {
+        printf(" ARME NAME : %s\n", currentWeapon->weapon.name);
+        // Insertion de l'arme dans WEAPON
+        char weapon_insert_sql[256];
+        snprintf(weapon_insert_sql, sizeof(weapon_insert_sql),
+                 "INSERT INTO WEAPON (name, nb_attack_per_round, minDamage, maxDamage, id_sauvegarde) VALUES ('%s', %d, %d, %d, %d);",
+                 currentWeapon->weapon.name, currentWeapon->weapon.nb_attack_per_round,
+                 currentWeapon->weapon.minDamage, currentWeapon->weapon.maxDamage, saveId);
+
+        rc = sqlite3_exec(db, weapon_insert_sql, 0, 0, &error_message);
+        if (rc != SQLITE_OK)
+        {
+            fprintf(stderr, "Erreur lors de l'insertion des données de l'arme : %s\n", error_message);
+            sqlite3_free(error_message);
+            return rc;
+        }
+        printf("INSERTION ARME : %s\n", currentWeapon->weapon.name);
+
+        // Récupération de l'ID de l'arme insérée
+        int weaponIdFirst = sqlite3_last_insert_rowid(db);
+        printf("ID DE L'ARME : %d\n", weaponIdFirst);
+
+        printf("INSERT PLAYER-WEAPON :\n");
+        printf("PLAYER ID : %d\n", playerId);
+        printf("ID ARME INSERER : %d\n", weaponIdFirst);
+        printf(" IS EQUIPPED : %d\n", currentWeapon->weapon.isEquipped);
+
+        // Insertion dans PLAYER_WEAPON
+        char player_weapon_insert_sql[256];
+        snprintf(player_weapon_insert_sql, sizeof(player_weapon_insert_sql),
+                 "INSERT INTO PLAYER_WEAPON (player_id, weapon_id, isEquiped, next_weapon_id) VALUES (%d, %d, %d, NULL);",
+                 playerId, weaponIdFirst, currentWeapon->weapon.isEquipped);
+
+        rc = sqlite3_exec(db, player_weapon_insert_sql, 0, 0, &error_message);
+        if (rc != SQLITE_OK)
+        {
+            fprintf(stderr, "Erreur lors de l'insertion de l'association joueur-arme : %s\n", error_message);
+            sqlite3_free(error_message);
+            return rc;
+        }
+        printf("PLAYER-WEAPON OK\n\n");
+
+        if(idArme != 0)
+        {
+            printf("UPDATE CONDITION\n");
+            printf("ID ARME INSERE: %d\n", idArme);
+            printf("ID ARME PREV : %d\n", weaponIdFirst);
+            char update_prev_weapon_sql[256];
+            snprintf(update_prev_weapon_sql, sizeof(update_prev_weapon_sql),
+                     "UPDATE PLAYER_WEAPON SET next_weapon_id = %d WHERE weapon_id = %d;",
+                     weaponIdFirst, idArme);
+
+            rc = sqlite3_exec(db, update_prev_weapon_sql, 0, 0, &error_message);
+            if (rc != SQLITE_OK)
+            {
+                fprintf(stderr, "Erreur lors de la mise à jour de next_weapon_id : %s\n", error_message);
+                sqlite3_free(error_message);
+                return rc;
+            }
+            printf("UPDATE PLAYER-WEAPON OK\n\n");
+
+        }
+
+        idArme = weaponIdFirst;
+        printf("ID ARME NEW : %d\n", idArme);
+        currentWeapon = currentWeapon->next;
+        printf("ARME SUIVANTE\n\n");
+    }
+
+
+    // Validez la transaction
+    rc = sqlite3_exec(db, "COMMIT;", 0, 0, &error_message);
+    if (rc != SQLITE_OK)
+    {
+        fprintf(stderr, "Erreur lors de la validation de la transaction : %s\n", error_message);
+        sqlite3_free(error_message);
+        return rc;
+    }
+    printf("DEBUG :: fin (commit ok) \n\n");
 
     return SQLITE_OK; // Tout s'est bien passé
 }
+
 
 
 int insert_monsters(sqlite3 *db, st_level* p_level, int saveId)
@@ -146,8 +339,8 @@ int insert_monsters(sqlite3 *db, st_level* p_level, int saveId)
             printf("Debut insert niveau \n");
             // Récupérez l'ID du monstre que vous venez d'insérer.
 
-            sqlite3_int64 monster_id = sqlite3_last_insert_rowid(db);
-            int mstrId = (int)monster_id;
+            //sqlite3_int64 monster_id = sqlite3_last_insert_rowid(db);
+            //int mstrId = (int)monster_id;
 
 
             // Préparez la requête SQL d'insertion
@@ -167,12 +360,12 @@ int insert_monsters(sqlite3 *db, st_level* p_level, int saveId)
 
             printf("LEVEL NUMBER %d \n", p_lvl->lvl_number);
             printf("nb monster  %d \n", p_lvl->nb_monster);
-            printf("ID DU MONSTRE WALLAH %lld \n", monster_id);
+            printf("NUM DU MONSTRE WALLAH %lld \n", p_monster->number);
             printf("SAVE ID : %d\n", saveId);
             // Liez les valeurs aux paramètres de la requête
             sqlite3_bind_int(stmt2, 1, p_lvl->lvl_number);
             sqlite3_bind_int(stmt2, 2, p_lvl->nb_monster);
-            sqlite3_bind_int(stmt2, 3, mstrId);
+            sqlite3_bind_int(stmt2, 3, p_monster->number);
             sqlite3_bind_int(stmt2, 4, saveId);
 
             printf("BIND VALUE OK  \n");
@@ -197,7 +390,7 @@ int insert_monsters(sqlite3 *db, st_level* p_level, int saveId)
     return SQLITE_OK;
 }
 
-int insertTheSAVE(sqlite3 *db, st_player* p_player, st_level* p_level)
+int insertTheSAVE(sqlite3 *db, st_player* p_player, st_level* p_level, WeaponsPlayer* weapons)
 {
     // ERROR MSG
     char *error_message = 0;
@@ -257,7 +450,7 @@ int insertTheSAVE(sqlite3 *db, st_player* p_player, st_level* p_level)
 
     // LES FONCTIONS d'insertions avec en paramètre l'id de la sauvegarde.
 
-    insertPlayer(db, p_player, p_level, saveId);
+    insertPlayer(db, p_player, p_level, saveId, weapons);
     printf("PLAYER OK \n");
 
     insert_monsters(db, p_level, saveId);
