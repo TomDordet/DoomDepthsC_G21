@@ -128,15 +128,15 @@ void afficherPersonnages() {
 
     // affichage heros
     for (int i = 0; i < sizeof(hero) / sizeof(hero[0]); i++) {
-        if (/*nombre de monstre*/ == 1) {
-            printf("%s\t\t\t\t\t%s\n", hero[i], monstre1[i]);
-        } else if (/*nombre de monstre*/  == 2) {
-            printf("%s\t\t\t\t\t%s\t%s\n", hero[i], monstre1[i], monstre2[i]);
-        } else if (/*nombre de monstre*/ == 3) {
-            printf("%s\t\t\t\t\t%s\t%s\t%s\n", hero[i], monstre1[i], monstre2[i], monstre1[i]);
-        } else {
+        //if (/*nombre de monstre*/ == 1) {
+        //    printf("%s\t\t\t\t\t%s\n", hero[i], monstre1[i]);
+        //} else if (/*nombre de monstre*/  == 2) {
+          //  printf("%s\t\t\t\t\t%s\t%s\n", hero[i], monstre1[i], monstre2[i]);
+       // } else if (/*nombre de monstre*/ == 3) {
+         //   printf("%s\t\t\t\t\t%s\t%s\t%s\n", hero[i], monstre1[i], monstre2[i], monstre1[i]);
+        //} else {
             printf("%s\t\t\t\t\t%s\t%s\t%s\t%s\n", hero[i], monstre2[i], monstre1[i], monstre2[i], monstre1[i]);
-        }
+        //}
 
     }
 }

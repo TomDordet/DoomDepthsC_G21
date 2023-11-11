@@ -45,7 +45,7 @@ static int create_level(int save_id)
         // BDD
         int rc = 0;
         sqlite3 *db;
-        rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+        rc = sqlite3_open("D:/Bilal/Code/DoomDepths/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
         if (rc)
         {
             fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));

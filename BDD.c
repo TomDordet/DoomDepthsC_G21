@@ -98,7 +98,7 @@ int init_bdd(void)
 
     int rc = 0;
     sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    rc = sqlite3_open("D:/Bilal/Code/DoomDepths/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
     if (rc) {
         fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
         return rc;
@@ -118,7 +118,7 @@ int insertData(st_player* p_player, st_level* p_level)
     fprintf(stderr, "Début de la fonction insertData\n");
     int rc = 0;
     sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    rc = sqlite3_open("D:/Bilal/Code/DoomDepths/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
     if (rc) {
         fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
         return rc;
