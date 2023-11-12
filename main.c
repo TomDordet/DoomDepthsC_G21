@@ -205,7 +205,7 @@ void display_inventory(st_player* p_player){
                                 changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
                                 changeMinAndMaxAttackValues(p_player);
                             }
-                        default: //Armes -> Retour
+                        case 2: //Armes -> Retour
                             break;
 
                         default:
@@ -224,7 +224,7 @@ void display_inventory(st_player* p_player){
                     printf("2. Retour\n");
                     scanf(" %s", saisie4);
 
-                    if (sscanf(saisie3, "%d", &armorOption) != 1) {
+                    if (sscanf(saisie4, "%d", &armorOption) != 1) {
                         printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
                         continue;
@@ -247,7 +247,6 @@ void display_inventory(st_player* p_player){
                             }
                         case 2: //Armures -> Retour
                             break;
-
                         default:
                             printf("Aucune option ne correspond a votre saisi. Veuillez reesayer\n");
                             break;
@@ -255,10 +254,12 @@ void display_inventory(st_player* p_player){
                 }
                 break;
             case 3: //Inventaire -> Potions
-                printf("Vous accedez aux Sorts\n");
+                printf("----------\n");
+                printf("Description des sorts :\n");
                 for (enum Sorts sort = BOULEDEFEU; sort <= REGENERATIONMANA; sort++) {
                     afficherDescriptionSort(sort);
                 }
+                printf("----------\n");
                 break;
             case 4: //Inventaire -> Retour
                 break;
@@ -366,7 +367,7 @@ int game(int id_db)
                 char saisie0[256];
 
                 do{
-                    printf("attaque %d\n", p_player->attack);
+                    printf("attaque %d\n", p_player->minAttack);
                     printf("defense %d\n", p_player->defense);
                     printf("1. Attaquer\n");
                     printf("2. Lancer un sort\n");
@@ -391,7 +392,7 @@ int game(int id_db)
                                 // on remet à NULL les monstres dans le lvl, pck ils sont morts.
                                 set_lvl_monsters(NULL, get_lvl());
                                 printf("Tout les monstres sont morts !\n");
-                                p_player->attack = 10;
+                                p_player->minAttack = 10;
                                 p_player->defense = 10;
                                 f_menu = first_menu(p_player);
                                 if (f_menu == 2) {
@@ -470,7 +471,7 @@ int game(int id_db)
 
                                         set_lvl_monsters(NULL, get_lvl());
                                         printf("Tout les monstres sont morts !");
-                                        p_player->attack = 10;
+                                        p_player->minAttack = 10;
                                         p_player->defense = 10;
                                         f_menu = first_menu(p_player);
                                         if (f_menu == 2) {
@@ -521,7 +522,7 @@ int game(int id_db)
 
                                         set_lvl_monsters(NULL, get_lvl());
                                         printf("Tout les monstres sont morts !\n");
-                                        p_player->attack = 10;
+                                        p_player->minAttack = 10;
                                         p_player->defense = 10;
                                         f_menu = first_menu(p_player);
                                         if (f_menu == 2) {

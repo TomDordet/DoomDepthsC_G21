@@ -40,7 +40,7 @@ static void init_stats_monster (st_monsters * p_monster, int level_number, int i
         p_monster->number     = g_number_monster++;
         p_monster->attack      = 5 * level_number;
         p_monster->maxLife     = ((rand() % (10)) * level_number);
-        p_monster->currentLife = p_montser->maxLife;
+        p_monster->currentLife = p_monster->maxLife;
         p_monster->percentGainGold = rand() % 101;
         p_monster->percentGainMana = rand() % 101;
         p_monster->defense     = rand() % 10; // a faire plus tard.
