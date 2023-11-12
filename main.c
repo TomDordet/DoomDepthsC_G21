@@ -18,7 +18,9 @@ st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monste
 
 
 //HEAL
-int heal(st_player *p_player); //proto heal
+int healLife(st_player *p_player); //proto healLife
+int healMana(st_player *p_player); //proto healMana
+
 
 // INSERT DATA (SAVE)
 int insertTheSAVE(sqlite3 *db, st_player* p_player, st_level* p_level);
@@ -160,12 +162,12 @@ void display_inventory(st_player* p_player){
     while (option != 4){
         printf("1. Armes\n");
         printf("2. Armures\n");
-        printf("3. Potions\n");
+        printf("3. Sorts\n");
         printf("4. Retour\n");
         scanf(" %s", saisie2);
 
         if (sscanf(saisie2, "%d", &option) != 1) {
-            printf("Veuillez entrer un chiffre valide.\n\n");
+            printf("Veuillez entrer un chiffre valide.\n");
             while (getchar() != '\n');
             continue;
         }
@@ -182,7 +184,7 @@ void display_inventory(st_player* p_player){
                     scanf(" %s", saisie3);
 
                     if (sscanf(saisie3, "%d", &weaponOption) != 1) {
-                        printf("Veuillez entrer un chiffre valide.\n\n");
+                        printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
                         continue;
                     }
@@ -223,7 +225,7 @@ void display_inventory(st_player* p_player){
                     scanf(" %s", saisie4);
 
                     if (sscanf(saisie3, "%d", &armorOption) != 1) {
-                        printf("Veuillez entrer un chiffre valide.\n\n");
+                        printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
                         continue;
                     }
@@ -251,7 +253,10 @@ void display_inventory(st_player* p_player){
                     }
                 }
             case 3: //Inventaire -> Potions
-                printf("Vous accedez aux potions\n");
+                printf("Vous accedez aux Sorts\n");
+                for (enum Sorts sort = BOULEDEFEU; sort <= REGENERATIONMANA; sort++) {
+                    afficherDescriptionSort(sort);
+                }
                 break;
             case 4: //Inventaire -> Retour
                 break;
@@ -279,7 +284,7 @@ int first_menu(st_player *p_player)
         scanf(" %s", saisie);
 
         if (sscanf(saisie, "%d", &save_choice) != 1) {
-            printf("Veuillez entrer un chiffre valide.\n\n");
+            printf("Veuillez entrer un chiffre valide.\n");
             while (getchar() != '\n');
             continue;
         }
@@ -331,11 +336,11 @@ int game(int id_db)
         printf("4.heal \n");
         printf("5.Inventaire\n");
         printf("9.sortir \n");
-        printf("Selectionner une des options: ");
+        printf("Selectionner une des options: \n");
         scanf(" %s", saisie);
 
         if (sscanf(saisie, "%d", &choixMenu) != 1) {
-            printf("Veuillez entrer un chiffre valide.\n\n");
+            printf("Veuillez entrer un chiffre valide.\n");
             // Effacer le tampon d'entrée pour éviter les boucles infinies en cas de saisie invalide
             while (getchar() != '\n');
             continue;  // Reprendre la boucle
@@ -359,15 +364,16 @@ int game(int id_db)
                 char saisie0[256];
 
                 do{
-
+                    printf("attaque %d\n", p_player->attack);
+                    printf("defense %d\n", p_player->defense);
                     printf("1. Attaquer\n");
                     printf("2. Lancer un sort\n");
                     printf("0. Retour\n");
-                    printf("Votre selection: ");
+                    printf("Votre selection: \n");
 
                     scanf(" %s", saisie0);
                     if (sscanf(saisie0, "%d", &choixAttaque) != 1) {
-                        printf("Veuillez entrer un chiffre valide.\n\n");
+                        printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
                         continue;
                     }
@@ -382,7 +388,9 @@ int game(int id_db)
 
                                 // on remet à NULL les monstres dans le lvl, pck ils sont morts.
                                 set_lvl_monsters(NULL, get_lvl());
-                                printf("Tout les monstres sont morts !");
+                                printf("Tout les monstres sont morts !\n");
+                                p_player->attack = 10;
+                                p_player->defense = 10;
                                 f_menu = first_menu(p_player);
                                 if (f_menu == 2) {
                                     insertData(p_player, g_st_level);
@@ -420,22 +428,23 @@ int game(int id_db)
 
                             printf("1. Boule de Feu\n");
                             printf("2. Eclair Fulgurant\n");
-                            printf("3. Mur de glace\n");
-                            printf("4. Bouclier de lumiere\n");
-                            printf("5. Regeneration de vie\n");
-                            printf("6. Regeneration de mana\n");
+                            printf("3. Decuplement\n");
+                            printf("4. Mur de glace\n");
+                            printf("5. Bouclier de lumiere\n");
+                            printf("6. Regeneration de vie\n");
+                            printf("7. Regeneration de mana\n");
                             printf("0. Retour\n");
-                            printf("Selectionner une option: ");
+                            printf("Selectionner une option: \n");
 
                             scanf(" %s", saisie1);
                             if (sscanf(saisie1, "%d", &choixSort) != 1) {
-                                printf("Veuillez entrer un chiffre valide.\n\n");
+                                printf("Veuillez entrer un chiffre valide.\n");
                                 while (getchar() != '\n');
                                 continue;
                             }
 
                             Sort mon_sort;
-                            st_monsters* p_fight = NULL;
+                            st_monsters *p_fight = NULL;
 
 
                             switch (choixSort) {
@@ -447,9 +456,48 @@ int game(int id_db)
                                     mon_sort.damage = damage;
                                     mon_sort.resources = ressources;
                                     mon_sort.type = OFFENSIVE;
-                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
-                                    //sort(p_player, p_fight, mon_sort);
+                                    if(p_player->currentMana < mon_sort.resources){
+                                        printf("Pas assez de mana pour ce sort\n");
+                                        break;
+                                    }else{
+                                        p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    }
+
+                                    if (p_fight == NULL) {
+                                        int f_menu;
+
+                                        set_lvl_monsters(NULL, get_lvl());
+                                        printf("Tout les monstres sont morts !");
+                                        p_player->attack = 10;
+                                        p_player->defense = 10;
+                                        f_menu = first_menu(p_player);
+                                        if (f_menu == 2) {
+                                            insertData(p_player, g_st_level);
+                                        } else if (f_menu == 3) {
+                                            next_level();
+                                        } else if (f_menu == 4)//Exit
+                                        {
+                                            return exit_game(p_player);
+                                        }
+                                        break;
+                                    } else if (p_fight != get_lvl_monsters(get_lvl())) {
+                                        set_lvl_monsters(p_fight, get_lvl());
+                                    } else {
+                                        //pNew == get_lvl_monsters(get_lvl()
+                                        //donc on fait rien
+                                    }
+
+                                    p_player = fight_monsters_round(p_player, get_lvl_monsters(
+                                            get_lvl())); // déclenche l'attaque du monstre.
+                                    if (NULL == p_player) // si joueur = NULL (donc mort...)
+                                    {
+                                        printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
+                                        /*Libere tous les montres*/
+                                        delete_all_level();
+                                        return 0; // ?
+                                    }
                                     break;
+
                                 }
                                 case 2:
                                 {
@@ -459,23 +507,75 @@ int game(int id_db)
                                     mon_sort.damage = damage;
                                     mon_sort.resources = ressources;
                                     mon_sort.type = OFFENSIVE;
-                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
-                                    //sort(p_player, p_fight, mon_sort);
+                                    if(p_player->currentMana < mon_sort.resources){
+                                        printf("Pas assez de mana pour ce sort\n");
+                                        break;
+                                    }else{
+                                        p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
+                                    }
+
+                                    if (p_fight == NULL) {
+                                        int f_menu;
+
+                                        set_lvl_monsters(NULL, get_lvl());
+                                        printf("Tout les monstres sont morts !\n");
+                                        p_player->attack = 10;
+                                        p_player->defense = 10;
+                                        f_menu = first_menu(p_player);
+                                        if (f_menu == 2) {
+                                            insertData(p_player, g_st_level);
+                                        } else if (f_menu == 3) {
+                                            next_level();
+                                        } else if (f_menu == 4)//Exit
+                                        {
+                                            return exit_game(p_player);
+                                        }
+                                        break;
+                                    } else if (p_fight != get_lvl_monsters(get_lvl())) {
+                                        set_lvl_monsters(p_fight, get_lvl());
+                                    } else {
+                                        //pNew == get_lvl_monsters(get_lvl()
+                                        //donc on fait rien
+                                    }
+
+                                    p_player = fight_monsters_round(p_player, get_lvl_monsters(
+                                            get_lvl())); // déclenche l'attaque du monstre.
+                                    if (NULL == p_player) // si joueur = NULL (donc mort...)
+                                    {
+                                        printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
+                                        /*Libere tous les montres*/
+                                        delete_all_level();
+                                        return 0; // ?
+                                    }
+
                                     break;
                                 }
                                 case 3:
                                 {
+
+                                    int damage = rand() % 5+2;
+                                    int ressources = rand() % 30+1;
+                                    mon_sort.sort = DECUPLEMENT;
+                                    mon_sort.damage = damage;
+                                    mon_sort.resources = ressources;
+                                    mon_sort.type = OFFENSIVE;
+                                    sort(p_player, p_fight, mon_sort);
+                                    break;
+                                }
+                                case 4:
+                                {//pk quand je clique sur 4 il sort du programme, parce que p_monster est à null
                                     int damage = rand() % 50+1;
-                                    int ressources = rand() % 50+1;
+                                    int ressources = rand() % 30+1;
                                     mon_sort.sort = MURDECLACE;
                                     mon_sort.damage = damage;
                                     mon_sort.resources = ressources;
                                     mon_sort.type = DEFENSIVE;
-                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
-                                    //sort(p_player, p_fight, mon_sort);
+                                    sort(p_player, p_fight, mon_sort);
+
+
                                     break;
                                 }
-                                case 4:
+                                case 5:
                                 {
                                     int damage = rand() % 50+1;
                                     int ressources = rand() % 50+1;
@@ -483,11 +583,12 @@ int game(int id_db)
                                     mon_sort.damage = damage;
                                     mon_sort.resources = ressources;
                                     mon_sort.type = DEFENSIVE;
-                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
-                                    //sort(p_player, p_fight, mon_sort);
+                                    sort(p_player, p_fight, mon_sort);
+
+
                                     break;
                                 }
-                                case 5:
+                                case 6:
                                 {
                                     int damage = rand() % 50+1;
                                     int ressources = rand() % 50+1;
@@ -495,11 +596,10 @@ int game(int id_db)
                                     mon_sort.damage = damage;
                                     mon_sort.resources = ressources;
                                     mon_sort.type = LIFEHEAL;
-                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
-                                    //sort(p_player, p_fight, mon_sort);
+                                    sort(p_player, p_fight, mon_sort);
                                     break;
                                 }
-                                case 6:
+                                case 7:
                                 {
                                     int damage = rand() % 50+1;
                                     int ressources = rand() % 50+1;
@@ -507,8 +607,7 @@ int game(int id_db)
                                     mon_sort.damage = damage;
                                     mon_sort.resources = ressources;
                                     mon_sort.type = MANAHEAL;
-                                    p_fight = sort_player_round(p_player, get_lvl_monsters(get_lvl()), mon_sort);
-                                    //sort(p_player, p_fight, mon_sort);
+                                    sort(p_player, p_fight, mon_sort);
                                     break;
                                 }
                                 case 0:
@@ -519,38 +618,8 @@ int game(int id_db)
                                     break;
 
                             }
-                            if (p_fight == NULL) {
-                                int f_menu;
-
-                                set_lvl_monsters(NULL, get_lvl());
-                                printf("Tout les monstres sont morts !");
-                                f_menu = first_menu(p_player);
-                                if (f_menu == 2) {
-                                    insertData(p_player, g_st_level);
-                                } else if (f_menu == 3) {
-                                    next_level();
-                                } else if (f_menu == 4)//Exit
-                                {
-                                    return exit_game(p_player);
-                                }
-                                break;
-                            } else if (p_fight != get_lvl_monsters(get_lvl())) {
-                                set_lvl_monsters(p_fight, get_lvl());
-                            } else {
-                                //pNew == get_lvl_monsters(get_lvl()
-                                //donc on fait rien
-                            }
-
-                            p_player = fight_monsters_round(p_player, get_lvl_monsters(
-                                    get_lvl())); // déclenche l'attaque du monstre.
-                            if (NULL == p_player) // si joueur = NULL (donc mort...)
-                            {
-                                printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
-                                /*Libere tous les montres*/
-                                delete_all_level();
-                                return 0; // ?
-                            }
-                            break;
+                            printf("Vie: %d / %d \n", p_player->currentLife, p_player->maxLife);
+                            printf("Mana: %d / %d \n", p_player->currentMana, p_player->maxMana);
 
                         }
 
@@ -568,7 +637,35 @@ int game(int id_db)
             }
 
             case 4: {
-                heal(p_player);
+
+                int choixPotions = 1;
+                char saisie0[256];
+
+                do {
+                    printf("1. Potions de vie\n");
+                    printf("2. Potions de Mana\n");
+                    printf("0. Retour\n");
+                    printf("Votre selection: \n");
+
+                    scanf(" %s", saisie0);
+                    if (sscanf(saisie0, "%d", &choixPotions) != 1) {
+                        printf("Veuillez entrer un chiffre valide.\n");
+                        while (getchar() != '\n');
+                        continue;
+                    }
+                    switch (choixPotions) {
+                        case 1:
+                            healLife(p_player);
+                            break;
+
+                        case 2:
+                            healMana(p_player);
+                            break;
+
+                        case 0:
+                            break;
+                    }
+                } while (choixPotions != 0);
                 break;
             }
             case 5: {

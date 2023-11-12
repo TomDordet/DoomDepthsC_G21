@@ -11,10 +11,11 @@
 enum Sorts {
     BOULEDEFEU = 1,
     ECLAIRFULGURANT = 2,
-    MURDECLACE = 3,
-    BOUCLIERDELUMIERE = 4,
-    REGENERATIONVIE = 5,
-    REGENERATIONMANA = 6,
+    DECUPLEMENT = 3,
+    MURDECLACE = 4,
+    BOUCLIERDELUMIERE = 5,
+    REGENERATIONVIE = 6,
+    REGENERATIONMANA = 7,
 };
 
 enum SortsTypes {
@@ -36,5 +37,9 @@ typedef struct
 
 /*cette fonction lance le sort player choice lancé par p_player contre p_monster*/
 void sort(st_player* p_player, st_monsters* p_monster, Sort playerChoice);
+
+/*Fonction pour afficher chaque sort et leurs descriptions*/
+void afficherDescriptionSort(enum Sorts sort);
+
 
 #endif //DOOMDEPTHSC_G21_SORT_H
