@@ -224,7 +224,7 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
 
                     if (MAX_LVL == get_lvl())
                     {
-                        printf("Vous avez atteint le sommet !!! \n tous les niveaux ont ete remportés !!! \n C'est la victoir !!!");
+                        printf("Mettre le giga YOU WIN ");
                         return exit_game (p_player);
                     }
                     else
@@ -266,7 +266,7 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
                 p_player = fight_monsters_round(p_player, get_lvl_monsters(get_lvl())); // déclenche l'attaque du monstre.
                 if (NULL == p_player) // si joueur = NULL (donc mort...)
                 {
-                    printf("Vous avez perdu, retour au menu... \n ");
+                    printf("Mettre le GAME OVER\n ");
                     /*Libere tous les montres*/
                     delete_all_level ();
                     return 0; // ?

@@ -20,7 +20,7 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
     p_monster_found = searchMonster(p_first_monster); // on utilise la func pour choisir le monstre, et on stock ce monstre.
     if (p_monster_found == NULL) // si marche pas
     {
-        printf("Monstre non trouvé. \n");
+        printf("Monstre inexistant.\n");
         return p_first_monster; // on renvoit le le first.
     }
 
@@ -49,14 +49,14 @@ st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monste
             p_player->currentLife -= p_monster->attack; // monstre attack
             if (p_player->currentLife < 0)
                 p_player->currentLife = 0; // on remet à 0 pour pas avoir de valeurs négatives
-            printf("Le monstre %d inflige %d dammage au player (life :%d/%d)\n", p_monster->number, p_monster->attack,
+            printf("Le monstre %d inflige %d de dégâts au joueur (life :%d/%d)\n", p_monster->number, p_monster->attack,
                    p_player->currentLife, p_player->maxLife);
         }
         p_monster = (st_monsters *) p_monster->p_next; // i++
     }
 
     if (p_player->currentLife == 0) { // si la vie du player == 0
-        printf("GAME OVER"); // ici faudras appeller une fonction qui pop un giga message.
+        //printf("GAME OVER"); // ici faudras appeller une fonction qui pop un giga message.
         return delete_player(p_player); //on le sup.
     }
     return p_player;

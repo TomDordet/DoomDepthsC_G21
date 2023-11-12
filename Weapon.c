@@ -28,29 +28,29 @@ Weapon *createWeapon(int nb_attack_per_round, int minDamage, int maxDamage)
 
 Weapon *createWeaponSave(int nb_attack_per_round, int minDamage, int maxDamage, const char* name)
 {
-    printf("ALLOC ARME OK\n");
+    //printf("ALLOC ARME OK\n");
     // alloc de l'arme
     Weapon *newWeapon = malloc(sizeof(Weapon));
 
     newWeapon->name = strdup(name);
 
-    printf("NAME : %s\n", newWeapon->name);
+    //printf("NAME : %s\n", newWeapon->name);
     newWeapon->nb_attack_per_round = nb_attack_per_round;
 
-    printf("NB ATTACK : %d\n", newWeapon->nb_attack_per_round);
+    //printf("NB ATTACK : %d\n", newWeapon->nb_attack_per_round);
     newWeapon->minDamage = minDamage;
     newWeapon->maxDamage = maxDamage;
     newWeapon->isEquipped = 0;
     newWeapon->next = NULL;
 
-    printf("OK\n\n");
+    //printf("OK\n\n");
     return newWeapon;
 }
 
 // free l'arme
 void deleteWeapon(Weapon * weapon)
 {
-    printf("debug :: suppression weapons %p \n",weapon);
+    //printf("debug :: suppression weapons %p \n",weapon);
     free(weapon);
 }
 
@@ -74,11 +74,11 @@ void displayWeapon(Weapon * weapon)
 
 int* addWeaponsPlayer(st_player *player, Weapon* New_Weapon)
 {
-    printf("debut dunc addWeaponPlayer\n");
+    //printf("debut dunc addWeaponPlayer\n");
 
     // nb d'armes du joueur.
     int count = countWeaponsPlayer(player);
-    printf("nb armes : %d\n", count);
+    //printf("nb armes : %d\n", count);
     if (count >= 5)
     {
         // si joueur a déjà plus de 5 armes :
@@ -92,7 +92,7 @@ int* addWeaponsPlayer(st_player *player, Weapon* New_Weapon)
     if (weapon == NULL)
     {
         player->weapons = (int *)New_Weapon;
-        printf("Insert weapons (1st) \n");
+        //printf("Insert weapons (1st) \n");
     }
     else
     {
@@ -101,14 +101,14 @@ int* addWeaponsPlayer(st_player *player, Weapon* New_Weapon)
         {
             // nouvelle arme(s) = sa suivante.
             weapon = (Weapon *)weapon->next;
-            printf("next .. \n");
+            //printf("next .. \n");
         }
         // Sa suivante = la nouvelle arme.
         weapon->next = (int *)New_Weapon;
-        printf("Insert weapons (2nd) \n");
+        //printf("Insert weapons (2nd) \n");
     }
 
-    printf("FIN FUNC :\n\n");
+    //printf("FIN FUNC :\n\n");
     // Retourner la nouvelle tête de la liste.
     return player->weapons;
 }
@@ -125,7 +125,6 @@ void deleteWeaponsPlayer(st_player * p_player)
         weapons = (Weapon *)weapons->next;
         // et les supprimes
         deleteWeapon(tmp);
-
     }
 }
 
@@ -139,7 +138,7 @@ int countWeaponsPlayer(st_player * player)
     while (next != NULL)
     {
         count++;
-        printf("%s next = %p , count %d \n",__FUNCTION__ ,next,count);
+        //printf("%s next = %p , count %d \n",__FUNCTION__ ,next,count);
         //arme suivante.
         next = ((Weapon *)next)->next;
     }

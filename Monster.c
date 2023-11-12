@@ -51,26 +51,18 @@ static void init_stats_monster_save(st_monsters * p_montser, int save_id, int mo
     sqlite3_bind_int(stmt, 1, save_id);
     sqlite3_bind_int(stmt, 2, monster_number);
 
-    rc = sqlite3_step(stmt);
+    sqlite3_step(stmt);
 
     int monsterMaxLife = sqlite3_column_int(stmt, 0);
     int monsterCurrentLife = sqlite3_column_int(stmt, 1);
     int monsterAttack = sqlite3_column_int(stmt, 2);
     int monsterNext = sqlite3_column_int(stmt, 3);
 
-    /*printf("NUMBER MONSTER %d\n", monster_number);
-    printf("MAX LIFE MONSTER %d\n", monsterMaxLife);
-    printf("CURRENT LIFE MONSTER %d\n", monsterCurrentLife);
-    printf("ATTACK MONSTER %d\n", monsterAttack);
-    printf("NEXT MONSTER  %d\n\n", monsterNext);*/
-
     //value from DB
     p_montser->number = monster_number;
     p_montser->attack = monsterAttack;
     p_montser->maxLife = monsterMaxLife;
     p_montser->currentLife = monsterCurrentLife;
-    //p_montser->p_next = monsterNext;
-
 
     sqlite3_finalize(stmt);
     sqlite3_close(db);
@@ -195,7 +187,7 @@ st_monsters *delete_the_monster(st_monsters *p_first_monster, st_monsters *p_the
         }
 
     }
-    printf("Not found \n"); // si pas trouvé, bah pas trouver.
+    printf("Aucun monstre trouver. \n"); // si pas trouvé, bah pas trouver.
     return NULL;
 }
 

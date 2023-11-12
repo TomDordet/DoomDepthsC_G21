@@ -64,7 +64,7 @@ static int create_level(int save_id)
         sqlite3_bind_int(stmt, 1, save_id);
 
         // ON STOCK LES VALEURS RECUPERES DANS DES VARIABLES
-        rc = sqlite3_step(stmt);
+        sqlite3_step(stmt);
         int nbLvl = sqlite3_column_int(stmt, 0);
         int allLvl = sqlite3_column_int(stmt, 1);
         int minLvl = sqlite3_column_int(stmt, 2);
@@ -90,6 +90,7 @@ static int create_level(int save_id)
         while ((rc = sqlite3_step(stmt2)) == SQLITE_ROW && levelIndex < allLvl)
         {
             // ON RECUP LES DATA
+
             int lvlNumber = sqlite3_column_int(stmt2, 0);
             int nbMonster = sqlite3_column_int(stmt2, 1);
 
@@ -111,7 +112,7 @@ static int create_level(int save_id)
 
 
                     if(j < (nbMonster-1))
-                        rc = sqlite3_step(stmt2);
+                        sqlite3_step(stmt2);
                 }
             }
             levelIndex++; // Incrémentez le compteur
@@ -193,7 +194,7 @@ int delete_all_level (void)
     for (int i = 0; i < MAX_LVL; i ++)
     {
         if (g_st_level[i].p_monster != NULL) {
-            printf("DEBUG :: Delete level %d \n",g_st_level[i].lvl_number);
+            //printf("DEBUG :: Delete level %d \n",g_st_level[i].lvl_number);
             delete_all_monster(g_st_level[i].p_monster);
         }
 

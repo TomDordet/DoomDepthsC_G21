@@ -33,11 +33,11 @@ int displayLatestSaves(void)
         return rc;
     }
 
-
     int i = 1;
     int choixSave = 0;
     printf("Quelle sauvegardes voulez-vous charger ?\n");
-    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+
+    while ((sqlite3_step(stmt)) == SQLITE_ROW)
     {
         int sauvegarde_id = sqlite3_column_int(stmt, 0);
         int currentLevel = sqlite3_column_int(stmt, 1);

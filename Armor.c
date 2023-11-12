@@ -39,12 +39,13 @@ Armor* createArmorSave(int defense, const char* name)
 // supp
 void deleteArmor(Armor *armor)
 {
+    //printf("debug :: suppression armors %p \n",armor);
     free(armor);
 }
 
 void displayArmor(Armor* armor)
 {
-    printf("Armor - %s (defense: %d)", armor->name, armor->defense);
+    //printf("Armor - %s (defense: %d)", armor->name, armor->defense);
     if(armor->isEquipped == 1)
     {
         printf(" (Equipped)");
@@ -56,10 +57,9 @@ void displayArmor(Armor* armor)
 // meme comment que pour l'arme.
 int* addArmorsPlayer(st_player * player, Armor* New_Armor)
 {
-    printf("DEBUT FUNC ADD ARMOR PLAYER \n");
+    //printf("DEBUT FUNC ADD ARMOR PLAYER \n");
 
     int count = countArmorsPlayer(player);
-    printf("nb armures : %d\n", count);
     if (count >= 5)
     {
         printf("Inventaire d'armures plein !\n");
@@ -70,7 +70,7 @@ int* addArmorsPlayer(st_player * player, Armor* New_Armor)
     if (armor == NULL)
     {
         player->armors = (int *)New_Armor;
-        printf("Insert armor (1st) \n");
+        //printf("Insert armor (1st) \n");
     }
     else
     {
@@ -79,14 +79,14 @@ int* addArmorsPlayer(st_player * player, Armor* New_Armor)
         {
             // nouvelle arme(s) = sa suivante.
             armor = (Armor *)armor->next;
-            printf("next .. \n");
+            //printf("next .. \n");
         }
         // Sa suivante = la nouvelle arme.
         armor->next = (int *)New_Armor;
-        printf("Insert armor (2nd) \n");
+        //printf("Insert armor (2nd) \n");
     }
 
-    printf("FIN FUNC :\n\n");
+    //printf("FIN FUNC :\n\n");
     // Retourner la nouvelle tête de la liste.
     return player->armors;
 }

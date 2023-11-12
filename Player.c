@@ -9,9 +9,9 @@
 
 // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
 st_player * create_player(int id_db){
-    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
+    //printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
     st_player* p_player = malloc(sizeof(st_player)); //p_player = le joueur en gros.
-    printf("DEBUG :: alloc p_player [%d] = %p \n",1,p_player); // printf pour débug, vérifier que le joueur est bien créer/allouer.
+    //printf("DEBUG :: alloc p_player [%d] = %p \n",1,p_player); // printf pour débug, vérifier que le joueur est bien créer/allouer.
 
     srand(time(NULL)); //pour que chaque génération diffère des précédentes / suivantes.
 
@@ -30,9 +30,9 @@ st_player * create_player(int id_db){
         Weapon *weapon1 = createWeapon(1, 2, 5);
         weapon1->isEquipped = 1;
         weapon1->name = "Baton en bois";
-        printf("%s\n",weapon1->name);
         p_player->weapons = addWeaponsPlayer(p_player, weapon1);
 
+        /*
         Weapon *weapon2 = createWeapon(1, 2, 5);
         printf("%s\n",weapon2->name);
         p_player->weapons = addWeaponsPlayer(p_player, weapon2);
@@ -46,23 +46,24 @@ st_player * create_player(int id_db){
         p_player->weapons = addWeaponsPlayer(p_player, weapon4);
 
         Weapon *weapon5 = createWeapon(3, 7, 5);
-        printf("%s\n",weapon5->name);
+        //printf("%s\n",weapon5->name);
         p_player->weapons = addWeaponsPlayer(p_player, weapon5);
 
-        printf("DEBUG:: Nb arm is p_player->weapons %d\n", countWeaponsPlayer(p_player));
-
+        //printf("DEBUG:: Nb arm is p_player->weapons %d\n", countWeaponsPlayer(p_player));
+        */
         Weapon * weapon_debug = getWeaponNumberToWeaponsPlayer(p_player, 4);
-        printf("DEBUG Nom : %s\n", weapon_debug->name);
+        //printf("DEBUG Nom : %s\n", weapon_debug->name);
 
         //FIN PARTIE TEST ARMORS
 
         Armor *armor1 = createArmor(1);
         armor1->isEquipped = 1;
         armor1->name = "Tenue simple";
-        printf("%s\n",armor1->name);
+        //printf("%s\n",armor1->name);
         p_player->armors = addArmorsPlayer(p_player, armor1);
 
-        //PARTIE TEST WEAPONS
+        //PARTIE TEST WEAPON
+        /*
         Armor *armor2 = createArmor(2);
         printf("%s\n",armor2->name);
         p_player->armors = addArmorsPlayer(p_player, armor2);
@@ -80,9 +81,9 @@ st_player * create_player(int id_db){
         p_player->armors = addArmorsPlayer(p_player, armor5);
 
         printf("DEBUG:: NB Armor in player %d\n", countArmorsPlayer(p_player));
-
+        */
         Armor *armor_debug = getArmorNumberToArmorsPlayer(p_player, 4);
-        printf("DEBUG Nom : %s\n", armor_debug->name);
+        //printf("DEBUG Nom : %s\n", armor_debug->name);
         //FIN PARTIE TEST ARMORS
     }
     else
@@ -106,12 +107,9 @@ st_player * create_player(int id_db){
         {
             fprintf(stderr, "Erreur lors de la préparation de la requête : %s\n", sqlite3_errmsg(db));
         }
-        printf("RQT PLAYER OK\n");
-
 
         sqlite3_bind_int(stmt, 1, id_db);
 
-        printf("ID DB : %d\n", id_db);
 
         sqlite3_step(stmt);
 
@@ -128,10 +126,6 @@ st_player * create_player(int id_db){
         p_player->armors = NULL;
 
         sqlite3_finalize(stmt);
-
-        printf("PLAYER FINIS\n");
-
-
 
         // WEAPON -----------------
 
@@ -152,8 +146,7 @@ st_player * create_player(int id_db){
         sqlite3_step(stmt2);
 
         int countWeapon = sqlite3_column_int(stmt2, 0);
-
-        printf("NB WEAPON : %d\n", countWeapon);
+        printf("Nombre d'armes : %d\n", countWeapon);
 
         // NOUVELLE REQUETE POUR RECUP LES DATA
         const char *select_weapons_sql = "SELECT W.nb_attack_per_round, W.minDamage, W.maxDamage, W.name, P.isEquiped "
@@ -174,7 +167,7 @@ st_player * create_player(int id_db){
 
         int i = 0;
 
-        while ( (i < countWeapon) )
+        while ((i < countWeapon))
         {
 
             int nbAttck = sqlite3_column_int(stmt3, 0);
@@ -192,11 +185,8 @@ st_player * create_player(int id_db){
             i++; // Incrémentez le compteur
             sqlite3_step(stmt3);
         }
-
-        printf("FINITO ARME\n\n");
         sqlite3_finalize(stmt2);
         sqlite3_finalize(stmt3);
-
 
         // ARMOR -----------------
 
@@ -217,8 +207,6 @@ st_player * create_player(int id_db){
 
         int countArmor = sqlite3_column_int(stmt4, 0);
 
-        printf("NB ARMOR : %d\n", countArmor);
-
         // NOUVELLE REQUETE POUR RECUP LES DATA
         const char *select_armors_sql = "SELECT A.name, A.defense, P.isEquiped "
                                 "FROM ARMOR A "
@@ -233,10 +221,6 @@ st_player * create_player(int id_db){
         }
 
         sqlite3_bind_int(stmt5, 1, playerId);
-
-        printf("RQT INFO ARMOR OK\n");
-        // recup data :
-
         sqlite3_step(stmt5);
 
         int j = 0;
@@ -247,8 +231,7 @@ st_player * create_player(int id_db){
             const char *nameArmor = (const char *)sqlite3_column_text(stmt5, 0);
             int defense = sqlite3_column_int(stmt5, 1);
             int isEquipedArmor = sqlite3_column_int(stmt5, 2);
-            printf("------------------------- (%d)\n", j);
-            printf("ARMOR NAME : %s\n\n", nameArmor);
+
 
             Armor *newArmor = createArmorSave(defense, nameArmor);
 
@@ -260,7 +243,6 @@ st_player * create_player(int id_db){
             sqlite3_step(stmt5);
         }
 
-        printf("FINITO ARMOR\n\n");
         sqlite3_finalize(stmt4);
         sqlite3_finalize(stmt5);
 
@@ -275,14 +257,14 @@ st_player * delete_player (st_player * p_player) //Supprime le joueur.
 {
     //débug de vérification du free de l'ensemble des armes du joueur
     //je le fais ici car les armes ont besoin d'être free seulement lorsque le joueur meurt.
-    printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
+    //printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
     deleteWeaponsPlayer(p_player);
-     printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
-    //deleteArmorsPlayer(p_player->armors);
-    printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
-    printf("DEBUG :: free p_player %d = %p \n",1,p_player); // débug, pour vérifier qu'il est bien désallouer, faudras appeler cette fonction, quand notre MyPlayer, mourra par exemple, ce sera la fin de la game.
+    //printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
+    deleteArmorsPlayer(p_player);
+    //printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
+    //printf("DEBUG :: free p_player %d = %p \n",1,p_player); // débug, pour vérifier qu'il est bien désallouer, faudras appeler cette fonction, quand notre MyPlayer, mourra par exemple, ce sera la fin de la game.
     free (p_player);
-    printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
+    //printf("DEBUG %s() Line %d \n ",__FUNCTION__ ,__LINE__);
     return NULL;
 }
 
@@ -302,15 +284,16 @@ int display_player (st_player* p_player) // affichage des statistiques du joueur
         tmp = (Weapon *)tmp->next;
     }
 
-    /*
     //Affiche l'armure équipée
-    ArmorsPlayer *tmp2 = p_player->armors;
-    while (tmp2 != NULL) {
-        if (tmp2->armor.isEquipped == 1) {
-            printf("Armure equipee : %s\n", tmp2->armor.name);
+    Armor *tmp2 = (Armor *)p_player->armors;
+    while (tmp2 != NULL)
+    {
+        if (tmp2->isEquipped == 1)
+        {
+            printf("Armure equipee : %s\n", tmp2->name);
             break;
         }
-        tmp2 = tmp2->next;
-    }*/
+        tmp2 = (Armor *)tmp2->next;
+    }
     return 0;
 }
