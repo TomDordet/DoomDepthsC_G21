@@ -11,7 +11,7 @@ void sort(st_player* p_player, st_monsters* p_monster, Sort playerChoice){// je 
                 break;
             }
             if(playerChoice.sort == DECUPLEMENT){
-                p_player->attack *= playerChoice.damage;
+                p_player->minAttack *= playerChoice.damage;
                 p_player->currentMana -= playerChoice.resources;
                 printf("Vos attaques sont decuple par %d\n", playerChoice.damage);
                 break;

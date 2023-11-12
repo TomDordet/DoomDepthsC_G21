@@ -8,13 +8,15 @@
 
 #include "Player.h"
 #include "Monster.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include "level.h"
 #include "Sort.h"
 #include "Display.h"
 
 //-------------- FIGHT -----------------------------
 // le FIGHT.
-st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monster)
+st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monster, int nb_level)
 {
     st_monsters *p_monster_found; // le monstre que l'on veut attaquer.
 
@@ -49,6 +51,19 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
             int goldAmount = rand() % 21 + 15;
             p_player->gold += goldAmount;
             printf("Vous avez gagnez %d pieces d'or\n Or: %d\n", goldAmount, p_player->gold);
+        }
+
+        //Test de drop d'equipement dès que le monstre a été tué.
+        int dropChance = rand() % 10 + 1;
+        if (dropChance > 1) {
+            int whatEquipment = rand() % 2 + 1;
+            if (whatEquipment == 1) {
+                Weapon *newWeapon = createWeapon(nb_level);
+                addWeaponsPlayer(p_player->weapons, *newWeapon);
+            } else {
+                Armor *newArmor = createArmor(nb_level);
+                addArmorsPlayer(p_player->armors, *newArmor);
+            }
         }
 
         return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
@@ -101,7 +116,7 @@ st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monste
             return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
         } else {
             printf("Le monstre %d vient de prendre %d (%d/%d) \n", p_monster_found->number,
-                   p_player->attack, p_monster_found->currentLife, p_monster_found->maxLife);
+                   sort.damage, p_monster_found->currentLife, p_monster_found->maxLife);
             return p_first_monster;
         }
     }else {
@@ -114,11 +129,12 @@ st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monste
 
 
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster) {
-
     st_monsters *p_monster = p_first_monster;
     while (p_monster != NULL) { // tant que y'a des monstres :
         if (p_monster->currentLife > 0) { // et que le monstre est vivant ;
-            p_player->currentLife -= p_monster->attack; // monstre attack
+            int damageTaken = p_monster->attack - p_player->defense;
+            damageTaken = (damageTaken < 1) ? 1 : damageTaken;
+            p_player->currentLife -= damageTaken; // monstre attack
             if (p_player->currentLife < 0)
                 p_player->currentLife = 0; // on remet à 0 pour pas avoir de valeurs négatives
             printf("Le monstre %d inflige %d damage au player (life :%d/%d)\n", p_monster->number, p_monster->attack,

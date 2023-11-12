@@ -19,7 +19,7 @@ typedef struct WeaponsPlayer {
     struct WeaponsPlayer *next;
 }WeaponsPlayer;
 
-Weapon* createWeapon(int nb_attack_per_round, int minDamage, int maxDamage);
+Weapon* createWeapon(int level);
 void deleteWeapon(Weapon *weapon);
 void displayWeapon(Weapon* weapon);
 

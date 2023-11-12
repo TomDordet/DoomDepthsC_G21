@@ -2,13 +2,13 @@
 #include "Display.h"
 //PARTIE ARMOR
 
-Armor* createArmor(int defense) {
+Armor* createArmor(int level) {
     Armor *newArmor = malloc(sizeof(Armor));
 
     char *randomName = generateRandomArmorName();
     newArmor->name = randomName;
 
-    newArmor->defense = defense;
+    newArmor->defense = level;
     newArmor->isEquipped = 0;
     return newArmor;
 }

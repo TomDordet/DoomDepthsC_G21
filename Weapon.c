@@ -3,15 +3,15 @@
 
 //PARTIE WEAPON
 
-Weapon *createWeapon(int nb_attack_per_round, int minDamage, int maxDamage) {
+Weapon *createWeapon(int level) {
     Weapon *newWeapon = malloc(sizeof(Weapon));
 
     char *randomName = generateRandomWeaponName();
     newWeapon->name = randomName;
 
-    newWeapon->nb_attack_per_round = nb_attack_per_round;
-    newWeapon->minDamage = minDamage;
-    newWeapon->maxDamage = maxDamage;
+    newWeapon->nb_attack_per_round = rand() % 5 + 1;
+    newWeapon->minDamage = level * (rand() % 5 + 1);
+    newWeapon->maxDamage = newWeapon->minDamage + rand() % 5 + 1;
     newWeapon->isEquipped = 0;
     return newWeapon;
 }

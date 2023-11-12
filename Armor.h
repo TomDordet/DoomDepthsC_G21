@@ -21,7 +21,7 @@ typedef struct ArmorsPlayer {
     struct ArmorsPlayer *next;
 }ArmorsPlayer;
 
-Armor* createArmor(int defense);
+Armor* createArmor(int level);
 void deleteArmor(Armor *armor);
 void displayArmor(Armor* armor);
 

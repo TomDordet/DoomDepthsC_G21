@@ -8,7 +8,7 @@ st_player * create_player (int id_db)
     srand(time(NULL)); //pour que chaque génération diffère des précédentes / suivantes.
 
     //Création d'une arme et d'une armure par défaut
-    Weapon *startWeapon = createWeapon(1, 2, 5);
+    Weapon *startWeapon = createWeapon(1);
     startWeapon->isEquipped = 1;
     startWeapon->name = "Baton en bois";
     printf("%s\n",startWeapon->name);
@@ -52,56 +52,6 @@ st_player * create_player (int id_db)
     //Ajout des équipements par défaut dans la liste chainée
     p_player->weapons = addWeaponsPlayer(p_player->weapons, *startWeapon);
     p_player->armors = addArmorsPlayer(p_player->armors, *startArmor);
-
-    //PARTIE TEST WEAPONS
-    Weapon *weapon2 = createWeapon(1, 2, 5);
-    printf("%s\n",weapon2->name);
-    p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon2);
-    Weapon *weapon3 = createWeapon(3, 6, 10);
-    printf("%s\n",weapon3->name);
-    p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon3);
-    Weapon *weapon4 = createWeapon(2, 20, 22);
-    printf("%s\n",weapon4->name);
-    p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon4);
-    Weapon *weapon5 = createWeapon(3, 7, 15);
-    printf("%s\n",weapon5->name);
-    p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon5);
-
-    printf("%d\n", countWeaponsPlayer(p_player->weapons));
-
-    WeaponsPlayer *weaponsPlayer = getWeaponNumberToWeaponsPlayer(p_player->weapons, 4);
-    printf("Nom : %s\n", weaponsPlayer->weapon.name);
-
-    Weapon *weapon6 = createWeapon(2, 3, 14);
-    printf("%s\n",weapon6->name);
-    p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon6);
-    //FIN PARTIE TEST ARMORS
-
-  
-    //PARTIE TEST WEAPONS
-    Armor *armor2 = createArmor(2);
-    printf("%s\n",armor2->name);
-    p_player->armors = addArmorsPlayer(p_player->armors, *armor2);
-    Armor *armor3 = createArmor(3);
-    printf("%s\n",armor3->name);
-    p_player->armors = addArmorsPlayer(p_player->armors, *armor3);
-    Armor *armor4 = createArmor(4);
-    printf("%s\n",armor4->name);
-    p_player->armors = addArmorsPlayer(p_player->armors, *armor4);
-    Armor *armor5 = createArmor(5);
-    printf("%s\n",armor5->name);
-    p_player->armors = addArmorsPlayer(p_player->armors, *armor5);
-
-    printf("%d\n", countArmorsPlayer(p_player->armors));
-
-    ArmorsPlayer *armorsPlayer = getArmorNumberToArmorsPlayer(p_player->armors, 4);
-    printf("Nom : %s\n", armorsPlayer->armor.name);
-
-    Armor *armor6 = createArmor(6);
-    printf("%s\n",armor6->name);
-    p_player->armors = addArmorsPlayer(p_player->armors, *armor6);
-
-    //FIN PARTIE TEST ARMORS
 
     return p_player;
 }
