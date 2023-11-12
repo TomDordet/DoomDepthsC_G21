@@ -51,6 +51,16 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
             printf("Vous avez gagnez %d pieces d'or\n Or: %d\n", goldAmount, p_player->gold);
         }
 
+        //Test de drop d'equipement dès que le monstre a été tué.
+        /*int dropChance = rand() % 10 + 1;
+        if (dropChance == 1) {
+            int whatEquipment = rand() % 2 + 1;
+            if (whatEquipment == 1) {
+                createWeapon(level);
+            } else {
+                createArmor(level);
+            }*/
+
         return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
     }
     else
@@ -119,7 +129,7 @@ st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monste
     while (p_monster != NULL) { // tant que y'a des monstres :
         if (p_monster->currentLife > 0) { // et que le monstre est vivant ;
             int damageTaken = p_monster->attack - p_player->defense;
-            damageTaken = (damageTaken < 0) ? 0 : damageTaken;
+            damageTaken = (damageTaken < 1) ? 1 : damageTaken;
             p_player->currentLife -= damageTaken; // monstre attack
             if (p_player->currentLife < 0)
                 p_player->currentLife = 0; // on remet à 0 pour pas avoir de valeurs négatives

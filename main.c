@@ -278,6 +278,14 @@ int first_menu(st_player *p_player)
     {
         int save_choice = 1;
         char saisie[256];
+
+        //Récupérer les armes et armures potentiellement lootées par des monstres et les ajouter à l'inventaire du joueur.
+        //une boucle qui ajoute toutes les armes lootées dans la liste chainées weapons du joueur par le biai de la fonction addWeaponsPlayer
+
+        //une boucle qui ajoute toutes les armures lootées dans la liste chainées armors du joueur par le biai de la fonction addWeaponsPlayer
+
+        //je souhaite que les différents tableaux/ou listes chainées qui servaient à stocker temporairement mes équipements soient vidées.
+
         printf("Quelques minutes de pause avant de reprendre... Que voulez vous faire ? \n");
         printf("1 - Inventaire\n");
         printf("2 - Sauvegarde\n");
@@ -392,8 +400,6 @@ int game(int id_db)
                                 // on remet à NULL les monstres dans le lvl, pck ils sont morts.
                                 set_lvl_monsters(NULL, get_lvl());
                                 printf("Tout les monstres sont morts !\n");
-                                p_player->minAttack = 10;
-                                p_player->defense = 10;
                                 f_menu = first_menu(p_player);
                                 if (f_menu == 2) {
                                     insertData(p_player, g_st_level);
