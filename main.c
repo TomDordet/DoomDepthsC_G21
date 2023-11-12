@@ -7,6 +7,7 @@
 #include "level.h"
 #include "sqlite3.h"
 #include "Sort.h"
+#include "Display.h"
 
 
 
@@ -117,7 +118,7 @@ int init_bdd(void)
 {
     int rc = 0;
     sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    rc = sqlite3_open("D:/Bilal/Code/DoomDepths 2/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
     if (rc) {
         fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
         return rc;
@@ -137,7 +138,7 @@ int insertData(st_player* p_player, st_level* p_level)
     fprintf(stderr, "Début de la fonction insertData\n");
     int rc = 0;
     sqlite3 *db;
-    rc = sqlite3_open("C:/Users/ethan/CLionProjects/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
+    rc = sqlite3_open("D:/Bilal/Code/DoomDepths 2/DoomDepthsC_G21/DoomDepthsC_G21.db", &db);
     if (rc) {
         fprintf(stderr, "Impossible d'ouvrir la base de données : %s\n", sqlite3_errmsg(db));
         return rc;
@@ -164,7 +165,9 @@ void display_inventory(st_player* p_player){
         printf("3. Sorts\n");
         printf("4. Retour\n");
         scanf(" %s", saisie2);
-
+        clearScreen();
+        barreAffichage(p_player);
+        afficherHero(p_player);
         if (sscanf(saisie2, "%d", &option) != 1) {
             printf("Veuillez entrer un chiffre valide.\n");
             while (getchar() != '\n');
@@ -181,7 +184,9 @@ void display_inventory(st_player* p_player){
                     printf("1. Changer d'arme\n");
                     printf("2. Retour\n");
                     scanf(" %s", saisie3);
-
+                    clearScreen();
+                    barreAffichage(p_player);
+                    afficherHero(p_player);
                     if (sscanf(saisie3, "%d", &weaponOption) != 1) {
                         printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
@@ -194,6 +199,9 @@ void display_inventory(st_player* p_player){
                             displayWeaponsPlayer(p_player->weapons);
                             printf("Quelle arme equiper?\n");
                             scanf("%d", &equipWeapon);
+                            clearScreen();
+                            barreAffichage(p_player);
+                            afficherHero(p_player);
                             if (equipWeapon == -1){
                                 break;
                             }
@@ -205,7 +213,7 @@ void display_inventory(st_player* p_player){
                                 changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
                                 changeMinAndMaxAttackValues(p_player);
                             }
-                        default: //Armes -> Retour
+                        case 2: //Armures -> Retour
                             break;
 
                         default:
@@ -223,7 +231,9 @@ void display_inventory(st_player* p_player){
                     printf("1. Changer d'armure\n");
                     printf("2. Retour\n");
                     scanf(" %s", saisie4);
-
+                    clearScreen();
+                    barreAffichage(p_player);
+                    afficherHero(p_player);
                     if (sscanf(saisie3, "%d", &armorOption) != 1) {
                         printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
@@ -273,6 +283,8 @@ void display_inventory(st_player* p_player){
 
 int first_menu(st_player *p_player)
 {
+    clearScreen();
+    affichageMenu(p_player, get_lvl_monsters(get_lvl()));
     while(1)
     {
         int save_choice = 1;
@@ -293,6 +305,8 @@ int first_menu(st_player *p_player)
 
         switch(save_choice){
             case 1: {
+                clearScreen();
+                affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                 display_inventory(p_player);
                 break;
             }
@@ -328,9 +342,12 @@ int game(int id_db)
     printf("DEBUG --- %s ----id_db %d \n", __FUNCTION__ ,id_db);
     st_player *p_player = create_player(id_db); // on créer le joueur.
     init_level(id_db); // init le lvl (qui init la créa des mstr)
-
+    clearScreen();
     while (1)
     {
+        clearScreen();
+        barreAffichage(p_player);
+        afficherHero();
         printf("--- LEVEL %d ----\n", get_lvl());
         printf("1.stat joueur \n");
         printf("2.stat monsters \n");
@@ -351,21 +368,30 @@ int game(int id_db)
         switch (choixMenu)
         {
             case 1: {
+                clearScreen();
+                barreAffichage(p_player);
+                afficherHero();
                 display_player(p_player); // affiche les stats du joueur.
+                sleep(5);
                 break;
             }
             case 2:
             {
+                clearScreen();
+                affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                 printf("-- Level %d -- \n",get_lvl()); // affiche le LVL actuel
                 display_monsters(get_lvl_monsters(get_lvl())); // affiche les monstres.
+                sleep(5);
                 break;
             }
             case 3:
             {
+                clearScreen();
                 int choixAttaque = 1;
                 char saisie0[256];
 
                 do{
+                    affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                     printf("attaque %d\n", p_player->attack);
                     printf("defense %d\n", p_player->defense);
                     printf("1. Attaquer\n");
@@ -374,6 +400,8 @@ int game(int id_db)
                     printf("Votre selection: \n");
 
                     scanf(" %s", saisie0);
+                    clearScreen();
+                    affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                     if (sscanf(saisie0, "%d", &choixAttaque) != 1) {
                         printf("Veuillez entrer un chiffre valide.\n");
                         while (getchar() != '\n');
@@ -418,6 +446,9 @@ int game(int id_db)
                                 printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
                                 /*Libere tous les montres*/
                                 delete_all_level();
+                                gameOver();
+                                sleep(5);
+                                clearScreen();
                                 return 0; // ?
                             }
                             break;
@@ -427,7 +458,8 @@ int game(int id_db)
                         {
                             int choixSort = 1;
                             char saisie1[256];
-
+                            clearScreen();
+                            affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                             printf("1. Boule de Feu\n");
                             printf("2. Eclair Fulgurant\n");
                             printf("3. Decuplement\n");
@@ -439,6 +471,8 @@ int game(int id_db)
                             printf("Selectionner une option: \n");
 
                             scanf(" %s", saisie1);
+                            clearScreen();
+                            affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                             if (sscanf(saisie1, "%d", &choixSort) != 1) {
                                 printf("Veuillez entrer un chiffre valide.\n");
                                 while (getchar() != '\n');
@@ -469,7 +503,7 @@ int game(int id_db)
                                         int f_menu;
 
                                         set_lvl_monsters(NULL, get_lvl());
-                                        printf("Tout les monstres sont morts !");
+                                        printf("Tout les monstres sont morts !\n");
                                         p_player->attack = 10;
                                         p_player->defense = 10;
                                         f_menu = first_menu(p_player);
@@ -496,6 +530,9 @@ int game(int id_db)
                                         printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
                                         /*Libere tous les montres*/
                                         delete_all_level();
+                                        gameOver();
+                                        sleep(5);
+                                        clearScreen();
                                         return 0; // ?
                                     }
                                     break;
@@ -547,6 +584,9 @@ int game(int id_db)
                                         printf("Player is dead (has been deleted) .. Game over !!!!! \n ");
                                         /*Libere tous les montres*/
                                         delete_all_level();
+                                        gameOver();
+                                        sleep(5);
+                                        clearScreen();
                                         return 0; // ?
                                     }
 
@@ -620,6 +660,7 @@ int game(int id_db)
                                     break;
 
                             }
+                            clearScreen();
                             printf("Vie: %d / %d \n", p_player->currentLife, p_player->maxLife);
                             printf("Mana: %d / %d \n", p_player->currentMana, p_player->maxMana);
 
@@ -639,11 +680,14 @@ int game(int id_db)
             }
 
             case 4: {
-
+                clearScreen();
+                affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                 int choixPotions = 1;
                 char saisie0[256];
 
                 do {
+                    clearScreen();
+                    affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                     printf("1. Potions de vie\n");
                     printf("2. Potions de Mana\n");
                     printf("0. Retour\n");
@@ -671,11 +715,14 @@ int game(int id_db)
                 break;
             }
             case 5: {
+                clearScreen();
+                affichageMenu(p_player, get_lvl_monsters(get_lvl()));
                 display_inventory(p_player);
                 break;
             }
             case 9:
             {
+                clearScreen();
                 int var;
                 printf("Tout sera supprimer, continuer ? (1/0)\n");
                 scanf("%d", &var);
@@ -705,7 +752,9 @@ int welcome(void)
 
     while (choixMenu != 3)
     {
-        printf("--DOOMDEPTH-- \n\n");
+        clearScreen();
+        doomDepths();
+        printf("\n\n");
         printf("1 - Start Game \n");
         printf("2 - Load save \n");
         printf("3 - Exit\n");
@@ -722,16 +771,19 @@ int welcome(void)
 
         switch (choixMenu) {
             case 1: {
+                clearScreen();
                 game(id_db);
                 break;
             }
             case 2:
             {
+                clearScreen();
                 id_db = displayLatestSaves();
                 printf("ID DB is %d\n", id_db);
                 break;
             }
             case 3: {
+                clearScreen();
                 break;
             }
             default:

@@ -1,5 +1,5 @@
 #include "Monster.h"
-
+#include "Display.h"
 static int g_number_monster = 1; //
 
 void reset_monster_number (void) // func pour reset le nb de monstres. (pour que quand on les supp, puis en recréer d'autres, le "compteur" de mstr" reparte de 1.
@@ -40,7 +40,7 @@ static void init_stats_monster (st_monsters * p_monster, int level_number, int i
         p_monster->number     = g_number_monster++;
         p_monster->attack      = 5 * level_number;
         p_monster->maxLife     = ((rand() % (10)) * level_number);
-        p_monster->currentLife = p_montser->maxLife;
+        p_monster->currentLife = p_monster->maxLife;
         p_monster->percentGainGold = rand() % 101;
         p_monster->percentGainMana = rand() % 101;
         p_monster->defense     = rand() % 10; // a faire plus tard.
@@ -143,9 +143,10 @@ st_monsters *searchMonster(st_monsters *p_first_monster)
         p_monster = (st_monsters *) p_monster->p_next; // i++.
     }
 
+
     printf("Quelle monstre attaquer ? :"); // on demande lequel on veut attaquer.
     scanf("%d", &nb);
-
+    clearScreen();
     p_monster = p_first_monster; // on remet p_monster au premier monstre.
 
     // parcours de la liste etc..

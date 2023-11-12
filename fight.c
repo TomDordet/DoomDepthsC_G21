@@ -10,7 +10,7 @@
 #include "Monster.h"
 #include "level.h"
 #include "Sort.h"
-
+#include "Display.h"
 
 //-------------- FIGHT -----------------------------
 // le FIGHT.
@@ -128,7 +128,7 @@ st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monste
     }
 
     if (p_player->currentLife == 0) { // si la vie du player == 0
-        printf("GAME OVER"); // ici faudras appeller une fonction qui pop un giga message.
+        gameOver(); // ici faudras appeller une fonction qui pop un giga message.
         return delete_player(p_player); //on le sup.
     }
     return p_player;
