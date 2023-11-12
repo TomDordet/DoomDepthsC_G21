@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-
 #include "Monster.h"
 
 static int g_number_monster = 1; //
@@ -21,29 +16,34 @@ void reset_monster_number (void) // func pour reset le nb de monstres. (pour que
 //      |-> maxLife
 //      |-> currentLife
 //      |-> defense
-static void init_stats_monster (st_monsters * p_montser, int level_number, int id_db)
+static void init_stats_monster (st_monsters * p_monster, int level_number, int id_db)
 {
     printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
 
     if (id_db == 0)
     {
         //default value, Hardcoded value.
-        p_montser->number     = g_number_monster++;
-        p_montser->attack      = 5 * level_number;
-        p_montser->maxLife     = ((rand() % (10)) * level_number);
-        if (p_montser->maxLife == 0)
-            p_montser->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
-        p_montser->currentLife = p_montser->maxLife;
-        p_montser->defense     = rand() % 10; // a faire plus tard.
+        p_monster->number     = g_number_monster++;
+        p_monster->attack      = 5 * level_number;
+        p_monster->maxLife     = ((rand() % (10)) * level_number);
+        p_monster->percentGainGold = rand() % 101;
+        p_monster->percentGainMana = rand() % 101;
+
+        if (p_monster->maxLife == 0)
+            p_monster->maxLife = 1; // on s'assure que la vie du monstre soit au moins de 1.
+        p_monster->currentLife = p_monster->maxLife;
+        p_monster->defense     = rand() % 10; // a faire plus tard.
     }
     else
     {
         //value from DB
-        p_montser->number     = g_number_monster++;
-        p_montser->attack      = 5 * level_number;
-        p_montser->maxLife     = ((rand() % (10)) * level_number);
-        p_montser->currentLife = p_montser->maxLife;
-        p_montser->defense     = rand() % 10; // a faire plus tard.
+        p_monster->number     = g_number_monster++;
+        p_monster->attack      = 5 * level_number;
+        p_monster->maxLife     = ((rand() % (10)) * level_number);
+        p_monster->currentLife = p_montser->maxLife;
+        p_monster->percentGainGold = rand() % 101;
+        p_monster->percentGainMana = rand() % 101;
+        p_monster->defense     = rand() % 10; // a faire plus tard.
     }
 }
 
@@ -173,7 +173,7 @@ int display_monsters(st_monsters *p_first_monster)
             printf("Monstre %d\n", p_monster->number);
             printf("Vie : %d / %d\n", p_monster->currentLife, p_monster->maxLife);
             printf("Attaque : %d\n", p_monster->attack);
-            printf("Défense : %d\n", p_monster->defense);
+            printf("Defense : %d\n", p_monster->defense);
             printf("-----\n");
         }
         p_monster = (st_monsters *) p_monster->p_next;

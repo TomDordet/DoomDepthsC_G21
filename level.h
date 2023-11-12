@@ -5,6 +5,12 @@
 #ifndef DOOMDEPTHSC_G21_LEVEL_H
 #define DOOMDEPTHSC_G21_LEVEL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <unistd.h>
+
 #include "Monster.h"
 
 #define MAX_LVL 10

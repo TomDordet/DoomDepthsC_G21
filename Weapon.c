@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-
 #include "Weapon.h"
 
 
@@ -41,7 +36,7 @@ void displayWeapon(Weapon *weapon)
 WeaponsPlayer* addWeaponsPlayer(WeaponsPlayer *weapons, Weapon weapon) {
     int count = countWeaponsPlayer(weapons);
     if (count == 5) {
-        printf("Impossible.\n");
+        swapWeaponsPlayer(weapons, weapon);
         return weapons;
     }
 
@@ -128,6 +123,7 @@ void swapWeaponsPlayer(WeaponsPlayer *weapons, Weapon newWeapon) {
         if (weaponToSwap->weapon.isEquipped) {
             weaponToSwap->weapon.isEquipped = 0;
             newWeapon.isEquipped = 1;
+            //changeMinAndMaxAttackValues(p_player);
         }
 
         weaponToSwap->weapon = newWeapon;

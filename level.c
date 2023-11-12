@@ -1,12 +1,6 @@
 //
 // Created by ethan on 19/10/2023.
 //
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include <unistd.h>
-
 #include "level.h"
 
 st_level g_st_level[MAX_LVL]; // tableau de st_lvl, de taille 10 (donc 10 LVL créer). Faudras varier le nb de lvl.
@@ -15,7 +9,7 @@ static int g_current_lvl = 1; // lvl actuel.
 //------------ CREATION LVL ----------------
 
 // prend en param un lvl (struct), et le nombre max de lvl que l'on veut.
-static int create_level( int id_db)
+static int create_level(int id_db)
 {
 
     memset (g_st_level, 0, sizeof (st_level) * MAX_LVL);
@@ -40,7 +34,7 @@ static int create_level( int id_db)
     else
     {
         //Value from Data base
-        // max_lvl --> le total de level sauve garder --> 2
+        // max_lvl --> le total de level sauvegarder --> 2
         //   |-> lvl_number --> les levels sauvegarder --> 7 and 8
         //   |-> nb_monster --> nb de monstre pour chaque level
         //      |-> attack
@@ -64,7 +58,7 @@ static int create_level( int id_db)
 int init_level(int id_db)
 {
     printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
-    return create_level( id_db); //création du lvl.
+    return create_level(id_db); //création du lvl.
 }
 
 //-------------- SET MONSTERS by LVL -----------
