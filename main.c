@@ -150,7 +150,6 @@ int insertData(st_player* p_player, st_level* p_level)
     return 0;
 }
 
-
 // --------------- DISPLAY ENTRE LVL ---------------------
 
 //-----------------PARTIE INVENTAIRE-----------------
@@ -204,8 +203,9 @@ void display_inventory(st_player* p_player){
                             }
                             else {
                                 changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
+                                changeMinAndMaxAttackValues(p_player);
                             }
-                        case 2: //Armes -> Retour
+                        default: //Armes -> Retour
                             break;
 
                         default:
@@ -243,6 +243,7 @@ void display_inventory(st_player* p_player){
                                 break;
                             } else {
                                 changeIsEquippedToArmorsPlayer(p_player->armors, equipArmor);
+                                changeDefenseValue(p_player);
                             }
                         case 2: //Armures -> Retour
                             break;
@@ -252,6 +253,7 @@ void display_inventory(st_player* p_player){
                             break;
                     }
                 }
+                break;
             case 3: //Inventaire -> Potions
                 printf("Vous accedez aux Sorts\n");
                 for (enum Sorts sort = BOULEDEFEU; sort <= REGENERATIONMANA; sort++) {

@@ -14,7 +14,8 @@ typedef struct st_player
     int currentLife;
     int maxMana;
     int currentMana;
-    int attack;
+    int minAttack;
+    int maxAttack;
     int defense;
     int gold;
     WeaponsPlayer *weapons;
@@ -26,5 +27,9 @@ st_player *create_player(int id_db);
 st_player *delete_player(st_player *p_player);
 
 int display_player(st_player *p_player);
+
+void changeMinAndMaxAttackValues(st_player *p_player);
+
+void changeDefenseValue(st_player *p_player);
 
 #endif //DOOMDEPTHSC_G21_PLAYER_H

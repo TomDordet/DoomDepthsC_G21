@@ -27,7 +27,8 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
         return p_first_monster; // on renvoit le first.
     }
 
-    p_monster_found->currentLife -= p_player->attack; // opération, on diminue la vie du monstre, en fonction de l'attaque du joueur.
+    int randomDamage = rand() % (p_player->maxAttack - p_player->minAttack + 1) + p_player->minAttack;
+    p_monster_found->currentLife -= randomDamage; // opération, on diminue la vie du monstre, en fonction de l'attaque du joueur.
 
     if (p_monster_found->currentLife < 0)
         p_monster_found->currentLife = 0; // à partir du moment ou la vie du monstre < 0, on la remet à zéro. (au lieu d'avoir [random] -8, on met 0, plus clean.
@@ -55,7 +56,7 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
     else
     {
         printf("Le monstre %d vient de prendre %d (%d/%d) \n", p_monster_found->number,
-               p_player->attack, p_monster_found->currentLife, p_monster_found->maxLife); //sinon il prend simplement les dégats.
+               randomDamage, p_monster_found->currentLife, p_monster_found->maxLife); //sinon il prend simplement les dégats.
         return p_first_monster; // et on retourne le premier monstre.
     }
 }
@@ -120,7 +121,7 @@ st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monste
             p_player->currentLife -= p_monster->attack; // monstre attack
             if (p_player->currentLife < 0)
                 p_player->currentLife = 0; // on remet à 0 pour pas avoir de valeurs négatives
-            printf("Le monstre %d inflige %d dammage au player (life :%d/%d)\n", p_monster->number, p_monster->attack,
+            printf("Le monstre %d inflige %d damage au player (life :%d/%d)\n", p_monster->number, p_monster->attack,
                    p_player->currentLife, p_player->maxLife);
         }
         p_monster = (st_monsters *) p_monster->p_next; // i++
