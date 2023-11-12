@@ -12,7 +12,7 @@
 
 // PROTOTYPE FONCTIONS (pas issue de .h donc on les protos ici)
 // FIGHT
-st_monsters *fight_player_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func joueur attaque monstre
+st_monsters *fight_player_round(st_player *p_player, st_monsters *p_first_monster, int nb_level); //proto de la func joueur attaque monstre
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func monstre(s) attaque joueur
 st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monster, Sort sort);
 
@@ -278,6 +278,14 @@ int first_menu(st_player *p_player)
     {
         int save_choice = 1;
         char saisie[256];
+
+        //Récupérer les armes et armures potentiellement lootées par des monstres et les ajouter à l'inventaire du joueur.
+        //une boucle qui ajoute toutes les armes lootées dans la liste chainées weapons du joueur par le biai de la fonction addWeaponsPlayer
+
+        //une boucle qui ajoute toutes les armures lootées dans la liste chainées armors du joueur par le biai de la fonction addWeaponsPlayer
+
+        //je souhaite que les différents tableaux/ou listes chainées qui servaient à stocker temporairement mes équipements soient vidées.
+
         printf("Quelques minutes de pause avant de reprendre... Que voulez vous faire ? \n");
         printf("1 - Inventaire\n");
         printf("2 - Sauvegarde\n");
@@ -385,15 +393,13 @@ int game(int id_db)
                         case 1: {
                             /*Game*/
                             // Si le retour de fight_player_round == NULL, alors monstres morts / désallouer (voir ce que la fonction retourne à sa définition, pour comprendre).
-                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
+                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()), get_lvl());
                             if (p_fight == NULL) {
                                 int f_menu;
 
                                 // on remet à NULL les monstres dans le lvl, pck ils sont morts.
                                 set_lvl_monsters(NULL, get_lvl());
                                 printf("Tout les monstres sont morts !\n");
-                                p_player->minAttack = 10;
-                                p_player->defense = 10;
                                 f_menu = first_menu(p_player);
                                 if (f_menu == 2) {
                                     insertData(p_player, g_st_level);
