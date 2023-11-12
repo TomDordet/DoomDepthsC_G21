@@ -1,5 +1,5 @@
 #include "Weapon.h"
-
+#include "Display.h"
 
 //PARTIE WEAPON
 
@@ -116,6 +116,7 @@ void swapWeaponsPlayer(WeaponsPlayer *weapons, Weapon newWeapon) {
     printf("Selectionnez le numero de l'arme que vous souhaitez remplacer : ");
     int choice;
     scanf("%d", &choice);
+    clearScreen();
 
     if (choice >= 1 && choice <= countWeaponsPlayer(weapons)) {
         WeaponsPlayer *weaponToSwap = getWeaponNumberToWeaponsPlayer(weapons, choice);

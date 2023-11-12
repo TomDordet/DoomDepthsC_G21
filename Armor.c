@@ -1,5 +1,5 @@
 #include "Armor.h"
-
+#include "Display.h"
 //PARTIE ARMOR
 
 Armor* createArmor(int level) {
@@ -109,6 +109,7 @@ void swapArmorsPlayer(ArmorsPlayer *armors, Armor newArmor) {
     printf("Selectionnez le numero de l'armure que vous souhaitez remplacer : ");
     int choice;
     scanf("%d", &choice);
+    clearScreen();
 
     if (choice >= 1 && choice <= countArmorsPlayer(armors)) {
         ArmorsPlayer *armorToSwap = getArmorNumberToArmorsPlayer(armors, choice);
