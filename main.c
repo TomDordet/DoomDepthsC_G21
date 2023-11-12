@@ -213,13 +213,8 @@ void display_inventory(st_player* p_player){
                                 changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
                                 changeMinAndMaxAttackValues(p_player);
                             }
-
-                       
-
-                        case 2: //Armes -> Retour
-
+                        case 2: //Armes -> Retou
                             break;
-
                         default:
                             printf("Aucune option ne correspond a votre saisi. Veuillez reesayer\n");
                             break;
@@ -330,6 +325,7 @@ int first_menu(st_player *p_player)
             case 2:
                 return 2;
             case 3:
+                clearScreen();
                 return 3;
             case 4:
                 return 4;

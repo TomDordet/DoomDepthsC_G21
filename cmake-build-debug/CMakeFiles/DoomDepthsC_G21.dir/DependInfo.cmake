@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/CLion 2023.2.2/DoomDepthsC_G21/Armor.c" "CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj.d"
+  "D:/CLion 2023.2.2/DoomDepthsC_G21/Display.c" "CMakeFiles/DoomDepthsC_G21.dir/Display.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/Display.c.obj.d"
   "D:/CLion 2023.2.2/DoomDepthsC_G21/Monster.c" "CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj.d"
   "D:/CLion 2023.2.2/DoomDepthsC_G21/Player.c" "CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj.d"
   "D:/CLion 2023.2.2/DoomDepthsC_G21/Sort.c" "CMakeFiles/DoomDepthsC_G21.dir/Sort.c.obj" "gcc" "CMakeFiles/DoomDepthsC_G21.dir/Sort.c.obj.d"

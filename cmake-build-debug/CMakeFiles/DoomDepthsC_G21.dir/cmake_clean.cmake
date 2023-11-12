@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj"
   "CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj.d"
+  "CMakeFiles/DoomDepthsC_G21.dir/Display.c.obj"
+  "CMakeFiles/DoomDepthsC_G21.dir/Display.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj"
   "CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj.d"
   "CMakeFiles/DoomDepthsC_G21.dir/Player.c.obj"

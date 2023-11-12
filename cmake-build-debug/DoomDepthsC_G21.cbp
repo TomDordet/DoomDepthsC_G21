@@ -82,6 +82,12 @@
 		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Armor.h">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>
+		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Display.c">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
+		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Display.h">
+			<Option target="DoomDepthsC_G21"/>
+		</Unit>
 		<Unit filename="D:/CLion 2023.2.2/DoomDepthsC_G21/Monster.c">
 			<Option target="DoomDepthsC_G21"/>
 		</Unit>

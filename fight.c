@@ -54,8 +54,8 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
         }
 
         //Test de drop d'equipement dès que le monstre a été tué.
-        int dropChance = rand() % 10 + 1;
-        if (dropChance > 1) {
+        int dropChance = rand() % 100 + 1;
+        if (dropChance <= 25) {
             int whatEquipment = rand() % 2 + 1;
             if (whatEquipment == 1) {
                 Weapon *newWeapon = createWeapon(nb_level);
@@ -145,6 +145,7 @@ st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monste
 
     if (p_player->currentLife == 0) { // si la vie du player == 0
         gameOver(); // ici faudras appeller une fonction qui pop un giga message.
+        sleep(5);
         return delete_player(p_player); //on le sup.
     }
     return p_player;

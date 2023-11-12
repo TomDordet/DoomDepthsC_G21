@@ -23,4 +23,5 @@ add_executable(DoomDepthsC_G21 main.c
         Armor.h
         Sort.c
         Sort.h
+        Display.c
 )

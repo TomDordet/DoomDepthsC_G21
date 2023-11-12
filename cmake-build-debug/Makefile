@@ -152,6 +152,30 @@ Armor.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Armor.c.s
 .PHONY : Armor.c.s
 
+Display.obj: Display.c.obj
+.PHONY : Display.obj
+
+# target to build an object file
+Display.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Display.c.obj
+.PHONY : Display.c.obj
+
+Display.i: Display.c.i
+.PHONY : Display.i
+
+# target to preprocess a source file
+Display.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Display.c.i
+.PHONY : Display.c.i
+
+Display.s: Display.c.s
+.PHONY : Display.s
+
+# target to generate assembly for a file
+Display.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DoomDepthsC_G21.dir\build.make CMakeFiles/DoomDepthsC_G21.dir/Display.c.s
+.PHONY : Display.c.s
+
 Monster.obj: Monster.c.obj
 .PHONY : Monster.obj
 
@@ -428,6 +452,9 @@ help:
 	@echo ... Armor.obj
 	@echo ... Armor.i
 	@echo ... Armor.s
+	@echo ... Display.obj
+	@echo ... Display.i
+	@echo ... Display.s
 	@echo ... Monster.obj
 	@echo ... Monster.i
 	@echo ... Monster.s
