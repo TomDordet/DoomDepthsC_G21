@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-
+#include "Player.h"
+#include "sqlite3.h"
 #include "Armor.h"
 
 //PARTIE ARMOR
@@ -15,9 +16,22 @@ Armor* createArmor(int defense)
     // nom random
     char *randomName = generateRandomArmorName();
     newArmor->name = randomName;
+    newArmor->defense = defense;
+    newArmor->isEquipped = 0;
+    newArmor->next = NULL;
+    return newArmor;
+}
+
+Armor* createArmorSave(int defense, const char* name)
+{
+    // on alloue la nouvelle armure.
+    Armor *newArmor = malloc(sizeof(Armor));
+
+    newArmor->name = strdup(name);
 
     newArmor->defense = defense;
     newArmor->isEquipped = 0;
+    newArmor->next = NULL;
     return newArmor;
 }
 
@@ -40,122 +54,150 @@ void displayArmor(Armor* armor)
 
 //PARTIE LISTE CHAINEES DE ARMORS
 // meme comment que pour l'arme.
-ArmorsPlayer* addArmorsPlayer(ArmorsPlayer *armors, Armor armor)
+int* addArmorsPlayer(st_player * player, Armor* New_Armor)
 {
-    int count = countArmorsPlayer(armors);
-    if (count == 5)
+    printf("DEBUT FUNC ADD ARMOR PLAYER \n");
+
+    int count = countArmorsPlayer(player);
+    printf("nb armures : %d\n", count);
+    if (count >= 5)
     {
-        printf("Impossible.\n");
-        return armors;
+        printf("Inventaire d'armures plein !\n");
+        return player->armors;
+    }
+//  findEnd = la nouvelle arme.
+    Armor * armor = (Armor *)player->armors;
+    if (armor == NULL)
+    {
+        player->armors = (int *)New_Armor;
+        printf("Insert armor (1st) \n");
+    }
+    else
+    {
+        // tant que liste pas finie.
+        while (armor->next != NULL)
+        {
+            // nouvelle arme(s) = sa suivante.
+            armor = (Armor *)armor->next;
+            printf("next .. \n");
+        }
+        // Sa suivante = la nouvelle arme.
+        armor->next = (int *)New_Armor;
+        printf("Insert armor (2nd) \n");
     }
 
-    ArmorsPlayer *newArmor = malloc(sizeof(ArmorsPlayer));
-    newArmor->armor = armor;
-    newArmor->next = NULL;
-
-    //debug
-    if (armors == NULL){
-        printf("armors == null\n");
-        return newArmor;
-    }
-
-    ArmorsPlayer *findEnd = armors;
-    while (findEnd->next != NULL){
-        findEnd = findEnd->next;
-    }
-
-    findEnd->next = newArmor;
-    return armors;
+    printf("FIN FUNC :\n\n");
+    // Retourner la nouvelle tête de la liste.
+    return player->armors;
 }
 
-void deleteArmorsPlayer(ArmorsPlayer *armors) {
-    while (armors != NULL){
-        ArmorsPlayer *tmp = armors;
-        armors = armors->next;
-        deleteArmor((&tmp->armor));
-        free(tmp);
-        printf("debug :: suppression armure");
+void deleteArmorsPlayer(st_player * player)
+{
+    Armor * armors = (Armor * )player->armors;
+    // parcours toutes les armes.
+    while (armors != NULL)
+    {
+        Armor *tmp = armors;
+        // sa suivante.
+        armors = (Armor *)armors->next;
+        // et les supprimes
+        deleteArmor(tmp);
     }
 }
 
-int countArmorsPlayer(ArmorsPlayer *armors) {
+int countArmorsPlayer(st_player * player)
+{
     int count = 0;
-    ArmorsPlayer *tmp = armors;
+    int * next = player->armors;
 
-    while (tmp != NULL){
+    while (next != NULL)
+    {
         count++;
-        tmp = tmp->next;
+        next = ((Armor *)next)->next;
     }
     return count;
 }
 
-ArmorsPlayer* getArmorNumberToArmorsPlayer(ArmorsPlayer *armors, int number) {
-    ArmorsPlayer * currentArmor = armors;
+Armor* getArmorNumberToArmorsPlayer(st_player * player, int number)
+{
+    Armor * currentArmor = (Armor* )player->armors;
     int currentNumber = 1;
 
-    while (currentArmor != NULL) {
+    while (currentArmor != NULL)
+    {
         if (currentNumber == number) {
             return currentArmor;
         }
 
-        currentArmor = currentArmor->next;
+        currentArmor = (Armor *)currentArmor->next;
         currentNumber++;
     }
     return NULL;
 }
 
-void displayArmorsPlayer(ArmorsPlayer *armors) {
+void displayArmorsPlayer(int* armors)
+{
     printf("----------\n");
     printf("Armures :\n");
-    ArmorsPlayer *tmp = armors;
+    Armor *tmp = (Armor *)armors;
     int value = 1;
-    while (tmp != NULL){
+    while (tmp != NULL)
+    {
         printf("%d - ", value);
-        displayArmor(&tmp->armor);
-        tmp = tmp->next;
+        displayArmor(tmp);
+        tmp = (Armor *)tmp->next;
         value++;
     }
     printf("----------\n");
 }
 
-void swapArmorsPlayer(ArmorsPlayer *armors, Armor newArmor) {
-    displayArmorsPlayer(armors);
+void swapArmorsPlayer(st_player *p_player, Armor newArmor)
+{
+    displayArmorsPlayer(p_player->armors);
 
     printf("Selectionnez le numero de l'armure que vous souhaitez remplacer : ");
     int choice;
     scanf("%d", &choice);
 
-    if (choice >= 1 && choice <= countArmorsPlayer(armors)) {
-        ArmorsPlayer *armorToSwap = getArmorNumberToArmorsPlayer(armors, choice);
+    if (choice >= 1 && choice <= countArmorsPlayer(p_player))
+    {
+        Armor *armorToSwap = getArmorNumberToArmorsPlayer(p_player, choice);
 
-        if (armorToSwap->armor.isEquipped) {
-            armorToSwap->armor.isEquipped = 0;
-            newArmor.isEquipped = 1;
+        if (armorToSwap->isEquipped)
+        {
+            armorToSwap->defense = newArmor.defense;
+            armorToSwap->name = newArmor.name;
+            armorToSwap->isEquipped = newArmor.isEquipped;
         }
-
-        armorToSwap->armor = newArmor;
         printf("Vous avez remplace l'armure selectionnee par :\n");
         displayArmor(&newArmor);
-    } else if (choice == 9){
+    }
+    else if (choice == 9)
+    {
         printf("Vous avez decide de garder vos armures actuelles.\n");
-    } else {
+    }
+    else
+    {
         printf("Choix invalide. Aucune armure n'a ete remplacee.\n");
     }
 }
 
-void changeIsEquippedToArmorsPlayer(ArmorsPlayer *armors, int numberArmor) {
-    ArmorsPlayer * currentArmor = armors;
+void changeIsEquippedToArmorsPlayer(st_player* p_player, int numberArmor)
+{
+    Armor * currentArmor = (Armor *)p_player->armors;
     int currentNumber = 1;
 
-
-    while (currentArmor != NULL) {
-        if (currentNumber == numberArmor) {
-            currentArmor->armor.isEquipped = 1;
-            printf("Vous avez equipe '%s'\n", currentArmor->armor.name);
-        } else {
-            currentArmor->armor.isEquipped = 0;
+    while (currentArmor != NULL)
+    {
+        if (currentNumber == numberArmor)
+        {
+            currentArmor->isEquipped = 1;
+            printf("Vous avez equipe '%s'\n", currentArmor->name);
+        } else
+        {
+            currentArmor->isEquipped = 0;
         }
-        currentArmor = currentArmor->next;
+        currentArmor = (Armor *)currentArmor->next;
         currentNumber++;
     }
 }
@@ -168,11 +210,11 @@ char* armorNames[] = {
         "Armure des Abysses",
         "Armure du Crepuscule",
         "Armure de la Nuit",
-        "Armure de l'Aube",
+        "Armure de l Aube",
         "Armure de Pierre",
         "Armure de Bronze",
         "Armure de Marbre",
-        "Armure d'Acier",
+        "Armure d Acier",
         "Armure du Desert",
         "Armure de Glace",
         "Armure de Feu",
@@ -188,28 +230,28 @@ char* armorNames[] = {
         "Armure de la Caverne",
         "Armure du Volcan",
         "Armure du Canyon",
-        "Armure de l'Eclair",
+        "Armure de l Eclair",
         "Armure de la Tempete",
         "Armure de la Foudre",
-        "Armure de l'Orage",
-        "Armure de l'Etoile",
+        "Armure de l Orage",
+        "Armure de l Etoile",
         "Armure du Cosmos",
         "Armure du Vide",
         "Armure des Elements",
         "Armure de la Terre",
-        "Armure de l'Eau",
+        "Armure de l Eau",
         "Armure du Feu Sacre",
         "Armure de la Lave",
-        "Armure de l'Ancien",
+        "Armure de l Ancien",
         "Armure du Gardien",
         "Armure du Protecteur",
         "Armure du Destin",
-        "Armure de l'Espoir",
+        "Armure de l Espoir",
         "Armure de la Sagesse",
         "Armure de la Discretion",
         "Armure du Courage",
         "Armure de la Resilience",
-        "Armure de l'Honneur",
+        "Armure de l Honneur",
         "Armure de la Victoire"
 };
 

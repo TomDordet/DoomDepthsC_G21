@@ -30,6 +30,11 @@ CMakeFiles/DoomDepthsC_G21.dir/Armor.c.obj: C:/Users/ethan/CLionProjects/DoomDep
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h
 
 CMakeFiles/DoomDepthsC_G21.dir/Monster.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.c \
@@ -134,12 +139,11 @@ CMakeFiles/DoomDepthsC_G21.dir/Weapon.c.obj: C:/Users/ethan/CLionProjects/DoomDe
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h
 
 CMakeFiles/DoomDepthsC_G21.dir/bdd.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/bdd.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -171,14 +175,12 @@ CMakeFiles/DoomDepthsC_G21.dir/bdd.c.obj: C:/Users/ethan/CLionProjects/DoomDepth
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h
 
 CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/fight.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -210,12 +212,6 @@ CMakeFiles/DoomDepthsC_G21.dir/fight.c.obj: C:/Users/ethan/CLionProjects/DoomDep
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h
 
@@ -254,11 +250,11 @@ CMakeFiles/DoomDepthsC_G21.dir/gameState.c.obj: C:/Users/ethan/CLionProjects/Doo
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h
 
 CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/heal.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -287,13 +283,7 @@ CMakeFiles/DoomDepthsC_G21.dir/heal.c.obj: C:/Users/ethan/CLionProjects/DoomDept
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h
 
 CMakeFiles/DoomDepthsC_G21.dir/level.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -373,9 +363,6 @@ CMakeFiles/DoomDepthsC_G21.dir/loadSave.c.obj: C:/Users/ethan/CLionProjects/Doom
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h
 
@@ -409,14 +396,14 @@ CMakeFiles/DoomDepthsC_G21.dir/main.c.obj: C:/Users/ethan/CLionProjects/DoomDept
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h \
   C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.h \
-  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/level.h
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Weapon.h \
+  C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h
 
 CMakeFiles/DoomDepthsC_G21.dir/sqlite3.c.obj: C:/Users/ethan/CLionProjects/DoomDepthsC_G21/sqlite3.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
@@ -838,11 +825,11 @@ C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h:
 
-C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h:
-
 C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Monster.c:
 
 C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Armor.h:
+
+C:/Users/ethan/CLionProjects/DoomDepthsC_G21/Player.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/x86_64-w64-mingw32/include/oaidl.h:
 

@@ -8,6 +8,8 @@
 #include "level.h"
 #include "sqlite3.h"
 
+#include "Weapon.h"
+#include "Armor.h"
 
 
 // PROTOTYPE FONCTIONS (pas issue de .h donc on les protos ici)
@@ -24,7 +26,7 @@ int heal(st_player *p_player); //proto heal
 
 int create_tables(sqlite3 *db);
 int init_bdd(void);
-int insertData(st_player* p_player, st_level* p_level, WeaponsPlayer* weapons);
+int insertData(st_player* p_player, st_level* p_level);
 
 // LOAD SAVE
 int displayLatestSaves(void);
@@ -58,7 +60,8 @@ void display_inventory(st_player* p_player)
                     scanf("%d", &weaponOption);
 
                     int equipWeapon = -1;
-                    switch(weaponOption){
+                    switch(weaponOption)
+                    {
                         case 1: //Armes -> Changer d'arme
                             displayWeaponsPlayer(p_player->weapons);
                             printf("Quelle arme equiper?\n");
@@ -67,14 +70,14 @@ void display_inventory(st_player* p_player)
                             {
                                 break;
                             }
-                            else if (equipWeapon > countWeaponsPlayer(p_player->weapons))
+                            else if (equipWeapon > countWeaponsPlayer(p_player))
                             {
                                 printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipWeapon);
                                 break;
                             }
                             else
                             {
-                                changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
+                                changeIsEquippedToWeaponsPlayer(p_player, equipWeapon);
                             }
                         case 2: //Armes -> Retour
                             break;
@@ -101,11 +104,14 @@ void display_inventory(st_player* p_player)
                             if (equipArmor == -1)
                             {
                                 break;
-                            } else if (equipArmor > countArmorsPlayer(p_player->armors)) {
+                            }
+                            else if (equipArmor > countArmorsPlayer(p_player))
+                            {
                                 printf("Erreur de saisie : aucune arme ne correspond au numero %d\n", equipArmor);
                                 break;
-                            } else {
-                                changeIsEquippedToArmorsPlayer(p_player->armors, equipArmor);
+                            } else
+                            {
+                                changeIsEquippedToArmorsPlayer(p_player, equipArmor);
                             }
                         case 2: //Armures -> Retour
                             break;
@@ -212,35 +218,43 @@ int game(int id_save) // prend en param un id_save, qui sert à savori si on as 
                 // si le res de p_fight == NULL, alors c'est que les monstres sont tous morts.
                 if (p_fight == NULL)
                 {
-                    //variable qui contient le retour du menu "postLvlMenu"
-                    int f_menu = 0;
-
                     // on remet à NULL les monstres dans le lvl
                     set_lvl_monsters(NULL, get_lvl());
                     printf("Tout les monstres sont morts !");
 
-                    f_menu = first_menu(p_player);
-                    if (f_menu == 2)
+                    if (MAX_LVL == get_lvl())
                     {
-                        // si on choisis de sauvegarder, on inserts les datas du joueur, des levels et des monstres.
-                        insertData(p_player, g_st_level, p_player->weapons);
-                        next_level(); // et on passe au lvl suivant
-                    }
-                    else if (f_menu == 3)
-                    {
-                        //on continue.
-                        next_level();
+                        printf("Vous avez atteint le sommet !!! \n tous les niveaux ont ete remportés !!! \n C'est la victoir !!!");
+                        return exit_game (p_player);
                     }
                     else
                     {
-                        int var;
-                        printf("Tout sera supprimer, continuer ? (1/0)\n");
-                        scanf("%d", &var);
-                        if (var == 1)
+                        //variable qui contient le retour du menu "postLvlMenu"
+                        int f_menu = first_menu(p_player);
+                        if (f_menu == 2)
                         {
-                            return exit_game (p_player);
+                            // si on choisis de sauvegarder, on inserts les datas du joueur, des levels et des monstres.
+                            insertData(p_player, g_st_level);
+                            next_level(); // et on passe au lvl suivant
+                        }
+                        else if (f_menu == 3)
+                        {
+                            //on continue.
+                            next_level();
+                        }
+                        else
+                        {
+                            int var;
+                            printf("Tout sera supprimer, continuer ? (1/0)\n");
+                            scanf("%d", &var);
+                            if (var == 1)
+                            {
+                                return exit_game (p_player);
+                            }
                         }
                     }
+
+
                     break;
                 }
                 else if (p_fight != get_lvl_monsters(get_lvl()))

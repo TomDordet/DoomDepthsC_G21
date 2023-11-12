@@ -11,26 +11,24 @@ typedef struct Weapon
     int minDamage;
     int maxDamage;
     int isEquipped;
+    int *next;
 }Weapon;
 
-typedef struct WeaponsPlayer
-{
-    Weapon weapon;
-    struct WeaponsPlayer *next;
-}WeaponsPlayer;
+Weapon *createWeapon(int nb_attack_per_round, int minDamage, int maxDamage);
+Weapon *createWeaponSave(int nb_attack_per_round, int minDamage, int maxDamage, const char* name);
 
-Weapon* createWeapon(int nb_attack_per_round, int minDamage, int maxDamage);
 void deleteWeapon(Weapon *weapon);
 void displayWeapon(Weapon* weapon);
 
 
-WeaponsPlayer* addWeaponsPlayer(WeaponsPlayer *weapons, Weapon weapon);
-void deleteWeaponsPlayer(WeaponsPlayer *weapons);
-int countWeaponsPlayer(WeaponsPlayer *weapons);
-WeaponsPlayer* getWeaponNumberToWeaponsPlayer(WeaponsPlayer* weaponsList, int number);
-void displayWeaponsPlayer(WeaponsPlayer *weapons);
-void swapWeaponsPlayer(WeaponsPlayer *weapons, Weapon weapon);
-void changeIsEquippedToWeaponsPlayer(WeaponsPlayer *weapons, int numberWeapon);
+int* addWeaponsPlayer(st_player *player, Weapon* weapon);
+
+void deleteWeaponsPlayer(st_player * p_player);
+int countWeaponsPlayer(st_player * player);
+Weapon* getWeaponNumberToWeaponsPlayer(st_player * player, int number);
+void displayWeaponsPlayer(int *weapons);
+void swapWeaponsPlayer(st_player * player, Weapon weapon);
+void changeIsEquippedToWeaponsPlayer(st_player * player, int numberWeapon);
 
 
 char* generateRandomWeaponName();
