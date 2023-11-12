@@ -8,13 +8,15 @@
 
 #include "Player.h"
 #include "Monster.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include "level.h"
 #include "Sort.h"
 
 
 //-------------- FIGHT -----------------------------
 // le FIGHT.
-st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monster)
+st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monster, int nb_level)
 {
     st_monsters *p_monster_found; // le monstre que l'on veut attaquer.
 
@@ -52,14 +54,17 @@ st_monsters *fight_player_round (st_player *p_player, st_monsters *p_first_monst
         }
 
         //Test de drop d'equipement dès que le monstre a été tué.
-        /*int dropChance = rand() % 10 + 1;
-        if (dropChance == 1) {
+        int dropChance = rand() % 10 + 1;
+        if (dropChance > 1) {
             int whatEquipment = rand() % 2 + 1;
             if (whatEquipment == 1) {
-                createWeapon(level);
+                Weapon *newWeapon = createWeapon(nb_level);
+                addWeaponsPlayer(p_player->weapons, *newWeapon);
             } else {
-                createArmor(level);
-            }*/
+                Armor *newArmor = createArmor(nb_level);
+                addArmorsPlayer(p_player->armors, *newArmor);
+            }
+        }
 
         return delete_the_monster(p_first_monster, p_monster_found); //on le sup.
     }
@@ -124,7 +129,6 @@ st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monste
 
 
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster) {
-
     st_monsters *p_monster = p_first_monster;
     while (p_monster != NULL) { // tant que y'a des monstres :
         if (p_monster->currentLife > 0) { // et que le monstre est vivant ;

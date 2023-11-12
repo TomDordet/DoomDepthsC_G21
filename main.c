@@ -12,7 +12,7 @@
 
 // PROTOTYPE FONCTIONS (pas issue de .h donc on les protos ici)
 // FIGHT
-st_monsters *fight_player_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func joueur attaque monstre
+st_monsters *fight_player_round(st_player *p_player, st_monsters *p_first_monster, int nb_level); //proto de la func joueur attaque monstre
 st_player *fight_monsters_round(st_player *p_player, st_monsters *p_first_monster); //proto de la func monstre(s) attaque joueur
 st_monsters *sort_player_round (st_player *p_player, st_monsters *p_first_monster, Sort sort);
 
@@ -393,7 +393,7 @@ int game(int id_db)
                         case 1: {
                             /*Game*/
                             // Si le retour de fight_player_round == NULL, alors monstres morts / désallouer (voir ce que la fonction retourne à sa définition, pour comprendre).
-                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()));
+                            st_monsters * p_fight = fight_player_round(p_player, get_lvl_monsters(get_lvl()), get_lvl());
                             if (p_fight == NULL) {
                                 int f_menu;
 
