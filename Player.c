@@ -1,15 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
 #include "Player.h"
 
 // fonction de type * st_player pour créer le joueur au lancement du prg. Le void, on attend rien en paramètre d'entrée.
 st_player * create_player (int id_db)
 {
-    printf("DEBUG --- %s() ----id_db %d \n", __FUNCTION__ ,id_db);
     st_player* p_player = malloc(sizeof(st_player)); //p_player = le joueur en gros.
-    printf("DEBUG :: alloc p_player [%d] = %p \n",1,p_player); // printf pour débug, vérifier que le joueur est bien créer/allouer.
 
     srand(time(NULL)); //pour que chaque génération diffère des précédentes / suivantes.
 
@@ -30,6 +24,9 @@ st_player * create_player (int id_db)
         //default value, Hardcoded value.
         p_player->maxLife = 50;//rand() % 50; // la vie du MyPlayer. Valeur de base, à changer plus tard.
         p_player->currentLife = p_player->maxLife;
+        p_player->maxMana = 80;
+        p_player->currentMana = p_player->maxMana;
+        p_player->gold = 0;
         p_player->minAttack = startWeapon->minDamage;
         p_player->maxAttack = startWeapon->maxDamage;
         p_player->defense = startArmor->defense;
@@ -41,6 +38,9 @@ st_player * create_player (int id_db)
         //get db (id_db)
         p_player->maxLife = 50;//rand() % 50; // la vie du MyPlayer. Valeur de base, à changer plus tard.
         p_player->currentLife = p_player->maxLife;
+        p_player->maxMana = 80;
+        p_player->currentMana = p_player->maxMana;
+        p_player->gold = 0;
         p_player->minAttack = startWeapon->minDamage;
         p_player->maxAttack = startWeapon->maxDamage;
         p_player->defense = startArmor->defense;
@@ -75,9 +75,9 @@ st_player * create_player (int id_db)
     Weapon *weapon6 = createWeapon(2, 3, 14);
     printf("%s\n",weapon6->name);
     p_player->weapons = addWeaponsPlayer(p_player->weapons, *weapon6);
-
     //FIN PARTIE TEST ARMORS
 
+  
     //PARTIE TEST WEAPONS
     Armor *armor2 = createArmor(2);
     printf("%s\n",armor2->name);
@@ -122,6 +122,8 @@ st_player * delete_player (st_player *p_player) //Supprime le joueur.
 int display_player (st_player *p_player) // affichage des statistiques du joueur.
 {
     printf("Vie : %d / %d point de vie. \n",p_player->currentLife, p_player->maxLife);
+    printf("Mana : %d / %d point de Mana. \n",p_player->currentMana, p_player->maxMana);
+    printf("Or: %d\n", p_player->gold);
     //Affiche l'arme équipée
     WeaponsPlayer *tmp = p_player->weapons;
     while (tmp != NULL) {

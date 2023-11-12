@@ -1,6 +1,11 @@
 #ifndef DOOMDEPTHSC_G21_MONSTER_H
 #define DOOMDEPTHSC_G21_MONSTER_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
 typedef struct {
     int number; // numero du monstre (comme le nombre de monstre est aléatoire, on lui donne un nombre, pour la suite.
 
@@ -8,6 +13,8 @@ typedef struct {
     int currentLife;
     int attack;
     int defense;
+    int percentGainMana;
+    int percentGainGold;
 
     int *p_next; // Pointeur d'int pour passer de monstre en monstre, voir suite.
 } st_monsters;

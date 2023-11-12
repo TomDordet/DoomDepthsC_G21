@@ -1,12 +1,6 @@
 //
 // Created by ethan on 19/10/2023.
 //
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include <unistd.h>
-
 #include "level.h"
 
 st_level g_st_level[MAX_LVL]; // tableau de st_lvl, de taille 10 (donc 10 LVL créer). Faudras varier le nb de lvl.
