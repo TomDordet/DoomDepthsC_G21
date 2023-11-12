@@ -35,7 +35,7 @@ void displayArmor(Armor* armor) {
 ArmorsPlayer* addArmorsPlayer(ArmorsPlayer *armors, Armor armor) {
     int count = countArmorsPlayer(armors);
     if (count == 5) {
-        printf("Impossible.\n");
+        swapArmorsPlayer(armors, armor);
         return armors;
     }
 

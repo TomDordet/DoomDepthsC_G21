@@ -30,8 +30,8 @@ int insertPlayer(sqlite3 *db, st_player* p_player, st_level* p_level, int saveId
     // Utilisez cet ID pour insérer les données du joueur dans la table JOUEUR
     char joueur_insert_sql[256];
     snprintf(joueur_insert_sql, sizeof(joueur_insert_sql),
-             "INSERT INTO JOUEUR (maxLife, currentLife, attack, id_niveau, id_sauvegarde) VALUES (%d, %d, %d, %d, %d);",
-             p_player->maxLife, p_player->currentLife, p_player->attack, p_level->lvl_number, saveId);
+             "INSERT INTO JOUEUR (maxLife, currentLife, attack, id_niveau, id_sauvegarde) VALUES (%d, %d, %d, %d, %d, %d);",
+             p_player->maxLife, p_player->currentLife, p_player->minAttack, p_player->maxAttack, p_level->lvl_number, saveId);
 
     rc = sqlite3_exec(db, joueur_insert_sql, 0, 0, &error_message);
 

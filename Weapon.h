@@ -25,6 +25,7 @@ int countWeaponsPlayer(WeaponsPlayer *weapons);
 WeaponsPlayer* getWeaponNumberToWeaponsPlayer(WeaponsPlayer* weaponsList, int number);
 void displayWeaponsPlayer(WeaponsPlayer *weapons);
 void swapWeaponsPlayer(WeaponsPlayer *weapons, Weapon weapon);
+//void swapWeaponsPlayer(st_player *p_player, Weapon weapon);
 void changeIsEquippedToWeaponsPlayer(WeaponsPlayer *weapons, int numberWeapon);
 
 

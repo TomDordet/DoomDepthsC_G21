@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/CLion 2023.2.2/DoomDepthsC_G21/cmake-build-debug",
-		"source" : "D:/CLion 2023.2.2/DoomDepthsC_G21"
+		"build" : "C:/Users/tomdo/CLionProjects/DoomDepthsC_G21/cmake-build-debug",
+		"source" : "C:/Users/tomdo/CLionProjects/DoomDepthsC_G21"
 	},
 	"version" : 
 	{

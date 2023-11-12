@@ -186,8 +186,9 @@ void display_inventory(st_player* p_player){
                             }
                             else {
                                 changeIsEquippedToWeaponsPlayer(p_player->weapons, equipWeapon);
+                                changeMinAndMaxAttackValues(p_player);
                             }
-                        case 2: //Armes -> Retour
+                        default: //Armes -> Retour
                             break;
                     }
                 }
@@ -214,6 +215,7 @@ void display_inventory(st_player* p_player){
                                 break;
                             } else {
                                 changeIsEquippedToArmorsPlayer(p_player->armors, equipArmor);
+                                changeDefenseValue(p_player);
                             }
                         case 2: //Armures -> Retour
                             break;
